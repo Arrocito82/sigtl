@@ -20,7 +20,7 @@ class Producto(models.Model):
     cantidad_disponible = models.IntegerField(
         blank=False, null=False, default=0)
     valorInv = models.FloatField(blank=False, null=False, default=0)
-    is_active = models.BooleanField(null=False, blank=False, default=True)
+    # is_active = models.BooleanField(null=False, blank=False, default=True)
 
     def __str__(self):
         return '%s, %s' % (self.nombre, self.descripcion_producto)
@@ -29,11 +29,11 @@ class Sucursal(models.Model):
     id_sucursal = models.BigAutoField(unique=True, primary_key=True, blank=False, null=False)
     nombre_sucursal = models.CharField(max_length=50, blank=False, null=False)
     direccion = models.TextField(blank=False, null=False)
-    is_active = models.BooleanField(null=False, blank=False, default=True)
+    # is_active = models.BooleanField(null=False, blank=False, default=True)
     productos = models.ManyToManyField(Producto, through='ProductoEnSucursal', through_fields=('id_sucursal', 'id_producto'),related_name='sucursal_productos',)
 
     def __str__(self):
-        return '%s, %s' % (self.nombre_sucursal, self.id_municipio)
+        return '%s, %s' % (self.nombre_sucursal, self.direccion)
 
 class Pedido(models.Model):
     VENDIDO = 'VND'
