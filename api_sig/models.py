@@ -43,7 +43,7 @@ class Pedido(models.Model):
         (EN_ESPERA, 'En espera'),
     ]
     id_pedido = models.BigAutoField(unique=True, primary_key=True, blank=False, null=False)
-    fecha_registro = models.DateTimeField(blank=False, null=False, auto_now=True)
+    fecha_registro = models.DateTimeField(blank=False, null=False)
     estado = models.CharField(choices=ESTADOS, max_length=3, default=EN_ESPERA)
     # cliente = models.CharField(null=False, blank=True, max_length=50)
 

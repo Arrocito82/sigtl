@@ -1,13 +1,13 @@
-#import django.apps
-#os.environ.setdefault ("DJANGO_SETTINGS_MODULE", "sigtl.settings")
-#django.setup()
-#from models import Producto
-#from api_sig.models import Sucursal
-#from api_sig.models import Pedido
-#from api_sig.models import LineaPedido
+from api_sig.models import *
+from api_sig.random_datetime import get_current_time as get_custom_random_datetime
 
-#producto = Producto.objects.get(1)
-#sucursal = Sucursal.objects.get(1)
-#pedido = Pedido.objects.create(1, '2022-02-14', 'Vendido')
-print("hola")
+producto = Producto.objects.get(pk=1)
+sucursal = Sucursal.objects.get(pk=1)
+def generar_pedido():
+    fecha_registro=get_custom_random_datetime()
+    pedido=Pedido.objects.create(fecha_registro=fecha_registro, estado=Pedido.VENDIDO)
+    return pedido
+
+def generar_linea_pedido():
+    
 #lineaPedido = LineaPedido.objects.create()
