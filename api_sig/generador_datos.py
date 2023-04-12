@@ -41,10 +41,12 @@ def generar_pedido():
 def generar_linea_pedido(pedido, producto, cantidad):
     importe=producto.precio*cantidad
     total=importe*(1-producto.descuento)
+    # agregar movimiento de entrada
     linea_pedido=LineaPedido.objects.create(id_pedido=pedido,id_producto=producto,precioUni=producto.precio,descuento=producto.descuento,importe=importe,cantidad=cantidad,total=total, movimiento=[])
     return linea_pedido
 
 def generar_movimiento(sucursal, producto, fecha_registro, cantidad, total):
+    # comprobar costo de producto cuando entro al inventario
     movimiento=Movimiento.objects.create(id_sucursal=sucursal, id_producto=producto, fecha_registro=fecha_registro,
                                           detalle=producto.nombre, valorUnitario=producto.precio, cantidad=cantidad, total=total, tipo="S")
     return movimiento
