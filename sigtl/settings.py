@@ -76,7 +76,15 @@ WSGI_APPLICATION = "sigtl.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'SIGTL',
+        'USER': 'dsi115',
+        'PASSWORD': 'dsi115',
+        'HOST': 'proyectos.czoy1vdwgmhj.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
+    },
+    "sqlite": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }

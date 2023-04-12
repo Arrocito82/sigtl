@@ -1,0 +1,28 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$jCOKc2PWrwODyJdKePdRWO$bjz4uEInFAEACCEeWVfg5SjRcAvbSGPV90DSw8KlpIY=",
+            "last_login": "2023-04-10T20:51:37.122Z",
+            "is_superuser": true,
+            "username": "vscode",
+            "first_name": "",
+            "last_name": "",
+            "email": "mm18057@ues.edu.sv",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-04-10T20:51:32.415Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "j6jnprgw2hwy5fktuhtqknycxds35viu",
+        "fields": {
+            "session_data": ".eJxVjEEOwiAQRe_C2hAGCoJL9z0DmYGpVA0kpV0Z765NutDtf-_9l4i4rSVunZc4Z3ERIE6_G2F6cN1BvmO9NZlaXZeZ5K7Ig3Y5tszP6-H-HRTs5VsPMFlH7LUFyiGQIaczeVTGZtAePagpBaWRh0ROETm0COfECAPqYMT7A-T0OBA:1plyUD:2sCnF-qjyEsRRr6K0qAcdr2VGJh4_hMHAxTT3wU6vpA",
+            "expire_date": "2023-04-24T20:51:37.129Z"
+        }
+    }
+]

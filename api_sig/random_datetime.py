@@ -1,8 +1,8 @@
 import datetime
 import random
-start_date = datetime.datetime(2022, 1, 4, 8,tzinfo=datetime.timezone.utc) 
+start_date = datetime.datetime(2022, 2, 5, 8,tzinfo=datetime.timezone.utc) 
 # Establece la fecha inicial a las 8 am del 3 de enero de 2022
-end_date = datetime.datetime(2022, 1, 4, 19,tzinfo=datetime.timezone.utc) 
+end_date = datetime.datetime(2022, 2, 5, 19,tzinfo=datetime.timezone.utc) 
 # Establece la fecha final a las 4 pm del 3 de enero de 2022
 current_date = start_date # Inicializa la fecha actual con la fecha inicial
 # RANGO DE SEGUNDOS ALEATORIOS

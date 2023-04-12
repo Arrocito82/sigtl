@@ -1,0 +1,1735 @@
+[
+    {
+        "model": "api_sig.categoria",
+        "pk": 1,
+        "fields": {
+            "nombre_categoria": "Ropa",
+            "descripcion_categoria": "Prendas de vestir para hombres, mujeres y niños"
+        }
+    },
+    {
+        "model": "api_sig.categoria",
+        "pk": 2,
+        "fields": {
+            "nombre_categoria": "Calzado",
+            "descripcion_categoria": "Zapatos, zapatillas y sandalias para todas las edades"
+        }
+    },
+    {
+        "model": "api_sig.categoria",
+        "pk": 3,
+        "fields": {
+            "nombre_categoria": "Electrónica",
+            "descripcion_categoria": "Dispositivos electrónicos, desde teléfonos móviles hasta televisores"
+        }
+    },
+    {
+        "model": "api_sig.categoria",
+        "pk": 4,
+        "fields": {
+            "nombre_categoria": "Hogar",
+            "descripcion_categoria": "Artículos para el hogar, como muebles, decoración y electrodomésticos"
+        }
+    },
+    {
+        "model": "api_sig.categoria",
+        "pk": 5,
+        "fields": {
+            "nombre_categoria": "Deportes",
+            "descripcion_categoria": "Equipos y accesorios para deportes y actividades al aire libre"
+        }
+    },
+    {
+        "model": "api_sig.categoria",
+        "pk": 6,
+        "fields": {
+            "nombre_categoria": "Belleza",
+            "descripcion_categoria": "Productos de belleza y cuidado personal, como maquillaje y perfumes"
+        }
+    },
+    {
+        "model": "api_sig.categoria",
+        "pk": 7,
+        "fields": {
+            "nombre_categoria": "Alimentación",
+            "descripcion_categoria": "Productos alimenticios, como frutas, verduras, carne y lácteos"
+        }
+    },
+    {
+        "model": "api_sig.categoria",
+        "pk": 8,
+        "fields": {
+            "nombre_categoria": "Libros",
+            "descripcion_categoria": "Libros de diferentes géneros y temáticas, tanto físicos como digitales"
+        }
+    },
+    {
+        "model": "api_sig.categoria",
+        "pk": 9,
+        "fields": {
+            "nombre_categoria": "Juguetes",
+            "descripcion_categoria": "Juguetes y juegos para todas las edades y gustos"
+        }
+    },
+    {
+        "model": "api_sig.categoria",
+        "pk": 10,
+        "fields": {
+            "nombre_categoria": "Instrumentos musicales",
+            "descripcion_categoria": "Instrumentos para músicos profesionales y aficionados"
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 1,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Camisa de algodón",
+            "precio": 25.99,
+            "descripcion_producto": "Camisa de manga larga hecha de algod?n de alta calidad.",
+            "descuento": 0.0,
+            "cantidad_disponible": 500,
+            "valorInv": 12995.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 2,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Pantalón vaquero",
+            "precio": 45.5,
+            "descripcion_producto": "Pantalón vaquero con corte recto y detalles desgastados.",
+            "descuento": 0.1,
+            "cantidad_disponible": 250,
+            "valorInv": 10125.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 3,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Chaqueta de cuero",
+            "precio": 150.0,
+            "descripcion_producto": "Chaqueta de cuero genuino con cierre de cremallera.",
+            "descuento": 0.2,
+            "cantidad_disponible": 50,
+            "valorInv": 6000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 4,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Vestido de fiesta",
+            "precio": 75.99,
+            "descripcion_producto": "Elegante vestido de fiesta con escote en V y falda de tul.",
+            "descuento": 0.0,
+            "cantidad_disponible": 100,
+            "valorInv": 7599.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 5,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Sudadera con capucha",
+            "precio": 35.0,
+            "descripcion_producto": "Sudadera con capucha y bolsillos canguro.",
+            "descuento": 0.05,
+            "cantidad_disponible": 200,
+            "valorInv": 7000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 6,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Falda plisada",
+            "precio": 29.99,
+            "descripcion_producto": "Falda plisada de longitud media con estampado floral.",
+            "descuento": 0.0,
+            "cantidad_disponible": 150,
+            "valorInv": 4498.5
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 7,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Abrigo de lana",
+            "precio": 99.99,
+            "descripcion_producto": "Abrigo de lana con cierre de botones y solapas amplias.",
+            "descuento": 0.15,
+            "cantidad_disponible": 75,
+            "valorInv": 7499.25
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 8,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Polo de rayas",
+            "precio": 20.0,
+            "descripcion_producto": "Polo de manga corta con rayas horizontales en tonos azules.",
+            "descuento": 0.0,
+            "cantidad_disponible": 300,
+            "valorInv": 6000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 9,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Pijama de algodón",
+            "precio": 15.99,
+            "descripcion_producto": "Pijama de dos piezas hecho de algodón suave y transpirable.",
+            "descuento": 0.0,
+            "cantidad_disponible": 400,
+            "valorInv": 6396.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 10,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Traje de bajo",
+            "precio": 50.0,
+            "descripcion_producto": "Traje de bajo de dos piezas con estampado tropical.",
+            "descuento": 0.0,
+            "cantidad_disponible": 100,
+            "valorInv": 5000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 11,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Chaleco de lana",
+            "precio": 45.99,
+            "descripcion_producto": "Chaleco de lana con cuello alto y cierre de botones.",
+            "descuento": 0.0,
+            "cantidad_disponible": 150,
+            "valorInv": 6898.5
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 12,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Gorra de béisbol",
+            "precio": 12.5,
+            "descripcion_producto": "Gorra de béisbol con logo bordado en la parte frontal.",
+            "descuento": 0.0,
+            "cantidad_disponible": 500,
+            "valorInv": 6250.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 13,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Jersey de punto",
+            "precio": 22.0,
+            "descripcion_producto": "Jersey de punto con cuello redondo y diseño de ochos.",
+            "descuento": 0.1,
+            "cantidad_disponible": 200,
+            "valorInv": 3960.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 14,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Parka acolchada",
+            "precio": 120.0,
+            "descripcion_producto": "Parka acolchada con capucha y forro de piel sintética.",
+            "descuento": 0.0,
+            "cantidad_disponible": 50,
+            "valorInv": 6000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 15,
+        "fields": {
+            "id_categoria": 1,
+            "nombre": "Camiseta de tirantes",
+            "precio": 10.99,
+            "descripcion_producto": "Camiseta de tirantes básica en varios colores.",
+            "descuento": 0.0,
+            "cantidad_disponible": 500,
+            "valorInv": 5495.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 16,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Zapatos deportivos",
+            "precio": 79.99,
+            "descripcion_producto": "Zapatos deportivos con suela de goma y material transpirable.",
+            "descuento": 0.1,
+            "cantidad_disponible": 200,
+            "valorInv": 15998.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 17,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Zapatillas de lona",
+            "precio": 29.5,
+            "descripcion_producto": "Zapatillas de lona con cordones y suela de goma.",
+            "descuento": 0.0,
+            "cantidad_disponible": 500,
+            "valorInv": 14750.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 18,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Botas de cuero",
+            "precio": 129.99,
+            "descripcion_producto": "Botas de cuero genuino con forro de piel y cierre de cremallera.",
+            "descuento": 0.0,
+            "cantidad_disponible": 75,
+            "valorInv": 9749.25
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 19,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Sandalias de playa",
+            "precio": 15.0,
+            "descripcion_producto": "Sandalias de playa con plantilla de espuma y correas ajustables.",
+            "descuento": 0.0,
+            "cantidad_disponible": 300,
+            "valorInv": 4500.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 20,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Mocasines de ante",
+            "precio": 69.99,
+            "descripcion_producto": "Mocasines de ante con detalles de borlas y suela de goma.",
+            "descuento": 0.0,
+            "cantidad_disponible": 100,
+            "valorInv": 6999.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 21,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Zapatos de tacón",
+            "precio": 89.5,
+            "descripcion_producto": "Zapatos de tacón alto con puntera redondeada y acabado brillante.",
+            "descuento": 0.05,
+            "cantidad_disponible": 50,
+            "valorInv": 4225.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 22,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Zapatos de vestir",
+            "precio": 99.99,
+            "descripcion_producto": "Zapatos de vestir con cierre de cordones y suela antideslizante.",
+            "descuento": 0.0,
+            "cantidad_disponible": 150,
+            "valorInv": 14998.5
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 23,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Zapatillas de running",
+            "precio": 119.0,
+            "descripcion_producto": "Zapatillas de running con amortiguación y soporte para el arco.",
+            "descuento": 0.0,
+            "cantidad_disponible": 100,
+            "valorInv": 11900.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 24,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Botines de cuero",
+            "precio": 89.99,
+            "descripcion_producto": "Botines de cuero con tacón bajo y cierre de cremallera lateral.",
+            "descuento": 0.0,
+            "cantidad_disponible": 75,
+            "valorInv": 6749.25
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 25,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Sandalias de tacón",
+            "precio": 55.0,
+            "descripcion_producto": "Sandalias de tacón alto con tiras entrecruzadas y cierre de hebilla.",
+            "descuento": 0.1,
+            "cantidad_disponible": 50,
+            "valorInv": 2475.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 26,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Zapatillas de baloncesto",
+            "precio": 149.99,
+            "descripcion_producto": "Zapatillas de baloncesto con suela de goma y amortiguación de aire.",
+            "descuento": 0.0,
+            "cantidad_disponible": 25,
+            "valorInv": 3749.75
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 27,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Zapatos náuticos",
+            "precio": 45.99,
+            "descripcion_producto": "Zapatos náuticos de cuero con detalles de cordones y suela de goma.",
+            "descuento": 0.0,
+            "cantidad_disponible": 200,
+            "valorInv": 9198.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 28,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Botas de montaña",
+            "precio": 99.5,
+            "descripcion_producto": "Botas de montaña con forro de Gore-Tex y suela antideslizante.",
+            "descuento": 0.0,
+            "cantidad_disponible": 50,
+            "valorInv": 4975.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 29,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Mocasines de cuero",
+            "precio": 59.99,
+            "descripcion_producto": "Mocasines de cuero con detalle de lazo y suela de goma.",
+            "descuento": 0.15,
+            "cantidad_disponible": 100,
+            "valorInv": 5099.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 30,
+        "fields": {
+            "id_categoria": 2,
+            "nombre": "Zapatillas de skate",
+            "precio": 69.0,
+            "descripcion_producto": "Zapatillas de skate con suela plana y detalles de tela vaquera.",
+            "descuento": 0.0,
+            "cantidad_disponible": 150,
+            "valorInv": 10350.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 31,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Televisor LED de 50 pulgadas",
+            "precio": 599.99,
+            "descripcion_producto": "Televisor LED de 50 pulgadas con resolución Full HD y función Smart TV.",
+            "descuento": 0.0,
+            "cantidad_disponible": 50,
+            "valorInv": 29999.5
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 32,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Laptop HP",
+            "precio": 849.0,
+            "descripcion_producto": "Laptop HP con procesador Intel Core i7 y pantalla de 14 pulgadas.",
+            "descuento": 0.1,
+            "cantidad_disponible": 25,
+            "valorInv": 21225.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 33,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Tablet Samsung",
+            "precio": 399.99,
+            "descripcion_producto": "Tablet Samsung con pantalla de 10.1 pulgadas y almacenamiento de 64GB.",
+            "descuento": 0.0,
+            "cantidad_disponible": 100,
+            "valorInv": 39999.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 34,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Cámara Nikon",
+            "precio": 699.0,
+            "descripcion_producto": "Cámara Nikon con sensor CMOS de 24.2 megapíxeles y lente zoom de 18-55mm.",
+            "descuento": 0.0,
+            "cantidad_disponible": 20,
+            "valorInv": 13980.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 35,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Reproductor de Blu-ray LG",
+            "precio": 69.99,
+            "descripcion_producto": "Reproductor de Blu-ray LG con capacidad de reproducción de discos en 3D.",
+            "descuento": 0.05,
+            "cantidad_disponible": 200,
+            "valorInv": 13998.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 36,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Parlante portátil JBL",
+            "precio": 129.99,
+            "descripcion_producto": "Parlante portátil JBL con conexión Bluetooth y batería recargable.",
+            "descuento": 0.0,
+            "cantidad_disponible": 150,
+            "valorInv": 19498.5
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 37,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Smartphone Samsung Galaxy",
+            "precio": 599.0,
+            "descripcion_producto": "Smartphone Samsung Galaxy con pantalla de 6.2 pulgadas y cámara trasera de 12 megapíxeles.",
+            "descuento": 0.0,
+            "cantidad_disponible": 50,
+            "valorInv": 29950.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 38,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Auriculares inalámbricos Bose",
+            "precio": 249.0,
+            "descripcion_producto": "Auriculares inalámbricos Bose con cancelación de ruido y conexión Bluetooth.",
+            "descuento": 0.0,
+            "cantidad_disponible": 75,
+            "valorInv": 18675.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 39,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Smartwatch Apple Watch",
+            "precio": 399.0,
+            "descripcion_producto": "Smartwatch Apple Watch con pantalla Retina y GPS integrado.",
+            "descuento": 0.0,
+            "cantidad_disponible": 30,
+            "valorInv": 11970.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 40,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Drone DJI Mavic Air 2",
+            "precio": 799.0,
+            "descripcion_producto": "Drone DJI Mavic Air 2 con cámara 4K y tiempo de vuelo de hasta 34 minutos.",
+            "descuento": 0.0,
+            "cantidad_disponible": 10,
+            "valorInv": 7990.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 41,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Proyector Epson",
+            "precio": 499.99,
+            "descripcion_producto": "Proyector Epson con resolución Full HD y 3600 lúmenes de brillo.",
+            "descuento": 0.0,
+            "cantidad_disponible": 15,
+            "valorInv": 7499.85
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 42,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Teclado mecánico Logitech",
+            "precio": 99.99,
+            "descripcion_producto": "Teclado mecánico Logitech con retroiluminación RGB y reposamuñecas desmontable.",
+            "descuento": 0.0,
+            "cantidad_disponible": 100,
+            "valorInv": 9999.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 43,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Impresora HP",
+            "precio": 149.0,
+            "descripcion_producto": "Impresora HP con conectividad Wi-Fi y capacidad de impresión a doble cara.",
+            "descuento": 0.0,
+            "cantidad_disponible": 50,
+            "valorInv": 7450.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 44,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Monitor de 27 pulgadas",
+            "precio": 299.99,
+            "descripcion_producto": "Monitor de 27 pulgadas con resolución Quad HD y tiempo de respuesta de 1ms.",
+            "descuento": 0.0,
+            "cantidad_disponible": 30,
+            "valorInv": 8999.7
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 45,
+        "fields": {
+            "id_categoria": 3,
+            "nombre": "Consola de videojuegos Xbox",
+            "precio": 499.0,
+            "descripcion_producto": "Consola de videojuegos Xbox con capacidad de reproducción de juegos en 4K.",
+            "descuento": 0.0,
+            "cantidad_disponible": 20,
+            "valorInv": 9980.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 46,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Sofá gris",
+            "precio": 150.0,
+            "descripcion_producto": "Sofá cómodo y elegante en color gris",
+            "descuento": 0.1,
+            "cantidad_disponible": 500,
+            "valorInv": 75000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 47,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Mesa de comedor",
+            "precio": 100.0,
+            "descripcion_producto": "Mesa de comedor de madera resistente",
+            "descuento": 0.0,
+            "cantidad_disponible": 200,
+            "valorInv": 20000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 48,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Juego de sabanas",
+            "precio": 50.0,
+            "descripcion_producto": "Sabanas de algodón suave y resistente",
+            "descuento": 0.05,
+            "cantidad_disponible": 300,
+            "valorInv": 15000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 49,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Alfombra roja",
+            "precio": 80.0,
+            "descripcion_producto": "Alfombra de lana roja suave y cálida",
+            "descuento": 0.2,
+            "cantidad_disponible": 150,
+            "valorInv": 12000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 50,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Lámpara de techo",
+            "precio": 30.0,
+            "descripcion_producto": "Lámpara de techo moderna y elegante",
+            "descuento": 0.0,
+            "cantidad_disponible": 1000,
+            "valorInv": 30000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 51,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Cojines decorativos",
+            "precio": 10.0,
+            "descripcion_producto": "Juego de cojines decorativos de colores",
+            "descuento": 0.0,
+            "cantidad_disponible": 500,
+            "valorInv": 5000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 52,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Cortinas opacas",
+            "precio": 25.0,
+            "descripcion_producto": "Cortinas opacas de color gris oscuro",
+            "descuento": 0.15,
+            "cantidad_disponible": 200,
+            "valorInv": 5000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 53,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Toallas de baño",
+            "precio": 15.0,
+            "descripcion_producto": "Toallas de baño suaves y absorbentes",
+            "descuento": 0.0,
+            "cantidad_disponible": 400,
+            "valorInv": 6000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 54,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Cubiertos de acero inoxidable",
+            "precio": 40.0,
+            "descripcion_producto": "Juego de cubiertos de acero inoxidable de alta calidad",
+            "descuento": 0.0,
+            "cantidad_disponible": 150,
+            "valorInv": 6000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 55,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Vajilla de porcelana",
+            "precio": 60.0,
+            "descripcion_producto": "Juego de vajilla de porcelana para 6 personas",
+            "descuento": 0.1,
+            "cantidad_disponible": 100,
+            "valorInv": 6000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 56,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Ollas y sartenes",
+            "precio": 70.0,
+            "descripcion_producto": "Juego de ollas y sartenes de acero inoxidable",
+            "descuento": 0.0,
+            "cantidad_disponible": 50,
+            "valorInv": 3500.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 57,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Cafetera",
+            "precio": 40.0,
+            "descripcion_producto": "Cafetera eléctrica para preparar café?",
+            "descuento": 0.05,
+            "cantidad_disponible": 100,
+            "valorInv": 3000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 58,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Cortina de ducha",
+            "precio": 20.0,
+            "descripcion_producto": "Cortina de ducha de tela resistente al agua",
+            "descuento": 0.0,
+            "cantidad_disponible": 300,
+            "valorInv": 6000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 59,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Estantería de madera",
+            "precio": 120.0,
+            "descripcion_producto": "Estantería de madera resistente con varios compartimentos",
+            "descuento": 0.0,
+            "cantidad_disponible": 50,
+            "valorInv": 6000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 60,
+        "fields": {
+            "id_categoria": 4,
+            "nombre": "Espejo de pared",
+            "precio": 50.0,
+            "descripcion_producto": "Espejo de pared grande y elegante",
+            "descuento": 0.0,
+            "cantidad_disponible": 100,
+            "valorInv": 5000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 61,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Pelota de fútbol",
+            "precio": 20.99,
+            "descripcion_producto": "Pelota de fútbol tamaño estándar",
+            "descuento": 0.1,
+            "cantidad_disponible": 25,
+            "valorInv": 524.75
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 62,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Raqueta de tenis",
+            "precio": 89.99,
+            "descripcion_producto": "Raqueta de tenis de alta calidad",
+            "descuento": 0.2,
+            "cantidad_disponible": 12,
+            "valorInv": 1079.88
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 63,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Bicicleta de montaña",
+            "precio": 549.0,
+            "descripcion_producto": "Bicicleta de montaña para todo terreno",
+            "descuento": 0.15,
+            "cantidad_disponible": 5,
+            "valorInv": 2745.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 64,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Guantes de boxeo",
+            "precio": 49.99,
+            "descripcion_producto": "Guantes de boxeo para entrenamiento",
+            "descuento": 0.05,
+            "cantidad_disponible": 50,
+            "valorInv": 2499.5
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 65,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Balón de baloncesto",
+            "precio": 25.0,
+            "descripcion_producto": "Balón de baloncesto tamaño oficial",
+            "descuento": 0.0,
+            "cantidad_disponible": 30,
+            "valorInv": 750.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 66,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Casco de ciclismo",
+            "precio": 79.95,
+            "descripcion_producto": "Casco de ciclismo de alta calidad",
+            "descuento": 0.1,
+            "cantidad_disponible": 20,
+            "valorInv": 1599.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 67,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Patines en línea",
+            "precio": 89.0,
+            "descripcion_producto": "Patines en línea para adultos",
+            "descuento": 0.0,
+            "cantidad_disponible": 15,
+            "valorInv": 1335.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 68,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Caña de pescar",
+            "precio": 59.99,
+            "descripcion_producto": "Caña de pescar para pesca de agua dulce",
+            "descuento": 0.1,
+            "cantidad_disponible": 25,
+            "valorInv": 1499.75
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 69,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Pelota de golf",
+            "precio": 15.99,
+            "descripcion_producto": "Pelota de golf de alta calidad",
+            "descuento": 0.05,
+            "cantidad_disponible": 40,
+            "valorInv": 639.6
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 70,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Mancuernas",
+            "precio": 39.99,
+            "descripcion_producto": "Juego de mancuernas de 10 libras",
+            "descuento": 0.0,
+            "cantidad_disponible": 20,
+            "valorInv": 799.8
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 71,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Pelota de voleibol",
+            "precio": 19.99,
+            "descripcion_producto": "Pelota de voleibol tamaño oficial",
+            "descuento": 0.0,
+            "cantidad_disponible": 25,
+            "valorInv": 499.75
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 72,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Colchoneta de yoga",
+            "precio": 29.95,
+            "descripcion_producto": "Colchoneta de yoga antideslizante",
+            "descuento": 0.0,
+            "cantidad_disponible": 30,
+            "valorInv": 898.5
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 73,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Parapente",
+            "precio": 799.0,
+            "descripcion_producto": "Parapente para vuelo libre",
+            "descuento": 0.25,
+            "cantidad_disponible": 2,
+            "valorInv": 3196.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 74,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Tabla de surf",
+            "precio": 399.0,
+            "descripcion_producto": "Tabla de surf para principiantes",
+            "descuento": 0.1,
+            "cantidad_disponible": 5,
+            "valorInv": 1995.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 75,
+        "fields": {
+            "id_categoria": 5,
+            "nombre": "Equipo de buceo",
+            "precio": 599.99,
+            "descripcion_producto": "Equipo de buceo para buceadores avanzados",
+            "descuento": 0.15,
+            "cantidad_disponible": 3,
+            "valorInv": 1799.97
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 76,
+        "fields": {
+            "id_categoria": 6,
+            "nombre": "Crema facial hidratante",
+            "precio": 25.99,
+            "descripcion_producto": "Crema facial hidratante con ingredientes naturales",
+            "descuento": 0.0,
+            "cantidad_disponible": 500,
+            "valorInv": 12995.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 77,
+        "fields": {
+            "id_categoria": 6,
+            "nombre": "Mascarilla capilar reparadora",
+            "precio": 12.5,
+            "descripcion_producto": "Mascarilla capilar con aceites esenciales y keratina",
+            "descuento": 0.1,
+            "cantidad_disponible": 250,
+            "valorInv": 3125.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 78,
+        "fields": {
+            "id_categoria": 6,
+            "nombre": "Set de brochas de maquillaje",
+            "precio": 35.99,
+            "descripcion_producto": "Set de brochas de maquillaje de alta calidad",
+            "descuento": 0.05,
+            "cantidad_disponible": 100,
+            "valorInv": 3599.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 79,
+        "fields": {
+            "id_categoria": 6,
+            "nombre": "Esmalte de uñas rojo intenso",
+            "precio": 7.99,
+            "descripcion_producto": "Esmalte de uñas de larga duración y alto brillo",
+            "descuento": 0.0,
+            "cantidad_disponible": 800,
+            "valorInv": 6392.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 80,
+        "fields": {
+            "id_categoria": 6,
+            "nombre": "Aceite corporal de almendras",
+            "precio": 18.99,
+            "descripcion_producto": "Aceite corporal hidratante y nutritivo",
+            "descuento": 0.0,
+            "cantidad_disponible": 300,
+            "valorInv": 5697.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 81,
+        "fields": {
+            "id_categoria": 6,
+            "nombre": "Loción corporal de vainilla",
+            "precio": 12.99,
+            "descripcion_producto": "Loción corporal con aroma a vainilla y manteca de karito?",
+            "descuento": 0.0,
+            "cantidad_disponible": 600,
+            "valorInv": 7794.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 82,
+        "fields": {
+            "id_categoria": 6,
+            "nombre": "Kit de manicura y pedicura",
+            "precio": 28.5,
+            "descripcion_producto": "Kit de manicura y pedicura con herramientas de acero inoxidable",
+            "descuento": 0.0,
+            "cantidad_disponible": 150,
+            "valorInv": 4275.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 83,
+        "fields": {
+            "id_categoria": 6,
+            "nombre": "Barra de labios nude",
+            "precio": 9.99,
+            "descripcion_producto": "Barra de labios de larga duración con acabado mate",
+            "descuento": 0.0,
+            "cantidad_disponible": 1000,
+            "valorInv": 9990.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 84,
+        "fields": {
+            "id_categoria": 6,
+            "nombre": "Agua micelar desmaquillante",
+            "precio": 14.5,
+            "descripcion_producto": "Agua micelar para limpieza facial y desmaquillado",
+            "descuento": 0.0,
+            "cantidad_disponible": 400,
+            "valorInv": 5800.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 85,
+        "fields": {
+            "id_categoria": 6,
+            "nombre": "Crema para manos y cuerpo",
+            "precio": 8.99,
+            "descripcion_producto": "Crema hidratante para manos y cuerpo con aroma a lavanda",
+            "descuento": 0.0,
+            "cantidad_disponible": 700,
+            "valorInv": 6293.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 86,
+        "fields": {
+            "id_categoria": 7,
+            "nombre": "Arroz",
+            "precio": 2.99,
+            "descripcion_producto": "Arroz blanco de grano largo,ideal para acompañar tus comidas.",
+            "descuento": 0.0,
+            "cantidad_disponible": 500,
+            "valorInv": 1495.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 87,
+        "fields": {
+            "id_categoria": 7,
+            "nombre": "Frijoles",
+            "precio": 1.99,
+            "descripcion_producto": "Frijoles negros,excelentes para preparar platillos mexicanos.",
+            "descuento": 0.0,
+            "cantidad_disponible": 800,
+            "valorInv": 1592.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 88,
+        "fields": {
+            "id_categoria": 7,
+            "nombre": "Sardinas en lata",
+            "precio": 0.99,
+            "descripcion_producto": "Sardinas en salsa de tomate,una opción práctica para tus comidas.",
+            "descuento": 0.1,
+            "cantidad_disponible": 200,
+            "valorInv": 158.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 89,
+        "fields": {
+            "id_categoria": 7,
+            "nombre": "Aceite de oliva",
+            "precio": 5.99,
+            "descripcion_producto": "Aceite de oliva extra virgen de alta calidad.",
+            "descuento": 0.0,
+            "cantidad_disponible": 300,
+            "valorInv": 1797.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 90,
+        "fields": {
+            "id_categoria": 7,
+            "nombre": "Atún enlatado",
+            "precio": 1.49,
+            "descripcion_producto": "Atún en agua, bajo en calorías y alto en proteínas.",
+            "descuento": 0.15,
+            "cantidad_disponible": 400,
+            "valorInv": 596.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 91,
+        "fields": {
+            "id_categoria": 7,
+            "nombre": "Leche en polvo",
+            "precio": 3.49,
+            "descripcion_producto": "Leche en polvo fortificada,ideal para preparar bebidas y postres.",
+            "descuento": 0.0,
+            "cantidad_disponible": 250,
+            "valorInv": 872.5
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 92,
+        "fields": {
+            "id_categoria": 7,
+            "nombre": "Mermelada de fresa",
+            "precio": 2.29,
+            "descripcion_producto": "Mermelada de fresa con trozos de fruta, deliciosa para untar en pan o galletas.",
+            "descuento": 0.0,
+            "cantidad_disponible": 150,
+            "valorInv": 343.5
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 93,
+        "fields": {
+            "id_categoria": 7,
+            "nombre": "Cereal",
+            "precio": 2.99,
+            "descripcion_producto": "Cereal de avena y miel, una opción nutritiva para tu desayuno.",
+            "descuento": 0.0,
+            "cantidad_disponible": 400,
+            "valorInv": 1196.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 94,
+        "fields": {
+            "id_categoria": 7,
+            "nombre": "Galletas",
+            "precio": 1.49,
+            "descripcion_producto": "Galletas de chocolate, ideales para tus antojos dulces.",
+            "descuento": 0.05,
+            "cantidad_disponible": 600,
+            "valorInv": 894.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 95,
+        "fields": {
+            "id_categoria": 7,
+            "nombre": "Mantequilla de mano",
+            "precio": 3.99,
+            "descripcion_producto": "Mantequilla de mano natural, sin aditivos ni conservantes.",
+            "descuento": 0.0,
+            "cantidad_disponible": 200,
+            "valorInv": 798.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 96,
+        "fields": {
+            "id_categoria": 8,
+            "nombre": " La Metamorfosis",
+            "precio": 10.99,
+            "descripcion_producto": " La Metamorfosis es una novela corta escrita por Franz Kafka en 1915.",
+            "descuento": 0.0,
+            "cantidad_disponible": 1500,
+            "valorInv": 16485.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 97,
+        "fields": {
+            "id_categoria": 8,
+            "nombre": " Cien años de soledad",
+            "precio": 12.99,
+            "descripcion_producto": " Cien años de soledad es una novela del escritor colombiano Gabriel García Márquez.",
+            "descuento": 0.2,
+            "cantidad_disponible": 1200,
+            "valorInv": 11616.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 98,
+        "fields": {
+            "id_categoria": 8,
+            "nombre": " Don Quijote de la Mancha",
+            "precio": 15.99,
+            "descripcion_producto": " Don Quijote de la Mancha es una novela escrita por el español Miguel de Cervantes Saavedra.",
+            "descuento": 0.1,
+            "cantidad_disponible": 800,
+            "valorInv": 10232.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 99,
+        "fields": {
+            "id_categoria": 8,
+            "nombre": "1984",
+            "precio": 11.99,
+            "descripcion_producto": " 1984 es una novela política de ficción dística,  escrita por George Orwell en 1949.",
+            "descuento": 0.0,
+            "cantidad_disponible": 2000,
+            "valorInv": 23980.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 100,
+        "fields": {
+            "id_categoria": 8,
+            "nombre": " El Gran Gatsby",
+            "precio": 9.99,
+            "descripcion_producto": " El Gran Gatsby es una novela escrita por el autor estadounidense F. Scott Fitzgerald.",
+            "descuento": 0.0,
+            "cantidad_disponible": 500,
+            "valorInv": 4995.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 101,
+        "fields": {
+            "id_categoria": 8,
+            "nombre": " El Hobbit",
+            "precio": 8.99,
+            "descripcion_producto": " El Hobbit es una novela de fantasía del autor británico J. R. R. Tolkien.",
+            "descuento": 0.15,
+            "cantidad_disponible": 2500,
+            "valorInv": 20122.5
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 102,
+        "fields": {
+            "id_categoria": 8,
+            "nombre": " Matar a un ruiseñor",
+            "precio": 7.99,
+            "descripcion_producto": " Matar a un ruiseñor es una novela de la autora estadounidense Harper Lee.",
+            "descuento": 0.0,
+            "cantidad_disponible": 1000,
+            "valorInv": 7990.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 103,
+        "fields": {
+            "id_categoria": 8,
+            "nombre": " El Señor de los Anillos",
+            "precio": 20.99,
+            "descripcion_producto": " El Señor de los Anillos es una novela de fantasía del autor británico J. R. R. Tolkien.",
+            "descuento": 0.1,
+            "cantidad_disponible": 1500,
+            "valorInv": 28303.5
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 104,
+        "fields": {
+            "id_categoria": 8,
+            "nombre": " El viejo y el mar",
+            "precio": 6.99,
+            "descripcion_producto": " El viejo y el mar es una novela corta del autor estadounidense Ernest Hemingway.",
+            "descuento": 0.05,
+            "cantidad_disponible": 3000,
+            "valorInv": 18855.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 105,
+        "fields": {
+            "id_categoria": 8,
+            "nombre": " Orgullo y prejuicio",
+            "precio": 14.99,
+            "descripcion_producto": " Orgullo y prejuicio es una novela de la autora británica Jane Austen.",
+            "descuento": 0.25,
+            "cantidad_disponible": 800,
+            "valorInv": 8994.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 106,
+        "fields": {
+            "id_categoria": 9,
+            "nombre": "Muñeca Barbie",
+            "precio": 20.0,
+            "descripcion_producto": "Muñeca Barbie con vestido rosa",
+            "descuento": 0.05,
+            "cantidad_disponible": 500,
+            "valorInv": 10000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 107,
+        "fields": {
+            "id_categoria": 9,
+            "nombre": "Carro de carreras",
+            "precio": 15.0,
+            "descripcion_producto": "Carro de carreras de juguete con control remoto",
+            "descuento": 0.02,
+            "cantidad_disponible": 800,
+            "valorInv": 12000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 108,
+        "fields": {
+            "id_categoria": 9,
+            "nombre": "Juego de bloques",
+            "precio": 25.0,
+            "descripcion_producto": "Set de 100 bloques para construcción",
+            "descuento": 0.0,
+            "cantidad_disponible": 450,
+            "valorInv": 11250.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 109,
+        "fields": {
+            "id_categoria": 9,
+            "nombre": "Pelota de fútbol",
+            "precio": 10.0,
+            "descripcion_producto": "Pelota de fútbol tamaño infantil",
+            "descuento": 0.03,
+            "cantidad_disponible": 1000,
+            "valorInv": 10000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 110,
+        "fields": {
+            "id_categoria": 9,
+            "nombre": "Juego de mesa",
+            "precio": 30.0,
+            "descripcion_producto": "Juego de mesa para la familia",
+            "descuento": 0.1,
+            "cantidad_disponible": 300,
+            "valorInv": 9000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 111,
+        "fields": {
+            "id_categoria": 9,
+            "nombre": "Figura de acción",
+            "precio": 12.0,
+            "descripcion_producto": "Figura de acción de superhéroe",
+            "descuento": 0.0,
+            "cantidad_disponible": 700,
+            "valorInv": 8400.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 112,
+        "fields": {
+            "id_categoria": 9,
+            "nombre": "Rompecabezas",
+            "precio": 18.0,
+            "descripcion_producto": "Rompecabezas de 500 piezas",
+            "descuento": 0.0,
+            "cantidad_disponible": 400,
+            "valorInv": 7200.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 113,
+        "fields": {
+            "id_categoria": 9,
+            "nombre": "Juguete de peluche",
+            "precio": 8.0,
+            "descripcion_producto": "Oso de peluche suave y tierno",
+            "descuento": 0.01,
+            "cantidad_disponible": 1200,
+            "valorInv": 9600.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 114,
+        "fields": {
+            "id_categoria": 9,
+            "nombre": "Instrumento musical",
+            "precio": 40.0,
+            "descripcion_producto": "Guitarra de juguete para niños",
+            "descuento": 0.08,
+            "cantidad_disponible": 200,
+            "valorInv": 8000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 115,
+        "fields": {
+            "id_categoria": 9,
+            "nombre": "Juego de bolos",
+            "precio": 22.0,
+            "descripcion_producto": "Set de bolos para niños con 6 pins y bola",
+            "descuento": 0.04,
+            "cantidad_disponible": 500,
+            "valorInv": 11000.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 116,
+        "fields": {
+            "id_categoria": 10,
+            "nombre": "Guitarra acústica Yamaha FG800",
+            "precio": 249.99,
+            "descripcion_producto": "Guitarra acústica de calidad con cuerpo de abeto y diapasón de palisandro. Incluye funda y afinador digital.",
+            "descuento": 0.0,
+            "cantidad_disponible": 5,
+            "valorInv": 1249.95
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 117,
+        "fields": {
+            "id_categoria": 10,
+            "nombre": "Batería electrónica Alesis Nitro Mesh",
+            "precio": 399.0,
+            "descripcion_producto": "Batería electrónica con módulo de sonido de 40 kits,pads de malla,pedales de bombo y charles, y más de 350 sonidos.",
+            "descuento": 0.1,
+            "cantidad_disponible": 3,
+            "valorInv": 1197.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 118,
+        "fields": {
+            "id_categoria": 10,
+            "nombre": "Piano digital Casio Privia PX-870",
+            "precio": 999.0,
+            "descripcion_producto": "Piano digital con teclas de acción martillo escalado,simulación de resonancia y pedal triple. Incluye soporte y pedal.",
+            "descuento": 0.0,
+            "cantidad_disponible": 2,
+            "valorInv": 1998.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 119,
+        "fields": {
+            "id_categoria": 10,
+            "nombre": "Trompeta Jupiter JTR700",
+            "precio": 699.0,
+            "descripcion_producto": "Trompeta en Si bemol con campana de 123 mm y boquilla plateada. Incluye estuche y accesorios.",
+            "descuento": 0.05,
+            "cantidad_disponible": 4,
+            "valorInv": 2796.0
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 120,
+        "fields": {
+            "id_categoria": 10,
+            "nombre": "Teclado Yamaha PSR-E373",
+            "precio": 299.99,
+            "descripcion_producto": "Teclado portátil de 61 teclas con más de 600 voces y 165 estilos de acompañamiento. Incluye soporte y adaptador de corriente.",
+            "descuento": 0.0,
+            "cantidad_disponible": 6,
+            "valorInv": 1799.94
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 121,
+        "fields": {
+            "id_categoria": 10,
+            "nombre": "Amplificador de guitarra Fender Champion 20",
+            "precio": 129.99,
+            "descripcion_producto": "Amplificador de 20 vatios con altavoz de 8 y efectos de modelado de amplificadores y pedales.",
+            "descuento": 0.0,
+            "cantidad_disponible": 8,
+            "valorInv": 1039.92
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 122,
+        "fields": {
+            "id_categoria": 10,
+            "nombre": "Bajo eléctrico Squier Classic Vibe '60s Precisión Bass",
+            "precio": 399.99,
+            "descripcion_producto": "Bajo eléctrico con cuerpo de pino,diapasón de arce y pastilla de bobina dividida. Incluye funda y correa.",
+            "descuento": 0.0,
+            "cantidad_disponible": 3,
+            "valorInv": 1199.97
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 123,
+        "fields": {
+            "id_categoria": 10,
+            "nombre": "Sintetizador Korg minilogue xd",
+            "precio": 649.99,
+            "descripcion_producto": "Sintetizador analógico polifónico de 4 voces con 500 programas preestablecidos y efectos digitales. Incluye adaptador de corriente.",
+            "descuento": 0.0,
+            "cantidad_disponible": 2,
+            "valorInv": 1299.98
+        }
+    },
+    {
+        "model": "api_sig.producto",
+        "pk": 124,
+        "fields": {
+            "id_categoria": 10,
+            "nombre": "Armónica Hohner Special 20",
+            "precio": 44.99,
+            "descripcion_producto": "Armónica diatónica de 10 agujeros con cuerpo de plástico y lengüetas de latón. Disponible en varias tonalidades.",
+            "descuento": 0.0,
+            "cantidad_disponible": 10,
+            "valorInv": 449.9
+        }
+    },
+    {
+        "model": "api_sig.sucursal",
+        "pk": 1,
+        "fields": {
+            "nombre_sucursal": "Sucursal San Salvador",
+            "direccion": "Calle La Reforma #255, San Salvador, El Salvador"
+        }
+    },
+    {
+        "model": "api_sig.sucursal",
+        "pk": 2,
+        "fields": {
+            "nombre_sucursal": "Sucursal Santa Tecla",
+            "direccion": "Calle El Progreso #89, Santa Tecla, El Salvador"
+        }
+    },
+    {
+        "model": "api_sig.sucursal",
+        "pk": 3,
+        "fields": {
+            "nombre_sucursal": "Sucursal San Miguel",
+            "direccion": "Calle Roosevelt #555, San Miguel, El Salvador"
+        }
+    },
+    {
+        "model": "api_sig.sucursal",
+        "pk": 4,
+        "fields": {
+            "nombre_sucursal": "Sucursal Santa Ana",
+            "direccion": "Calle Libertad #22, Santa Ana, El Salvador"
+        }
+    },
+    {
+        "model": "api_sig.sucursal",
+        "pk": 5,
+        "fields": {
+            "nombre_sucursal": "Sucursal Sonsonate",
+            "direccion": "Calle El Calvario #33, Sonsonate, El Salvador"
+        }
+    }
+    
+]
