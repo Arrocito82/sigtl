@@ -78,7 +78,7 @@ WSGI_APPLICATION = "sigtl.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'SIGTL',
+        'NAME': 'SIGTL2-DATOS-DE-PRUEBA',
         'USER': 'dsi115',
         'PASSWORD': 'dsi115',
         'HOST': 'proyectos.czoy1vdwgmhj.us-east-1.rds.amazonaws.com',
