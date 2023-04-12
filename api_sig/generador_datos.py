@@ -20,6 +20,7 @@ def generar_pedido():
     
     random_lineas_pedido=random.randint(MIN_LINEA_PEDIDO, MAX_LINEA_PEDIDO)
     print(random_lineas_pedido)
+    total_venta=0
     for x in range(random_lineas_pedido):
         random_cantidad_producto=random.randint(MIN_CANT_PRODUCTO, MAX_CANT_PRODUCTO)
         random_producto=random.randint(MIN_ID_PRODUCTO, MAX_ID_PRODUCTO)
@@ -35,7 +36,10 @@ def generar_pedido():
         movimiento.save()
         # modificar producto en sucursal
         # registrar venta
-
+        total_venta=total_venta+linea_pedido.total
+        
+    venta=generar_venta(pedido, fecha_registro, total_venta)
+    venta.save()
     return pedido
 
 def generar_linea_pedido(pedido, producto, cantidad):
@@ -50,3 +54,8 @@ def generar_movimiento(sucursal, producto, fecha_registro, cantidad, total):
     movimiento=Movimiento.objects.create(id_sucursal=sucursal, id_producto=producto, fecha_registro=fecha_registro,
                                           detalle=producto.nombre, valorUnitario=producto.precio, cantidad=cantidad, total=total, tipo="S")
     return movimiento
+
+def generar_venta(pedido, fecha_registro, total_venta):
+    iva=total_venta*0.13
+    venta = Venta.objects.create(pedido_venta=pedido, total=total_venta, iva=iva, fecha_registro=fecha_registro)
+    return venta
