@@ -13,6 +13,11 @@ MAX_ID_PRODUCTO=124
 MIN_ID_SUCURSAL=1
 MAX_ID_SUCURSAL=5
 
+def generar_datos(cantidad):
+    for n in range(cantidad):
+        generar_pedido()
+        print(n)
+
 def generar_pedido():
     fecha_registro=get_custom_random_datetime()
     random_sucursal=random.randint(MIN_ID_SUCURSAL,MAX_ID_SUCURSAL)
@@ -22,7 +27,7 @@ def generar_pedido():
     
     # random_lineas_pedido=random.randint(MIN_LINEA_PEDIDO, MAX_LINEA_PEDIDO)
     random_lineas_pedido=1
-    print(random_lineas_pedido)
+    # print(random_lineas_pedido)
     total_venta=0
     for x in range(random_lineas_pedido):
         # random_cantidad_producto=random.randint(MIN_CANT_PRODUCTO, MAX_CANT_PRODUCTO)
@@ -43,7 +48,7 @@ def generar_pedido():
     # registrar venta
     venta=generar_venta(pedido, fecha_registro, total_venta)
     venta.save()
-    return pedido
+    # return pedido
 
 def generar_linea_pedido(pedido, producto, cantidad):
     importe=producto.precio*cantidad
@@ -112,7 +117,9 @@ def reabastecer_inventario(sucursal, producto, fecha_actual):
         fecha_registro=fecha_actual+datetime.timedelta(days=dias_aleagorio,minutes=minutos_aleatorio,seconds=segundos_aleatorio)
         porcentaje_fluctuacion_mercado=random.uniform(-0.15,0.15)
         valorUnitario=round(primer_movimiento.valorUnitario*(1+porcentaje_fluctuacion_mercado),2)
-        valor_maximo=primer_movimiento.cantidad%12
+        valor_maximo=(primer_movimiento.cantidad%12)
+        if valor_maximo==0:
+            valor_maximo=2
         cantidad=random.randint(1,valor_maximo)*12
         total=cantidad*valorUnitario
         movimiento=Movimiento.objects.create(id_sucursal=sucursal, 
