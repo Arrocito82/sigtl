@@ -2,16 +2,16 @@ import datetime
 from api_sig.models import *
 from api_sig.random_datetime import get_current_time as get_custom_random_datetime
 import random
-from django.db.models import Sum
+from django.db.models import Sum, Avg
 # sucursal = Sucursal.objects.get(pk=1)
 MIN_LINEA_PEDIDO=1
-MAX_LINEA_PEDIDO=20
+MAX_LINEA_PEDIDO=5
 MIN_CANT_PRODUCTO=1
-MAX_CANT_PRODUCTO=3
+MAX_CANT_PRODUCTO=50
 MIN_ID_PRODUCTO=1
 MAX_ID_PRODUCTO=124
 MIN_ID_SUCURSAL=1
-MAX_ID_SUCURSAL=5
+MAX_ID_SUCURSAL=2
 
 def generar_datos(cantidad):
     for n in range(cantidad):
@@ -20,31 +20,35 @@ def generar_datos(cantidad):
 
 def generar_pedido():
     fecha_registro=get_custom_random_datetime()
-    random_sucursal=random.randint(MIN_ID_SUCURSAL,MAX_ID_SUCURSAL)
+    # random_sucursal=random.randint(MIN_ID_SUCURSAL,MAX_ID_SUCURSAL)
+    random_sucursal=1
     sucursal=Sucursal.objects.get(pk=random_sucursal)
     pedido=Pedido.objects.create(fecha_registro=fecha_registro, estado=Pedido.VENDIDO)
     pedido.save()
     
-    # random_lineas_pedido=random.randint(MIN_LINEA_PEDIDO, MAX_LINEA_PEDIDO)
-    random_lineas_pedido=1
+    random_lineas_pedido=random.randint(MIN_LINEA_PEDIDO, MAX_LINEA_PEDIDO)
+    # random_lineas_pedido=1
     # print(random_lineas_pedido)
     total_venta=0
     for x in range(random_lineas_pedido):
-        # random_cantidad_producto=random.randint(MIN_CANT_PRODUCTO, MAX_CANT_PRODUCTO)
-        random_cantidad_producto=200
-        # random_producto=random.randint(MIN_ID_PRODUCTO, MAX_ID_PRODUCTO)
-        random_producto=48
+        random_cantidad_producto=random.randint(MIN_CANT_PRODUCTO, MAX_CANT_PRODUCTO)
+        # random_cantidad_producto=1
+        # random_cantidad_producto=200
+        random_producto=random.randint(MIN_ID_PRODUCTO, MAX_ID_PRODUCTO)
+        # random_producto=12
+        # random_producto=48
         producto = Producto.objects.get(pk=random_producto)
         # creando linea producto
-        linea_pedido=generar_linea_pedido(pedido, producto, random_cantidad_producto)
-        reabastecer_inventario(sucursal, producto, fecha_registro)
         # validar que hay existencias antes de guardar sino no guardar 
         if hay_existencias(sucursal, producto, random_cantidad_producto):
+            linea_pedido=generar_linea_pedido(pedido, producto, random_cantidad_producto)
             linea_pedido.save()
             # creando movimiento
             generar_movimiento(sucursal,producto, fecha_registro,linea_pedido.cantidad)        
             total_venta=total_venta+linea_pedido.total
-        
+        else:
+            reabastecer_inventario(sucursal, producto, fecha_registro)
+
     # registrar venta
     venta=generar_venta(pedido, fecha_registro, total_venta)
     venta.save()
@@ -80,15 +84,18 @@ def generar_movimiento(sucursal, producto, fecha_registro, cantidad):
 
             # calculando el costo de este movimiento, en terminos del precio al que se compro al proveedor
             total=cantidad_movimiento*lote.valorUnitario
+            total=round(total,2)
             movimiento=Movimiento.objects.create(id_sucursal=sucursal, 
                                                     id_producto=producto, 
                                                     fecha_registro=fecha_registro,
-                                                    detalle=producto.nombre, 
+                                                    detalle=producto.nombre[:30], 
                                                     valorUnitario=lote.valorUnitario, 
                                                     cantidad=cantidad_movimiento, 
                                                     total=total, 
                                                     tipo="S")
             movimiento.save()
+            producto.cantidad_disponible-=cantidad_movimiento
+            producto.save()
             # modificar producto en sucursal (inventario)
             lote.cantidad=lote.cantidad-cantidad_movimiento
             lote.save()
@@ -103,39 +110,47 @@ def generar_venta(pedido, fecha_registro, total_venta):
 
 def hay_existencias(sucursal, producto, cantidad):
     total=ProductoEnSucursal.objects.filter(id_sucursal=sucursal,id_producto=producto).aggregate(total=Sum('cantidad'))['total']
+    if total is None:
+            return False
+    if total>=cantidad:
+        print("si hay "+str(producto.id_producto))
     return total>=cantidad
 
 def reabastecer_inventario(sucursal, producto, fecha_actual):
-    
-    total_disponible=ProductoEnSucursal.objects.filter(id_sucursal=sucursal,id_producto=producto).aggregate(total=Sum('cantidad'))['total']
-    # si no hay existencias hacer el nuevo pedido
-    primer_movimiento=Movimiento.objects.filter(id_sucursal=sucursal, id_producto=producto, tipo="E").order_by('fecha_registro').first()
-    if total_disponible<primer_movimiento.total*0.2:
-        minutos_aleatorio=random.randint(0,59)
-        segundos_aleatorio=random.randint(0,59)
-        dias_aleagorio=random.randint(0,3)
-        fecha_registro=fecha_actual+datetime.timedelta(days=dias_aleagorio,minutes=minutos_aleatorio,seconds=segundos_aleatorio)
-        porcentaje_fluctuacion_mercado=random.uniform(-0.15,0.15)
-        valorUnitario=round(primer_movimiento.valorUnitario*(1+porcentaje_fluctuacion_mercado),2)
-        valor_maximo=(primer_movimiento.cantidad%12)
-        if valor_maximo==0:
-            valor_maximo=2
-        cantidad=random.randint(1,valor_maximo)*12
-        total=cantidad*valorUnitario
-        movimiento=Movimiento.objects.create(id_sucursal=sucursal, 
-                                                    id_producto=producto, 
-                                                    fecha_registro= fecha_registro,
-                                                    detalle=producto.nombre, 
-                                                    valorUnitario=valorUnitario, 
-                                                    cantidad=cantidad, 
-                                                    total=total, 
-                                                    tipo="E")
-        movimiento.save()
-        nuevo_lote=ProductoEnSucursal.objects.create(id_sucursal=sucursal,
-                                                     id_producto=producto,
-                                                     valorUnitario=valorUnitario, 
-                                                     cantidad=cantidad, 
-                                                     fecha_registro=fecha_registro)
-        nuevo_lote.save()
+    print("Reabastecer "+str(producto.id_producto))
+    primer_movimiento=Movimiento.objects.filter(id_sucursal=sucursal,id_producto=producto, tipo="E").order_by('fecha_registro').first()
+    total_disponible=ProductoEnSucursal.objects.filter(id_sucursal=sucursal,id_producto=producto).aggregate(total=Sum('cantidad'), costo=Avg('valorUnitario'))['total']
+    if total_disponible is not None and primer_movimiento is not None:
+        if total_disponible<0.2*primer_movimiento.cantidad:
+            minutos_aleatorio=random.randint(0,59)
+            segundos_aleatorio=random.randint(0,59)
+            dias_aleagorio=random.randint(0,3)
+            fecha_registro=fecha_actual+datetime.timedelta(days=dias_aleagorio,minutes=minutos_aleatorio,seconds=segundos_aleatorio)
+            porcentaje_fluctuacion_mercado=random.uniform(-0.15,0.15)
+            valorUnitario=round(primer_movimiento.valorUnitario*(1+porcentaje_fluctuacion_mercado),2)
+            valor_maximo=(primer_movimiento.cantidad%12)
+            if valor_maximo==0:
+                valor_maximo=2
+            cantidad=random.randint(1,valor_maximo)*12
+            total=cantidad*valorUnitario
+            total=round(total,2)
+            movimiento=Movimiento.objects.create(id_sucursal=sucursal, 
+                                                        id_producto=producto, 
+                                                        fecha_registro= fecha_registro,
+                                                        detalle=producto.nombre[:30], 
+                                                        valorUnitario=valorUnitario, 
+                                                        cantidad=cantidad, 
+                                                        total=total, 
+                                                        tipo="E")
+            movimiento.save()
+            nuevo_lote=ProductoEnSucursal.objects.create(id_sucursal=sucursal,
+                                                        id_producto=producto,
+                                                        valorUnitario=valorUnitario, 
+                                                        cantidad=cantidad, 
+                                                        fecha_registro=fecha_registro)
+            nuevo_lote.save()
 
-
+            producto.cantidad_disponible+=cantidad
+            producto.save()
+        else:
+            print("todavia alcanza")
