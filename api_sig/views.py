@@ -7,4 +7,6 @@ import random
 def index(request):
     mensaje = ["Hello, World", "Hello, Universe!", "Hola, Mundo!"]
     index=random.randrange(0,len(mensaje))
-    return JsonResponse({'Msg':mensaje[index]})
+    return JsonResponse({
+        'Msg':mensaje[index]
+        })
