@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Nav(){
+function Nav({cerrarSesion}){
 
     return(
-      <nav className="navbar navbar-expand-lg"> 
-      <div className="container container-fluid pt-3">
+      <nav className="navbar"> 
+      <div className="container-fluid pt-3">
         <div>
           <img src="cover.png" alt="Tienda Luisito" style={{width:'300px'}}/>
         </div> 
@@ -15,14 +15,15 @@ function Nav(){
             <span style={{position:'relative',bottom:'0.5rem'}} >Configuración</span>
             <span className='material-symbols-outlined m-2'>settings</span>
           </button>
-          <button name='cerrar-sesion' className="btn btn-outline-dark mx-1 ">
+          <button name='cerrar-sesion' className="btn btn-outline-dark mx-1 "
+          onClick={()=>{cerrarSesion()}}>
             <span style={{position:'relative',bottom:'0.5rem'}}>Cerrar Sesión</span> 
             <span className="material-symbols-outlined m-2">logout</span>
           </button>
-          <button name='iniciar-sesion' className="btn btn-outline-dark mx-1 d-none">
+          {/* <button name='iniciar-sesion' className="btn btn-outline-dark mx-1 d-none">
             <span style={{position:'relative',bottom:'0.5rem'}}>Iniciar Sesión</span> 
             <span className="material-symbols-outlined m-2">login</span>
-          </button>
+          </button> */}
         </div>
       </div>
       </nav>

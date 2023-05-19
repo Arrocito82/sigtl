@@ -1,6 +1,6 @@
 function Menu(props){
   return(
-      <div className="d-flex pt-2 pb-3 justify-content-between container">
+      <div className="d-flex pt-2 pb-3 justify-content-between container-fluid">
         <button onClick={()=>{props.seleccionarReporte("demanda-clientes")}} 
         name='demanda-clientes' 
         className='btn btn-outline-primary mx-1' 

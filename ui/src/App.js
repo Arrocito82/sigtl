@@ -9,7 +9,7 @@ import ProductosMasVendidos from './ProductosMasVendidos';
 import Bienvenida from './Bienvenida';
 
 
-function App() {
+function App({cerrarSesion}) {
   // const sigService = new SigService();
   const [reporte, setReporte] = useState(<Bienvenida />);
 
@@ -43,7 +43,7 @@ function App() {
   return (
       <div>
         <header className=' bg-body-tertiary'>        
-          <Nav/>
+          <Nav cerrarSesion={cerrarSesion}/>
           <Menu seleccionarReporte={seleccionarReporte}/>
         </header>
         {reporte}
