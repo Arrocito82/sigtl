@@ -1,8 +1,8 @@
 import datetime
 import random
-start_date = datetime.datetime(2022, 2, 5, 8,tzinfo=datetime.timezone.utc) 
+start_date = datetime.datetime(2022, 1, 5, 8,tzinfo=datetime.timezone.utc) 
 # Establece la fecha inicial a las 8 am del 3 de enero de 2022
-end_date = datetime.datetime(2022, 2, 5, 19,tzinfo=datetime.timezone.utc) 
+end_date = datetime.datetime(2022, 1, 5, 19,tzinfo=datetime.timezone.utc) 
 # Establece la fecha final a las 4 pm del 3 de enero de 2022
 current_date = start_date # Inicializa la fecha actual con la fecha inicial
 # RANGO DE SEGUNDOS ALEATORIOS
@@ -10,10 +10,10 @@ MIN_SEG=0
 MAX_SEG=59
 # MINUTOS ENTRE VENTAS
 MIN_MINUTOS=0
-MAX_MINUTOS=3
+MAX_MINUTOS=20
 # HORAS MINUTOS ENTRE VENTAS EN HORA PICO
 MIN_MINUTOS_HORA_PICO=0
-MAX_MINUTOS_HORA_PICO=1
+MAX_MINUTOS_HORA_PICO=8
 # PERIODO DE HORAS PICO
 HORA_PICO_MIN_MANANA=11
 HORA_PICO_MAX_MANANA=13

@@ -83,8 +83,10 @@ class Venta(models.Model):
     pedido_venta = models.OneToOneField(Pedido, on_delete=models.CASCADE, primary_key=True,related_name='pedido_vendido')
     total = models.FloatField(null=False, blank=False)
     iva = models.FloatField(null=False, blank=False)
-    fecha_registro = models.DateTimeField(blank=False, null=False, auto_now_add=True)
+    fecha_registro = models.DateTimeField(blank=False, null=False)
 
+# el valor unitario es el precio al que se compro al proveedor
+# producto en sucursal es paralelo a movimientos, pero esta lleva la cantidad en inventario 
 class ProductoEnSucursal(models.Model):
     id_sucursal = models.ForeignKey(Sucursal, on_delete=models.CASCADE, related_name="prods_sucursal")
     id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
