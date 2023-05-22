@@ -101,3 +101,5 @@ class ProductoDanado(models.Model):
     detalle = models.CharField(max_length=100, blank=False, null=False)
     cantidad = models.IntegerField(blank=False, null=False)
     
+class File(models.Model):
+    file = models.FileField(upload_to="files")
