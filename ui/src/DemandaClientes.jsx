@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import "./App.css";
 import React, { useState } from 'react';
+import axios from 'axios';
 function DemandaClientes() {
     const [archivo, setArchivo]=useState(null);
 // Verificar datos del archivo cargado
@@ -8,6 +9,16 @@ function DemandaClientes() {
     setArchivo(e);
     console.log(e);
   }
+
+const onClickHandler = () => {
+    const data = new FormData() 
+    data.append('file', archivo)
+    axios.post("http://localhost:8000/api/upload", data, { // receive two parameter endpoint url ,form data 
+      })
+      .then(res => { // then print response status
+        console.log(res.statusText)
+      })
+}
 
   return (
     <div classNameName="App">
@@ -33,7 +44,7 @@ function DemandaClientes() {
                         <h5>{archivo && `${archivo[0].name}`}</h5>
                         </div>
                         <div className="col-md-auto">
-                        <button type="button" className="btn btn-success">Validar</button>
+                        <button type="button" className="btn btn-success" onClick={(e)=>onClickHandler()}>Validar</button>
                         </div>
                         <div className="col-md-auto">
                         <button type="button" className="btn btn-danger" onClick={(e)=>subirArchivo(null)}>Eliminar</button>
