@@ -5,6 +5,7 @@ from rest_framework import serializers
 from .models import *
 import random
 import pandas as pd
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     mensaje = ["Hello, World", "Hello, Universe!", "Hola, Mundo!"]
@@ -13,13 +14,15 @@ def index(request):
         'Msg':mensaje[index]
         })
 
+@csrf_exempt
 def main(request):
     # if request.method == "POST":
     #     file = request.FILES['archivo']
     #     obj = File.objects.create(file = file)
     #     create_db(obj.file)
     # return render(request, 'main.html')
-    JsonResponse({"Estado":"No Válido"})
+    return HttpResponse("<h1>Válido</h1>")
+
 def create_db(file_path):
     df=pd.read_csv(file_path, delimiter=',')
     print(df.values)
