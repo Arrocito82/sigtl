@@ -35,7 +35,7 @@ function FrecuenciaCompra() {
                             <button type="button" className="btn btn-success">Validar</button>
                             </div>
                             <div className="col-md-auto">
-                            <button type="button" className="btn btn-danger">Eliminar</button>
+                            <button type="button" className="btn btn-danger" onClick={(e)=>subirArchivo(null)}>Eliminar</button>
                             </div>
                         </div>
                         </>
