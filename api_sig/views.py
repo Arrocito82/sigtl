@@ -14,12 +14,12 @@ def index(request):
         })
 
 def main(request):
-    if request.method == "POST":
-        file = request.FILES['file']
-        obj = File.objects.create(file = file)
-        create_db(obj.file)
-    return render(request, 'main.html')
-
+    # if request.method == "POST":
+    #     file = request.FILES['archivo']
+    #     obj = File.objects.create(file = file)
+    #     create_db(obj.file)
+    # return render(request, 'main.html')
+    JsonResponse({"Estado":"No Válido"})
 def create_db(file_path):
     df=pd.read_csv(file_path, delimiter=',')
     print(df.values)

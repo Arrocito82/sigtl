@@ -13,15 +13,16 @@ function DemandaClientes() {
 const onClickHandler = () => {
     const data = new FormData() 
     data.append('file', archivo)
-    axios.post("http://localhost:8000/api/upload", data, { // receive two parameter endpoint url ,form data 
-      })
+    axios.post("http://localhost:8000/api/upload", 
+      data,{}
+      )
       .then(res => { // then print response status
         console.log(res.statusText)
       })
 }
 
   return (
-    <div classNameName="App">
+    <div className="App">
       <div className="container-sm">
         <div className="row justify-content-md-center">
           <div className="col-md-auto">
@@ -38,7 +39,7 @@ const onClickHandler = () => {
                   <>
                     <div className="row justify-content-md-center archivo-cargado bg-primary-subtle border border-primary-subtle rounded-3 mt-5 pt-3">
                         <div className="col-md-auto">
-                        <img img src='excel_icon.png' className="icon-excel"/>
+                        <img src='excel_icon.png' className="icon-excel"/>
                         </div>
                         <div className="col-md-auto pt-2">
                         <h5>{archivo && `${archivo[0].name}`}</h5>
