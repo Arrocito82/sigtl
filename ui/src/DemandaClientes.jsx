@@ -3,9 +3,11 @@ import "./App.css";
 import React, { useState } from 'react';
 import axios from 'axios';
 import $ from 'jquery';
+import Papa from "papaparse";
 
 function DemandaClientes() {
     const [archivo, setArchivo]=useState();
+    const [data, setData]=useState();
 // Verificar datos del archivo cargado
 //   const subirArchivo = e => {
 //     setArchivo(e[0]);
@@ -27,16 +29,30 @@ function DemandaClientes() {
 //     .catch(err=>console.log(err)
 //     );
     
-// }
+// 
 async function onClickHandler(){
-  const data = new FormData();
-   data.append('file', archivo);
-   axios.post("http://localhost:8000/api/upload/", data, { 
-      // receive two    parameter endpoint url ,form data
+  console.log(data);
+
+  await axios.post("http://localhost:8000/api/save/", data, {
+  headers: {
+    // Overwrite Axios's automatically set Content-Type
+    'Content-Type': 'application/json'
+  }
   }).then(res => { // then print response status
-    console.log(res.statusText)
+    console.log(res)
   });
 }
+const changeHandler = (event) => {
+  console.log(event.target.files[0])
+  Papa.parse(event.target.files[0], {
+    header: true,
+    skipEmptyLines: true,
+    complete: function (results) {
+      console.log(results.data)
+      setData(results.data);
+    },
+  });
+};
 
   return (
     // <div className="App">
@@ -74,9 +90,9 @@ async function onClickHandler(){
     //     </div>      
     //   </div>
     // </div>
-    <form method="post" action="http://localhost:8000/api/upload/" name="cargarArchivo">
-      <input type="file" name="file" id="file" value={archivo} onChange={(e)=>console.log(e.target.files[0])}/>
-      <button type="button" onClick={()=>onClickHandler()}>Enviar</button>
+    <form method="post" action="http://localhost:8000/api/upload/" id="cargarArchivo">
+      <input type="file" name="file" accept=".csv" id="file" onChange={changeHandler}/>
+      <button type="button" onClick={()=>onClickHandler()} id="enviarArchivo">Enviar</button>
     </form>
   );
 }

@@ -17,26 +17,35 @@ def index(request):
 @csrf_exempt
 def main(request):
     # if request.method == "POST":
-    #     file = request.FILES['archivo']
+    #     file = request.FILES['file']
     #     obj = File.objects.create(file = file)
     #     create_db(obj.file)
     # return render(request, 'main.html')
+    # print(file)
     return HttpResponse("<h1>Válido</h1>")
 
-def create_db(file_path):
-    df=pd.read_csv(file_path, delimiter=',')
-    print(df.values)
-    list_of_csv = [list(row) for row in df.values]
+@csrf_exempt
+def create_db(request):
+    # file = request.FILES
+    data=request.body
+    print(data)
+    # obj = File.objects.create(file = file)
+    # print(obj.file)
+    # df=pd.read_csv(file, delimiter=',')
+    # print(dict(file))
+    # list_of_csv = [list(row) for row in df.values]
 
-    for l in list_of_csv:
-        Movimiento.objects.create(
-            id_movimiento=l[1],
-            id_sucursal=l[2],
-            id_producto=l[3],
-            fecha_registro=l[4],
-            detalle=l[5],
-            valorUnitario=l[6],
-            cantidad=l[7],
-            total=l[8],
-            tipo =l[9],
-        )
+    # for l in list_of_csv:
+    #     print(l)
+    #     Movimiento.objects.create(
+    #         id_movimiento=l[1],
+    #         id_sucursal=l[2],
+    #         id_producto=l[3],
+    #         fecha_registro=l[4],
+    #         detalle=l[5],
+    #         valorUnitario=l[6],
+    #         cantidad=l[7],
+    #         total=l[8],
+    #         tipo =l[9],
+    #     )
+    return HttpResponse(request.body)
