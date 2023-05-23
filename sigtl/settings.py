@@ -14,11 +14,29 @@ from pathlib import Path
 
 CORS_ORIGIN_ALLOW_ALL = False
 
-CORS_ALLOWED_ORIGINS = (
-       'http://localhost:3000',
-       'http://172.17.0.2:3000'
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
 )
 
+CORS_ALLOW_METHODS = (
+    "GET",
+    "POST",
+)
+
+CORS_ALLOWED_ORIGINS = [
+       'http://localhost:3000',
+       'http://172.17.0.2:3000'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+       'http://localhost:3000',
+       'http://172.17.0.2:3000'
+]
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,7 +50,7 @@ SECRET_KEY = "django-insecure-o)sl=za+$_(z_!8ctjx5gs$#)g0hq=rhtp!-d-%*&n5^c_*i4z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS=[]
 
 
 # Application definition
