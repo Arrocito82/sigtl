@@ -3,12 +3,16 @@ function Menu(props){
       <div className="d-flex pt-2 pb-3 justify-content-between container-fluid">
         
           <div className="btn-group">
-            <button type="button" className="btn btn-primary">
+            {/* <button type="button" className="btn btn-primary">
               <span style={{position:'relative',bottom:'10px'}}>Cargar CSV</span> 
               <span className="material-symbols-outlined fs-2 m-2">upload</span>
             </button>
             <button type="button" className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
               <span className="visually-hidden">Toggle Dropdown</span>
+            </button> */}
+            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <span style={{position:'relative',bottom:'10px'}}>Cargar CSV</span> 
+              <span className="material-symbols-outlined fs-2 m-2">upload</span>
             </button>
             <ul className="dropdown-menu">
             <li>
