@@ -11,8 +11,8 @@ function Menu(props){
               <span className="visually-hidden">Toggle Dropdown</span>
             </button> */}
             <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              <span style={{position:'relative',bottom:'10px'}}>Cargar CSV</span> 
-              <span className="material-symbols-outlined fs-2 m-2">upload</span>
+              <span>Cargar CSV</span> 
+              <span className="material-symbols-outlined" style={{position:'relative',top:'5px'}}>upload</span>
             </button>
             <ul className="dropdown-menu">
             <li>
