@@ -7,6 +7,8 @@ import FrecuenciaCompra from './FrecuenciaCompra';
 import IngresosCostos from './IngresosCostos';
 import ProductosMasVendidos from './ProductosMasVendidos';
 import Bienvenida from './Bienvenida';
+import CargarDatosMovimientos from './CargarDatosMovimientos';
+import CargarDatosProductosDanados from './CargarDatosProductosDanados';
 
 
 function App({cerrarSesion}) {
@@ -16,6 +18,12 @@ function App({cerrarSesion}) {
   const seleccionarReporte=(reporteSeleccionado)=>{
     // eslint-disable-next-line default-case
     switch (reporteSeleccionado) {
+      case 'cargar-movimientos':
+          setReporte(<CargarDatosMovimientos/>);
+          break;
+      case 'cargar-productos-danados':
+          setReporte(<CargarDatosProductosDanados />);
+          break;
       case 'demanda-clientes':
           setReporte(<DemandaClientes />);
           break;
