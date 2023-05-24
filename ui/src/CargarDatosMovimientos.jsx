@@ -55,8 +55,8 @@ const changeHandler = (event) => {
 
     reader.onprogress = (event) => {
       if (event.lengthComputable) {
-        const percentage = Math.round((event.loaded * 100) / event.total);
-        setProgress(percentage);
+        const porcentaje = Math.round((event.loaded * 100) / event.total);
+        setProgress(porcentaje);
       }
     };
     reader.readAsText(file);
@@ -69,34 +69,41 @@ const changeHandler = (event) => {
           <div className="col-md-auto">
             <h1 className="text-center">Cargar CSV Movimientos</h1>
             <div className="cargar-archivo container text-center mt-5"  >
-              <div className="row justify-content-md-center">
-                <img src='excel_icon.png' className="icon-excel"/>
-                <h5>Seleccione un archivo para cargar.</h5>
-                <h6>O arrastra y suelte aquí.</h6>
-              </div>
-              <input className="entrada" type="file" accept=".csv" name='files'onChange={changeHandler}/>
-            </div>
-                {archivo &&
+                {archivo ?
                   <>
-                    <div className="row justify-content-md-center archivo-cargado bg-primary-subtle border border-primary-subtle rounded-3 mt-5 pt-3">
+                    <div className="row justify-content-md-center archivo-cargado bg-primary-subtle border border-primary-subtle rounded-3 m-6 pb-3 pt-3">
                         <div className="col-md-auto">
                         <img src='excel_icon.png' className="icon-excel"/>
                         </div>
-                        <div className="col-md-auto pt-2">
-                        <h5>{archivo && `${archivo.name}`}</h5>
-                        {loading && (
-                          <ProgressBar now={progress} label={`${progress}%`} striped animated />
-                        )}
-                        </div>
-                        <div className="col-md-auto">
-                        <button type="button" className="btn btn-success"  onClick={()=>onClickHandler()} >Validar</button>
-                        </div>
-                        <div className="col-md-auto">
-                        <button type="button" className="btn btn-danger" onClick={(e)=>subirArchivo(null)}>Eliminar</button>
+                        <div className="col-md-auto pt-2 ">
+                          <h5>{archivo && `${archivo.name}`}</h5>
+                          {loading ? (
+                            <>
+                              <ProgressBar now={progress} label={`${progress}%`} animated />
+                              <span>{Math.round(archivo.size/1000)} Kb</span>
+                            </>
+                            ):
+                              <><div className="row justify-content-around">
+                                  <div className="col-md-auto">
+                                    <button type="button" className="btn btn-success" onClick={() => onClickHandler()}>Validar</button>
+                                  </div><div className="col-md-auto">
+                                    <button type="button" className="btn btn-danger" onClick={(e) => subirArchivo(null)}>Eliminar</button>
+                                  </div>
+                                </div>
+                              </>
+                            }
                         </div>
                     </div>
                     </>
+                    :
+                      <><div className="row justify-content-md-center">
+                        <img src='excel_icon.png' className="icon-excel" />
+                        <h5>Seleccione un archivo para cargar.</h5>
+                        <h6>O arrastra y suelte aquí.</h6>
+                      </div><input className="entrada" type="file" accept=".csv" name='files' onChange={changeHandler} />
+                      </>
                 }
+            </div>
           </div>
         </div>      
       </div>

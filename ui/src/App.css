@@ -3,6 +3,7 @@
     border-color: rgb(56, 102, 255);
     border-style:dashed;
     padding:30px;
+    border-radius: 10px;
   }
   .icon-excel{
     position:relative;
