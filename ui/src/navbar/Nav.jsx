@@ -1,6 +1,5 @@
 import React from 'react';
 import { setAuthToken } from '../seguridad/setAuthToken';
-import { history } from '../seguridad/history';
 
 function Nav(){
     const logout=()=>{
