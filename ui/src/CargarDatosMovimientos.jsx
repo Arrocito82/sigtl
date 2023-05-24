@@ -3,10 +3,13 @@ import "./App.css";
 import React, { useState } from 'react';
 import axios from 'axios';
 import Papa from "papaparse";
+import {ProgressBar} from 'react-bootstrap';
 
 function CargarDatosMovimientos() {
     const [archivo, setArchivo]=useState();
     const [data, setData]=useState();
+    const [loading, setLoading] = useState(false);
+    const [progress, setProgress] = useState(0);
 // Verificar datos del archivo cargado
   const subirArchivo = e => {
     setArchivo(e);
@@ -20,10 +23,10 @@ async function onClickHandler(){
   headers: {
     // Overwrite Axios's automatically set Content-Type
     'Content-Type': 'application/json'
-  }
-  }).then(res => { // then print response status
-    console.log(res);
-  });
+  },
+}).then(res => { // then print response status
+  console.log(res);
+});
 }
 const changeHandler = (event) => {
   setArchivo(event.target.files[0]);
@@ -32,10 +35,31 @@ const changeHandler = (event) => {
     header: true,
     skipEmptyLines: true,
     complete: function (results) {
-      // console.log(results.data);
       setData(results.data);
     },
   });
+  const file = event.target.files[0];
+    
+    // Iniciar la carga del archivo
+    setLoading(true);
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      // Simular un retardo para mostrar la barra de progreso
+      setTimeout(() => {
+        setLoading(false);
+        setProgress(0);
+      }, 1000);
+    };
+
+    reader.onprogress = (event) => {
+      if (event.lengthComputable) {
+        const percentage = Math.round((event.loaded * 100) / event.total);
+        setProgress(percentage);
+      }
+    };
+    reader.readAsText(file);
 };
 
   return (
@@ -43,7 +67,7 @@ const changeHandler = (event) => {
       <div className="container-sm">
         <div className="row justify-content-md-center">
           <div className="col-md-auto">
-            <h1>Cargar CSV Movimientos</h1>
+            <h1 className="text-center">Cargar CSV Movimientos</h1>
             <div className="cargar-archivo container text-center mt-5"  >
               <div className="row justify-content-md-center">
                 <img src='excel_icon.png' className="icon-excel"/>
@@ -60,6 +84,9 @@ const changeHandler = (event) => {
                         </div>
                         <div className="col-md-auto pt-2">
                         <h5>{archivo && `${archivo.name}`}</h5>
+                        {loading && (
+                          <ProgressBar now={progress} label={`${progress}%`} striped animated />
+                        )}
                         </div>
                         <div className="col-md-auto">
                         <button type="button" className="btn btn-success"  onClick={()=>onClickHandler()} >Validar</button>
