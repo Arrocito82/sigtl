@@ -3,17 +3,21 @@ import "./App.css";
 import React, { useState } from 'react';
 import axios from 'axios';
 import Papa from "papaparse";
-import {ProgressBar} from 'react-bootstrap';
+import {ProgressBar,Toast, ToastContainer} from 'react-bootstrap';
 
 function CargarDatosProductosDanados() {
   const [archivo, setArchivo]=useState();
   const [data, setData]=useState();
+  //Barra de progreso
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
-// Verificar datos del archivo cargado
-const subirArchivo = e => {
+  //Toast
+  const [show, setShow] = useState(false);
+
+// Eliminar archivo
+const eliminarArchivo = e => {
   setArchivo(e);
-  // console.log(e[0]);
+  setShow(true);
 }
 
 async function onClickHandler(){
@@ -65,6 +69,16 @@ const file = event.target.files[0];
 return (
   <div className="App">
     <div className="container-sm">
+      {/* Toast */}
+      <ToastContainer position="top-end" className="p-3">
+          <Toast  onClose={() => setShow(false)} show={show} delay={3000} autohide>
+              <Toast.Header className="bg-success">
+                <span className="material-symbols-outlined rounded me-2">check_circle</span>
+                <strong className="me-auto">Success</strong>
+              </Toast.Header>
+              <Toast.Body style={{textAlign:'center'}}>El archivo ha sido eliminado.</Toast.Body>
+          </Toast>
+      </ToastContainer>
       <div className="row justify-content-md-center">
         <div className="col-md-auto">
           <h1 className="text-center">Cargar CSV Productos dañados</h1>
@@ -87,7 +101,7 @@ return (
                                 <div className="col-md-auto">
                                   <button type="button" className="btn btn-success" onClick={() => onClickHandler()}>Validar</button>
                                 </div><div className="col-md-auto">
-                                  <button type="button" className="btn btn-danger" onClick={(e) => subirArchivo(null)}>Eliminar</button>
+                                  <button type="button" className="btn btn-danger" onClick={(e) => eliminarArchivo(null)}>Eliminar</button>
                                 </div>
                               </div>
                             </>
