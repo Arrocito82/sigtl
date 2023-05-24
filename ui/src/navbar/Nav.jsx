@@ -1,7 +1,16 @@
 import React from 'react';
+import { setAuthToken } from '../seguridad/setAuthToken';
+import { history } from '../seguridad/history';
 
-function Nav({cerrarSesion}){
+function Nav(){
+    const logout=()=>{
+      setAuthToken();
+      localStorage.removeItem("token");
+      // console.log(localStorage.getItem("token"));
+      window.location.href = '/'
+      // history.forward();
 
+    }
     return(
       <nav className="navbar"> 
       <div className="container-fluid pt-3">
@@ -15,15 +24,13 @@ function Nav({cerrarSesion}){
             <span style={{position:'relative',bottom:'0.5rem'}} >Configuración</span>
             <span className='material-symbols-outlined m-2'>settings</span>
           </button>
-          <button name='cerrar-sesion' className="btn btn-outline-dark mx-1 "
-          onClick={()=>{cerrarSesion()}}>
+          <button 
+          onClick={logout}
+          name='cerrar-sesion' 
+          className="btn btn-outline-dark mx-1 ">
             <span style={{position:'relative',bottom:'0.5rem'}}>Cerrar Sesión</span> 
             <span className="material-symbols-outlined m-2">logout</span>
           </button>
-          {/* <button name='iniciar-sesion' className="btn btn-outline-dark mx-1 d-none">
-            <span style={{position:'relative',bottom:'0.5rem'}}>Iniciar Sesión</span> 
-            <span className="material-symbols-outlined m-2">login</span>
-          </button> */}
         </div>
       </div>
       </nav>

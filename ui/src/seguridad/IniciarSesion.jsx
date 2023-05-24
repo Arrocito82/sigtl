@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from 'axios';
+import { setAuthToken } from "./setAuthToken";
 
-function IniciarSesion({setToken}) {
+function IniciarSesion() {
     const [mensajeError, setMensajeError]=useState();
     const [contrasena, setContrasena]=useState("");
     const [email, setEmail]=useState("");
@@ -24,10 +25,18 @@ function IniciarSesion({setToken}) {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
         }
-        }).then(res => { // then print response status
-        //   console.log(res);
-        //   console.log(res.data.token);
-          setToken(res.data.token);
+        }).then(response => { // then print response status
+            //get token from response
+            const token  =  response.data.token;
+            
+            //set JWT token to local
+            localStorage.setItem("token", token);
+            // console.log(localStorage.getItem("token"));
+            //set token to axios common header
+            setAuthToken(token);
+
+            //redirect user to home page
+            window.location.href = '/'
         }).catch(error=>{
             if (error.response) {
                 // The request was made and the server responded with a status code
@@ -38,7 +47,7 @@ function IniciarSesion({setToken}) {
             }
             setMensajeError(<div className="bg-light-subtle rounded border fw-bold text-danger-emphasis border-danger text-center my-3 py-1">          
                                 <span style={{"position":"relative","bottom":"10px"}}>Credenciales Incorrectas</span>
-                                <span class="material-symbols-outlined m-1 fs-2" >report</span>
+                                <span className="material-symbols-outlined m-1 fs-2" >report</span>
                             </div>);
         });
     }

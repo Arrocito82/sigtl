@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
-import "./App.css";
 import React, { useState } from 'react';
 import axios from 'axios';
 import Papa from "papaparse";
 
-function CargarDatosMovimientos() {
+function CargarDatosProductosDanados() {
     const [archivo, setArchivo]=useState();
     const [data, setData]=useState();
 // Verificar datos del archivo cargado
@@ -43,7 +42,7 @@ const changeHandler = (event) => {
       <div className="container-sm">
         <div className="row justify-content-md-center">
           <div className="col-md-auto">
-            <h1>Cargar CSV Movimientos</h1>
+            <h1>Demanda de compra de clientes</h1>
             <div className="cargar-archivo container text-center mt-5"  >
               <div className="row justify-content-md-center">
                 <img src='excel_icon.png' className="icon-excel"/>
@@ -77,4 +76,4 @@ const changeHandler = (event) => {
   );
 }
 
-export default CargarDatosMovimientos;
+export default CargarDatosProductosDanados;

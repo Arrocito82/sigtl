@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
-import "./App.css";
 import React, { useState } from 'react';
-function IngresosCostos() {
+function ProductosMasVendidos() {
     const [archivo, setArchivo]=useState(null);
     // Verificar datos del archivo cargado
       const subirArchivo = e => {
@@ -9,11 +8,11 @@ function IngresosCostos() {
       }
     
       return (
-        <div classNameName="App">
+        <div className="App">
           <div className="container-sm">
             <div className="row justify-content-md-center">
               <div className="col-md-auto">
-                <h1 className="text-center">Ingresos y Costos trimestrales</h1>
+                <h1 className="text-center">Productos más vendidos</h1>
                 <div className="cargar-archivo container text-center mt-5"  >
                   <div className="row justify-content-md-center">
                     <img src='excel_icon.png' className="icon-excel"/>
@@ -47,4 +46,4 @@ function IngresosCostos() {
       );
 }
 
-export default IngresosCostos;
+export default ProductosMasVendidos;

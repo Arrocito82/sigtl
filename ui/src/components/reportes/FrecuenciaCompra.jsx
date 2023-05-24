@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
-import "./App.css";
 import React, { useState } from 'react';
-function ProductosDanados() {
+function FrecuenciaCompra() {
     const [archivo, setArchivo]=useState(null);
     // Verificar datos del archivo cargado
       const subirArchivo = e => {
@@ -13,7 +12,7 @@ function ProductosDanados() {
           <div className="container-sm">
             <div className="row justify-content-md-center">
               <div className="col-md-auto">
-                <h1 className="text-center">Productos dañados por vencimiento</h1>
+                <h1 className="text-center">Frecuencia de compra de productos</h1>
                 <div className="cargar-archivo container text-center mt-5"  >
                   <div className="row justify-content-md-center">
                     <img src='excel_icon.png' className="icon-excel"/>
@@ -47,4 +46,4 @@ function ProductosDanados() {
       );
 }
 
-export default ProductosDanados;
+export default FrecuenciaCompra;
