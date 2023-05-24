@@ -10,7 +10,7 @@ function Menu(props){
             <button type="button" className="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
               <span className="visually-hidden">Toggle Dropdown</span>
             </button> */}
-            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" className="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
               <span>Cargar CSV</span> 
               <span className="material-symbols-outlined" style={{position:'relative',top:'5px'}}>upload</span>
             </button>
