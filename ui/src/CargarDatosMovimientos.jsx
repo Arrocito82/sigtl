@@ -13,6 +13,9 @@ function CargarDatosMovimientos() {
     const [progress, setProgress] = useState(0);
     //Toast
     const [show, setShow] = useState(false);
+    // Spinner
+    const [loadingSpinner, setLoadingSpinner] = useState(false);
+    const [showTable, setShowTable] = useState(false);
 
   // Eliminar archivo
   const eliminarArchivo = e => {
@@ -22,13 +25,19 @@ function CargarDatosMovimientos() {
 
 async function onClickHandler(){
   // console.log(data);
-
+  // Iniciar la validación de los datos
+  setLoadingSpinner(true);
   await axios.post("http://localhost:8000/api/save/", data, {
   headers: {
     // Overwrite Axios's automatically set Content-Type
     'Content-Type': 'application/json'
   },
 }).then(res => { // then print response status
+  // Simular un retardo para mostrar el spinner
+  setTimeout(() => {
+    setLoadingSpinner(false);
+  }, 1000);
+  setShowTable(true);
   console.log(res);
 });
 }
@@ -120,6 +129,54 @@ const changeHandler = (event) => {
             </div>
           </div>
         </div>      
+      </div>
+      {/* Tabla para verificar los datos cargados */}
+      <div className="container-xl mt-4">
+        {loadingSpinner && 
+        (<div className="row justify-content-md-center">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>)}
+        {showTable && 
+          <table className="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>id_movimiento</th>
+                <th>id_sucursal</th>
+                <th>id_producto</th>
+                <th>fecha_registro</th>
+                <th>detalle</th>
+                <th>valorUnitario</th>
+                <th>cantidad</th>
+                <th>total</th>
+                <th>tipo</th>
+                <th>acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="table-info">
+                <th>xxxx</th>
+                <th>xxxx</th>
+                <th>xxxx</th>
+                <th>xx/xx/xxxx</th>
+                <th>xxxxxxxxxxxxxx</th>
+                <th>$xx.xx</th>
+                <th>xxxx</th>
+                <th>$xx.xx</th>
+                <th>xxxxxx</th>
+                <th>
+                  <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                    <span className="material-symbols-outlined">edit</span>
+                  </button>
+                  <button className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                    <span className="material-symbols-outlined">delete</span>
+                  </button>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        }
       </div>
     </div>
   );
