@@ -50,7 +50,7 @@ const changeHandler = (event) => {
                 <h5>Seleccione un archivo para cargar.</h5>
                 <h6>O arrastra y suelte aquí.</h6>
               </div>
-              <input className="entrada" type="file" accept=".csv" name='files'onChange={changeHandler}/>
+              <input className="entrada" type="file" accept=".csv" name='file'onChange={changeHandler}/>
             </div>
                 {archivo &&
                   <>
