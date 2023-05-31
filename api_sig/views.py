@@ -40,27 +40,31 @@ def create_db(request):
     for l in data_dict:
 
         movimiento=Movimiento()
-        movimiento.id_movimiento=l["id_movimiento"],
-        movimiento.id_sucursal_id=l["id_sucursal_id"],
-        movimiento.id_producto_id=l["id_producto_id"],
+        movimiento.id_movimiento=int(l["id_movimiento"])
+        movimiento.id_sucursal_id=int(l["id_sucursal_id"])
+        movimiento.id_producto_id=int(l["id_producto_id"])
 
-        print(l["fecha_registro"])
+        # print(l["fecha_registro"])
         fecha_div=l["fecha_registro"].split("+")
-        print(fecha_div[0])
-        fecha=datetime.strptime(fecha_div, "%Y-%m-%d %H:%M:%S")
-        print(type(fecha_div))
+        # print(fecha_div[0])
+        fecha=datetime.strptime(fecha_div[0], "%Y-%m-%d %H:%M:%S")
+        # print(type(fecha_div))
         #my_datetime_utc = fecha.strftime('%Y-%m-%d %H:%M:%S %Z%z')
         #print("hola", my_datetime_utc)
-        #movimiento.fecha_registro=fecha_div,
+        movimiento.fecha_registro=fecha
 
-        movimiento.detalle=l["detalle"],
-        movimiento.valorUnitario=l["valorUnitario"],
-        movimiento.cantidad=l["cantidad"],
-        movimiento.total=l["total"],
-        movimiento.tipo =l["tipo"],
+        movimiento.valorUnitario=float(l["valorUnitario"])
+        movimiento.detalle=l["detalle"]
+        movimiento.cantidad=int(l["cantidad"])
+        movimiento.total=float(l["total"])
+        movimiento.tipo =l["tipo"].strip(" ")
         try:
             movimiento.full_clean()
+            l["valido"]=True
+            l["errores"]={}
         except ValidationError as e:
-            print(e)
-    #print(data_dict)
+            l["valido"]=False
+            l["errores"]=e.message_dict
+            # print(e)
+    # print(data_dict)
     return JsonResponse(data_dict, safe=False)
