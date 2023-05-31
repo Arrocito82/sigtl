@@ -1,0 +1,24 @@
+.cargar-archivo{
+    border-color: rgb(56, 102, 255);
+    border-style:dashed;
+    padding:30px;
+    border-radius: 10px;
+  }
+  .icon-excel{
+    position:relative;
+    width: 50px;
+    padding-bottom: 10px;
+  }
+  .icon-excel-cargado{
+    position:absolute;
+    color: green;
+    font-size:30px;
+    padding-right: 10px;	
+  }
+  .entrada{
+    position: absolute;
+    font-size: 35px;
+    opacity:0;
+    margin-top: -90px;
+    margin-left: -250px;
+  }

@@ -1,54 +1,16 @@
-import React, { useState } from 'react';
-import Nav from './Nav';
-import Menu from './Menu';
-import DemandaClientes from './DemandaClientes';
-import ProductosDanados from './ProductosDanados';
-import FrecuenciaCompra from './FrecuenciaCompra';
-import IngresosCostos from './IngresosCostos';
-import ProductosMasVendidos from './ProductosMasVendidos';
-import Bienvenida from './Bienvenida';
+import { setAuthToken } from './seguridad/setAuthToken';
+import Routes from './seguridad/routes'
 
-
-function App({cerrarSesion}) {
-  // const sigService = new SigService();
-  const [reporte, setReporte] = useState(<Bienvenida />);
-
-  const seleccionarReporte=(reporteSeleccionado)=>{
-    // eslint-disable-next-line default-case
-    switch (reporteSeleccionado) {
-      case 'demanda-clientes':
-          setReporte(<DemandaClientes />);
-          break;
-      case 'productos-danados':
-          setReporte(<ProductosDanados />);
-          break;
-
-      case 'frecuencia-compra':
-          setReporte(<FrecuenciaCompra />);
-          break;
-
-      case 'ingresos-costos':
-          setReporte(<IngresosCostos />);
-          break;
-
-      case 'productos-mas-vendidos':
-          setReporte(<ProductosMasVendidos />);
-          break;
-      default:
-        setReporte(<Bienvenida />);
-        break;
-    }
+function App() {
+  //check jwt token
+  const token = localStorage.getItem("token");
+  if (token) {
+      setAuthToken(token);
   }
-
   return (
-      <div>
-        <header className=' bg-body-tertiary'>        
-          <Nav cerrarSesion={cerrarSesion}/>
-          <Menu seleccionarReporte={seleccionarReporte}/>
-        </header>
-        {reporte}
-        
-      </div>
+    <div className="App">
+      <Routes/>
+    </div>
   );
 }
 
