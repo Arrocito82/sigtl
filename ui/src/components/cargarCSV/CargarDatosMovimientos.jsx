@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react';
 import axios from 'axios';
 import Papa from "papaparse";
 import {ProgressBar, Toast, ToastContainer} from 'react-bootstrap';
+import moment from 'moment';
 
 function CargarDatosMovimientos() {
     const [archivo, setArchivo]=useState();
@@ -15,12 +17,15 @@ function CargarDatosMovimientos() {
     // Spinner
     const [loadingSpinner, setLoadingSpinner] = useState(false);
     const [showTable, setShowTable] = useState(false);
+    // Tabla
+    const [posts, setPosts] = useState([{movimientos:[]}]);
 
   // Eliminar archivo
   const eliminarArchivo = e => {
     setArchivo(e);
     setShow(true);
   }
+
 
 async function onClickHandler(){
   // console.log(data);
@@ -36,8 +41,9 @@ async function onClickHandler(){
   setTimeout(() => {
     setLoadingSpinner(false);
   }, 1000);
+  setPosts({movimientos:res.data});
   setShowTable(true);
-  console.log(res);
+  console.log(res.data);
 });
 }
 const changeHandler = (event) => {
@@ -138,9 +144,9 @@ const changeHandler = (event) => {
           </div>
         </div>)}
         {showTable && 
-          <table className="table table-striped table-hover">
+          <table className="table table-bordered table-hover">
             <thead>
-              <tr>
+              <tr className='text-center'>
                 <th>id_movimiento</th>
                 <th>id_sucursal</th>
                 <th>id_producto</th>
@@ -154,25 +160,176 @@ const changeHandler = (event) => {
               </tr>
             </thead>
             <tbody>
-              <tr className="table-info">
-                <th>xxxx</th>
-                <th>xxxx</th>
-                <th>xxxx</th>
-                <th>xx/xx/xxxx</th>
-                <th>xxxxxxxxxxxxxx</th>
-                <th>$xx.xx</th>
-                <th>xxxx</th>
-                <th>$xx.xx</th>
-                <th>xxxxxx</th>
-                <th>
-                  <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                    <span className="material-symbols-outlined">edit</span>
-                  </button>
-                  <button className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                    <span className="material-symbols-outlined">delete</span>
-                  </button>
-                </th>
-              </tr>
+              {posts.movimientos.map((mov) =>(
+                mov.valido ?(
+                  // muestra movimientos validos
+                  <tr className='text-center ' key={mov.id_movimiento}>
+                      <th>{mov.id_movimiento}</th>
+                      <th>{mov.id_sucursal_id}</th>
+                      <th>{mov.id_producto_id}</th>
+                      <th>{moment(mov.fecha_registro).format("DD/MM/YYYY")}</th>
+                      <th>{mov.detalle}</th>
+                      <th>${mov.valorUnitario}</th>
+                      <th>{mov.cantidad}</th>
+                      <th>${parseFloat(mov.total).toFixed(2)}</th>
+                      <th>{mov.tipo}</th>
+                      <th>
+                          <div className="btn-group">
+                            <button type="button" className="btn btn-light pt-1 pb-0.5" style={{background:'none', border:'none'}} data-bs-toggle="dropdown" aria-expanded="false">
+                              <span className="material-symbols-outlined">more_horiz</span>
+                            </button>
+                            <ul className="dropdown-menu">
+                              <li><a className="dropdown-item" >
+                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}}>edit</span>
+                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Editar</a>
+                                </button>
+                              </a></li>
+                              <li><a className="dropdown-item" >
+                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}} >delete</span>
+                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Eliminar</a>
+                                </button>
+                              </a></li>
+                            </ul>
+                          </div>
+                      </th>
+                    </tr>
+                ):(
+                  //muestra movimientos invalidos
+                  <tr className='text-center ' key={mov.id_movimiento}>
+                      <th>{mov.id_movimiento}
+                        {
+                          mov.errores.id_movimiento && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {mov.errores.id_movimiento}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{mov.id_sucursal_id}
+                        {
+                          mov.errores.id_sucursal_id && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {mov.errores.id_sucursal_id}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{mov.id_producto_id}
+                        {
+                          mov.errores.id_producto_id && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {mov.errores.id_producto_id}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{moment(mov.fecha_registro).format("DD/MM/YYYY")}
+                        {
+                          mov.errores.fecha_registro && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {mov.errores.fecha_registro}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{mov.detalle}
+                        {
+                          mov.errores.detalle && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {mov.errores.detalle}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>${mov.valorUnitario}
+                        {
+                          mov.errores.valorUnitario && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {mov.errores.valorUnitario}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{mov.cantidad}
+                        {
+                          mov.errores.cantidad && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {mov.errores.cantidad}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>${parseFloat(mov.total).toFixed(2)}
+                        {
+                          mov.errores.total && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {mov.errores.total}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{mov.tipo}
+                        {
+                          mov.errores.tipo && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {mov.errores.tipo}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>
+                          <div className="btn-group">
+                            <button type="button" className="btn btn-light pt-1 pb-0.5" style={{background:'none', border:'none'}} data-bs-toggle="dropdown" aria-expanded="false">
+                              <span className="material-symbols-outlined">more_horiz</span>
+                            </button>
+                            <ul className="dropdown-menu">
+                              <li><a className="dropdown-item" >
+                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}}>edit</span>
+                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Editar</a>
+                                </button>
+                              </a></li>
+                              <li><a className="dropdown-item" >
+                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}} >delete</span>
+                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Eliminar</a>
+                                </button>
+                              </a></li>
+                            </ul>
+                          </div>
+                      </th>
+                    </tr>
+                )
+              ))}
             </tbody>
           </table>
         }

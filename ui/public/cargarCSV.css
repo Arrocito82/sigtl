@@ -22,3 +22,6 @@
     margin-top: -90px;
     margin-left: -250px;
   }
+  tbody th{
+    font-weight: normal;
+  }

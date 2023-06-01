@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react';
 import axios from 'axios';
 import Papa from "papaparse";
 import {ProgressBar,Toast, ToastContainer} from 'react-bootstrap';
+import moment from 'moment';
 
 function CargarDatosProductosDanados() {
   const [archivo, setArchivo]=useState();
@@ -15,6 +17,8 @@ function CargarDatosProductosDanados() {
   // Spinner
   const [loadingSpinner, setLoadingSpinner] = useState(false);
   const [showTable, setShowTable] = useState(false);
+  // Tabla
+  const [posts, setPosts] = useState([{productos:[]}]);
 
 // Eliminar archivo
 const eliminarArchivo = e => {
@@ -36,6 +40,7 @@ headers: {
   setTimeout(() => {
     setLoadingSpinner(false);
   }, 1000);
+  setPosts({productos:res.data});
   setShowTable(true);
   console.log(res);
 });
@@ -150,21 +155,124 @@ return (
               </tr>
             </thead>
             <tbody>
-              <tr className="table-info">
-                <th>xxxx</th>
-                <th>xxxx</th>
-                <th>xx/xx/xxxx</th>
-                <th>xxxxxxxxxxxxxx</th>
-                <th>xxxx</th>
-                <th>
-                  <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                    <span className="material-symbols-outlined">edit</span>
-                  </button>
-                  <button className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                    <span className="material-symbols-outlined">delete</span>
-                  </button>
-                </th>
-              </tr>
+              {posts.productos.map((prod) =>(
+                prod.valido ?(
+                  // muestra productos validos
+                  <tr className='text-center' key={prod.id_movimiento}>
+                      <th>{prod.id_productoDanado}</th>
+                      <th>{prod.id_producto_id}</th>
+                      <th>{moment(prod.fecha_registro).format("DD/MM/YYYY")}</th>
+                      <th>{prod.detalle}</th>
+                      <th>{prod.cantidad}</th>
+                      <th>
+                          <div className="btn-group">
+                            <button type="button" className="btn btn-light pt-1 pb-0.5" style={{background:'none', border:'none'}} data-bs-toggle="dropdown" aria-expanded="false">
+                              <span className="material-symbols-outlined">more_horiz</span>
+                            </button>
+                            <ul className="dropdown-menu">
+                              <li><a className="dropdown-item" >
+                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}}>edit</span>
+                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Editar</a>
+                                </button>
+                              </a></li>
+                              <li><a className="dropdown-item" >
+                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}} >delete</span>
+                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Eliminar</a>
+                                </button>
+                              </a></li>
+                            </ul>
+                          </div>
+                      </th>
+                    </tr>
+                ):(
+                  // muestra productos invalidos
+                  <tr className='text-center' key={prod.id_movimiento}>
+                      <th>{prod.id_productoDanado}
+                        {
+                          prod.errores.id_productoDanado && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {prod.errores.id_productoDanado}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{prod.id_producto_id}
+                        {
+                          prod.errores.id_producto_id && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {prod.errores.id_producto_id}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{moment(prod.fecha_registro).format("DD/MM/YYYY")}
+                        {
+                          prod.errores.fecha_registro && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {prod.errores.fecha_registro}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{prod.detalle}
+                        {
+                          prod.errores.detalle && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {prod.errores.detalle}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{prod.cantidad}
+                        {
+                          prod.errores.cantidad && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {prod.errores.cantidad}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>
+                          <div className="btn-group">
+                            <button type="button" className="btn btn-light pt-1 pb-0.5" style={{background:'none', border:'none'}} data-bs-toggle="dropdown" aria-expanded="false">
+                              <span className="material-symbols-outlined">more_horiz</span>
+                            </button>
+                            <ul className="dropdown-menu">
+                              <li><a className="dropdown-item" >
+                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}}>edit</span>
+                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Editar</a>
+                                </button>
+                              </a></li>
+                              <li><a className="dropdown-item" >
+                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}} >delete</span>
+                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Eliminar</a>
+                                </button>
+                              </a></li>
+                            </ul>
+                          </div>
+                      </th>
+                    </tr>
+                )
+              ))}
             </tbody>
           </table>
         }
