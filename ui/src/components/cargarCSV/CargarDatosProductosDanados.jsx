@@ -157,7 +157,7 @@ return (
               {posts.productos.map((prod) =>(
                 prod.valido ?(
                   // muestra productos validos
-                  <tr className='text-center table-info' key={prod.id_movimiento}>
+                  <tr className='text-center' key={prod.id_movimiento}>
                       <th>{prod.id_productoDanado}</th>
                       <th>{prod.id_producto_id}</th>
                       <th>{moment(prod.fecha_registro).format("DD/MM/YYYY")}</th>
@@ -187,7 +187,7 @@ return (
                     </tr>
                 ):(
                   // muestra productos invalidos
-                  <tr className='text-center table-danger' key={prod.id_movimiento}>
+                  <tr className='text-center' key={prod.id_movimiento}>
                       <th>{prod.id_movimiento}</th>
                       <th>{prod.id_sucursal_id}</th>
                       <th>{prod.id_producto_id}</th>
