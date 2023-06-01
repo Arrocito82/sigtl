@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Papa from "papaparse";
 import {ProgressBar, Toast, ToastContainer} from 'react-bootstrap';
+import moment from 'moment';
 
 function CargarDatosMovimientos() {
     const [archivo, setArchivo]=useState();
@@ -15,12 +16,14 @@ function CargarDatosMovimientos() {
     // Spinner
     const [loadingSpinner, setLoadingSpinner] = useState(false);
     const [showTable, setShowTable] = useState(false);
-
+    // Tabla
+    const [posts, setPosts] = useState([{movimientos:[]}]);
   // Eliminar archivo
   const eliminarArchivo = e => {
     setArchivo(e);
     setShow(true);
   }
+
 
 async function onClickHandler(){
   // console.log(data);
@@ -36,8 +39,9 @@ async function onClickHandler(){
   setTimeout(() => {
     setLoadingSpinner(false);
   }, 1000);
+  setPosts({movimientos:res.data});
   setShowTable(true);
-  console.log(res);
+  console.log(res.data);
 });
 }
 const changeHandler = (event) => {
@@ -154,25 +158,30 @@ const changeHandler = (event) => {
               </tr>
             </thead>
             <tbody>
-              <tr className="table-info">
-                <th>xxxx</th>
-                <th>xxxx</th>
-                <th>xxxx</th>
-                <th>xx/xx/xxxx</th>
-                <th>xxxxxxxxxxxxxx</th>
-                <th>$xx.xx</th>
-                <th>xxxx</th>
-                <th>$xx.xx</th>
-                <th>xxxxxx</th>
-                <th>
-                  <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                    <span className="material-symbols-outlined">edit</span>
-                  </button>
-                  <button className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                    <span className="material-symbols-outlined">delete</span>
-                  </button>
-                </th>
-              </tr>
+              {
+                posts.movimientos && posts.movimientos.map((mov) =>
+                (
+                  <tr className="table-info" key={mov.id_movimiento}>
+                    <th>{mov.id_movimiento}</th>
+                    <th>{mov.id_sucursal_id}</th>
+                    <th>{mov.id_producto_id}</th>
+                    <th>{moment(mov.fecha_registro).format("DD/MM/YYYY")}</th>
+                    <th>{mov.detalle}</th>
+                    <th>${mov.valorUnitario}</th>
+                    <th>{mov.cantidad}</th>
+                    <th>${mov.total}</th>
+                    <th>{mov.tipo}</th>
+                    <th>
+                      <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                        <span className="material-symbols-outlined">edit</span>
+                      </button>
+                      <button className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                        <span className="material-symbols-outlined">delete</span>
+                      </button>
+                    </th>
+                  </tr>
+                ))
+              }
             </tbody>
           </table>
         }
