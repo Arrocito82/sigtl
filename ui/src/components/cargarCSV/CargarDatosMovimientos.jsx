@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -142,9 +143,9 @@ const changeHandler = (event) => {
           </div>
         </div>)}
         {showTable && 
-          <table className="table table-striped table-hover">
+          <table className="table table-bordered table-hover">
             <thead>
-              <tr>
+              <tr className='text-center'>
                 <th>id_movimiento</th>
                 <th>id_sucursal</th>
                 <th>id_producto</th>
@@ -158,30 +159,75 @@ const changeHandler = (event) => {
               </tr>
             </thead>
             <tbody>
-              {
-                posts.movimientos && posts.movimientos.map((mov) =>
-                (
-                  <tr className="table-info" key={mov.id_movimiento}>
-                    <th>{mov.id_movimiento}</th>
-                    <th>{mov.id_sucursal_id}</th>
-                    <th>{mov.id_producto_id}</th>
-                    <th>{moment(mov.fecha_registro).format("DD/MM/YYYY")}</th>
-                    <th>{mov.detalle}</th>
-                    <th>${mov.valorUnitario}</th>
-                    <th>{mov.cantidad}</th>
-                    <th>${mov.total}</th>
-                    <th>{mov.tipo}</th>
-                    <th>
-                      <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                        <span className="material-symbols-outlined">edit</span>
-                      </button>
-                      <button className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                        <span className="material-symbols-outlined">delete</span>
-                      </button>
-                    </th>
-                  </tr>
-                ))
-              }
+              {posts.movimientos.map((mov) =>(
+                mov.valido ?(
+                  <tr className='text-center ' key={mov.id_movimiento}>
+                      <th>{mov.id_movimiento}</th>
+                      <th>{mov.id_sucursal_id}</th>
+                      <th>{mov.id_producto_id}</th>
+                      <th>{moment(mov.fecha_registro).format("DD/MM/YYYY")}</th>
+                      <th>{mov.detalle}</th>
+                      <th>${mov.valorUnitario}</th>
+                      <th>{mov.cantidad}</th>
+                      <th>${parseFloat(mov.total).toFixed(2)}</th>
+                      <th>{mov.tipo}</th>
+                      <th>
+                          <div className="btn-group">
+                            <button type="button" className="btn btn-light pt-1 pb-0.5" style={{background:'none', border:'none'}} data-bs-toggle="dropdown" aria-expanded="false">
+                              <span className="material-symbols-outlined">more_horiz</span>
+                            </button>
+                            <ul className="dropdown-menu">
+                              <li><a className="dropdown-item" >
+                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}}>edit</span>
+                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Editar</a>
+                                </button>
+                              </a></li>
+                              <li><a className="dropdown-item" >
+                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}} >delete</span>
+                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Eliminar</a>
+                                </button>
+                              </a></li>
+                            </ul>
+                          </div>
+                      </th>
+                    </tr>
+                ):(
+                  <tr className='text-center table-danger' key={mov.id_movimiento}>
+                      <th>{mov.id_movimiento}</th>
+                      <th>{mov.id_sucursal_id}</th>
+                      <th>{mov.id_producto_id}</th>
+                      <th>{moment(mov.fecha_registro).format("DD/MM/YYYY")}</th>
+                      <th>{mov.detalle}</th>
+                      <th>${mov.valorUnitario}</th>
+                      <th>{mov.cantidad}</th>
+                      <th>${parseFloat(mov.total).toFixed(2)}</th>
+                      <th>{mov.tipo}</th>
+                      <th>
+                          <div className="btn-group">
+                            <button type="button" className="btn btn-light pt-1 pb-0.5" style={{background:'none', border:'none'}} data-bs-toggle="dropdown" aria-expanded="false">
+                              <span className="material-symbols-outlined">more_horiz</span>
+                            </button>
+                            <ul className="dropdown-menu">
+                              <li><a className="dropdown-item" >
+                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}}>edit</span>
+                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Editar</a>
+                                </button>
+                              </a></li>
+                              <li><a className="dropdown-item" >
+                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
+                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}} >delete</span>
+                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Eliminar</a>
+                                </button>
+                              </a></li>
+                            </ul>
+                          </div>
+                      </th>
+                    </tr>
+                )
+              ))}
             </tbody>
           </table>
         }
