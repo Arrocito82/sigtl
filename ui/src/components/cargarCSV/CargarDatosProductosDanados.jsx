@@ -19,6 +19,7 @@ function CargarDatosProductosDanados() {
   const [showTable, setShowTable] = useState(false);
   // Tabla
   const [posts, setPosts] = useState([{productos:[]}]);
+
 // Eliminar archivo
 const eliminarArchivo = e => {
   setArchivo(e);
@@ -188,15 +189,66 @@ return (
                 ):(
                   // muestra productos invalidos
                   <tr className='text-center' key={prod.id_movimiento}>
-                      <th>{prod.id_movimiento}</th>
-                      <th>{prod.id_sucursal_id}</th>
-                      <th>{prod.id_producto_id}</th>
-                      <th>{moment(prod.fecha_registro).format("DD/MM/YYYY")}</th>
-                      <th>{prod.detalle}</th>
-                      <th>${prod.valorUnitario}</th>
-                      <th>{prod.cantidad}</th>
-                      <th>${parseFloat(prod.total).toFixed(2)}</th>
-                      <th>{prod.tipo}</th>
+                      <th>{prod.id_productoDanado}
+                        {
+                          prod.errores.id_productoDanado && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {prod.errores.id_productoDanado}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{prod.id_producto_id}
+                        {
+                          prod.errores.id_producto_id && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {prod.errores.id_producto_id}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{moment(prod.fecha_registro).format("DD/MM/YYYY")}
+                        {
+                          prod.errores.fecha_registro && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {prod.errores.fecha_registro}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{prod.detalle}
+                        {
+                          prod.errores.detalle && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {prod.errores.detalle}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
+                      <th>{prod.cantidad}
+                        {
+                          prod.errores.cantidad && (
+                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                              <span class="material-symbols-outlined">error</span>
+                              <div>
+                                {prod.errores.cantidad}
+                              </div>
+                            </div>
+                          )
+                        }
+                      </th>
                       <th>
                           <div className="btn-group">
                             <button type="button" className="btn btn-light pt-1 pb-0.5" style={{background:'none', border:'none'}} data-bs-toggle="dropdown" aria-expanded="false">
