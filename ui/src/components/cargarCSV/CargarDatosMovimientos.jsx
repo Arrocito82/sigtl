@@ -161,7 +161,8 @@ const changeHandler = (event) => {
             <tbody>
               {posts.movimientos.map((mov) =>(
                 mov.valido ?(
-                  <tr className='text-center ' key={mov.id_movimiento}>
+                  // muestra movimientos validos
+                  <tr className='text-center table-info' key={mov.id_movimiento}>
                       <th>{mov.id_movimiento}</th>
                       <th>{mov.id_sucursal_id}</th>
                       <th>{mov.id_producto_id}</th>
@@ -194,6 +195,7 @@ const changeHandler = (event) => {
                       </th>
                     </tr>
                 ):(
+                  //muestra movimientos invalidos
                   <tr className='text-center table-danger' key={mov.id_movimiento}>
                       <th>{mov.id_movimiento}</th>
                       <th>{mov.id_sucursal_id}</th>
