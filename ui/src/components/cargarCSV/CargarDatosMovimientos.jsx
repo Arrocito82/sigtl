@@ -5,6 +5,8 @@ import axios from 'axios';
 import Papa from "papaparse";
 import {ProgressBar, Toast, ToastContainer} from 'react-bootstrap';
 import moment from 'moment';
+import ReactPaginate from 'react-paginate';
+
 
 function CargarDatosMovimientos() {
     const [archivo, setArchivo]=useState();
@@ -18,7 +20,13 @@ function CargarDatosMovimientos() {
     const [loadingSpinner, setLoadingSpinner] = useState(false);
     const [showTable, setShowTable] = useState(false);
     // Tabla
-    const [posts, setPosts] = useState([{movimientos:[]}]);
+    const [posts, setPosts] = useState({movimientos:[]});
+    //Paginacion
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 5; // Number of items to display per page
+    const pageCount = Math.ceil(posts.movimientos.length / itemsPerPage); // Total number of pages
+
+
 
   // Eliminar archivo
   const eliminarArchivo = e => {
@@ -43,6 +51,7 @@ async function onClickHandler(){
   }, 1000);
   setPosts({movimientos:res.data});
   setShowTable(true);
+  setCurrentPage(0);
   console.log(res.data);
 });
 }
@@ -79,6 +88,8 @@ const changeHandler = (event) => {
     };
     reader.readAsText(file);
 };
+const offset = currentPage * itemsPerPage;
+const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
 
   return (
     <div className="App">
@@ -143,27 +154,28 @@ const changeHandler = (event) => {
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>)}
-        {showTable && 
-          <table className="table table-bordered table-hover">
-            <thead>
-              <tr className='text-center'>
-                <th>id_movimiento</th>
-                <th>id_sucursal</th>
-                <th>id_producto</th>
-                <th>fecha_registro</th>
-                <th>detalle</th>
-                <th>valorUnitario</th>
-                <th>cantidad</th>
-                <th>total</th>
-                <th>tipo</th>
-                <th>acción</th>
-              </tr>
-            </thead>
-            <tbody>
-              {posts.movimientos.map((mov) =>(
-                mov.valido ?(
-                  // muestra movimientos validos
-                  <tr className='text-center ' key={mov.id_movimiento}>
+        {showTable && <>
+          {posts.movimientos && 
+            <><table className="table table-bordered table-hover">
+              <thead>
+                <tr className='text-center'>
+                  <th>id_movimiento</th>
+                  <th>id_sucursal</th>
+                  <th>id_producto</th>
+                  <th>fecha_registro</th>
+                  <th>detalle</th>
+                  <th>valorUnitario</th>
+                  <th>cantidad</th>
+                  <th>total</th>
+                  <th>tipo</th>
+                  <th>acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentPageItems.map((mov) => (
+                  mov.valido ? (
+                    // muestra movimientos validos
+                    <tr className='text-center ' key={mov.id_movimiento}>
                       <th>{mov.id_movimiento}</th>
                       <th>{mov.id_sucursal_id}</th>
                       <th>{mov.id_producto_id}</th>
@@ -174,164 +186,177 @@ const changeHandler = (event) => {
                       <th>${parseFloat(mov.total).toFixed(2)}</th>
                       <th>{mov.tipo}</th>
                       <th>
-                          <div className="btn-group">
-                            <button type="button" className="btn btn-light pt-1 pb-0.5" style={{background:'none', border:'none'}} data-bs-toggle="dropdown" aria-expanded="false">
-                              <span className="material-symbols-outlined">more_horiz</span>
-                            </button>
-                            <ul className="dropdown-menu">
-                              <li><a className="dropdown-item" >
-                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}}>edit</span>
-                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Editar</a>
-                                </button>
-                              </a></li>
-                              <li><a className="dropdown-item" >
-                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}} >delete</span>
-                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Eliminar</a>
-                                </button>
-                              </a></li>
-                            </ul>
-                          </div>
+                        <div className="btn-group">
+                          <button type="button" className="btn btn-light pt-1 pb-0.5" style={{ background: 'none', border: 'none' }} data-bs-toggle="dropdown" aria-expanded="false">
+                            <span className="material-symbols-outlined">more_horiz</span>
+                          </button>
+                          <ul className="dropdown-menu">
+                            <li><a className="dropdown-item">
+                              <button type="button" className='btn btn-light btn-sm' style={{ background: 'none', border: 'none' }}>
+                                <span className="material-symbols-outlined" style={{ fontSize: '25px' }}>edit</span>
+                                <a style={{ fontSize: '16px', paddingLeft: '8px', paddingBottom: '10px' }}>Editar</a>
+                              </button>
+                            </a></li>
+                            <li><a className="dropdown-item">
+                              <button type="button" className='btn btn-light btn-sm' style={{ background: 'none', border: 'none' }}>
+                                <span className="material-symbols-outlined" style={{ fontSize: '25px' }}>delete</span>
+                                <a style={{ fontSize: '16px', paddingLeft: '8px', paddingBottom: '10px' }}>Eliminar</a>
+                              </button>
+                            </a></li>
+                          </ul>
+                        </div>
                       </th>
                     </tr>
-                ):(
-                  //muestra movimientos invalidos
-                  <tr className='text-center ' key={mov.id_movimiento}>
+                  ) : (
+                    //muestra movimientos invalidos
+                    <tr className='text-center ' key={mov.id_movimiento}>
                       <th>{mov.id_movimiento}
-                        {
-                          mov.errores.id_movimiento && (
-                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                              <span class="material-symbols-outlined">error</span>
-                              <div>
-                                {mov.errores.id_movimiento}
-                              </div>
+                        {mov.errores.id_movimiento && (
+                          <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                            <span class="material-symbols-outlined">error</span>
+                            <div>
+                              {mov.errores.id_movimiento}
                             </div>
-                          )
-                        }
+                          </div>
+                        )}
                       </th>
                       <th>{mov.id_sucursal_id}
-                        {
-                          mov.errores.id_sucursal_id && (
-                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                              <span class="material-symbols-outlined">error</span>
-                              <div>
-                                {mov.errores.id_sucursal_id}
-                              </div>
+                        {mov.errores.id_sucursal_id && (
+                          <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                            <span class="material-symbols-outlined">error</span>
+                            <div>
+                              {mov.errores.id_sucursal_id}
                             </div>
-                          )
-                        }
+                          </div>
+                        )}
                       </th>
                       <th>{mov.id_producto_id}
-                        {
-                          mov.errores.id_producto_id && (
-                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                              <span class="material-symbols-outlined">error</span>
-                              <div>
-                                {mov.errores.id_producto_id}
-                              </div>
+                        {mov.errores.id_producto_id && (
+                          <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                            <span class="material-symbols-outlined">error</span>
+                            <div>
+                              {mov.errores.id_producto_id}
                             </div>
-                          )
-                        }
+                          </div>
+                        )}
                       </th>
                       <th>{moment(mov.fecha_registro).format("DD/MM/YYYY")}
-                        {
-                          mov.errores.fecha_registro && (
-                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                              <span class="material-symbols-outlined">error</span>
-                              <div>
-                                {mov.errores.fecha_registro}
-                              </div>
+                        {mov.errores.fecha_registro && (
+                          <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                            <span class="material-symbols-outlined">error</span>
+                            <div>
+                              {mov.errores.fecha_registro}
                             </div>
-                          )
-                        }
+                          </div>
+                        )}
                       </th>
                       <th>{mov.detalle}
-                        {
-                          mov.errores.detalle && (
-                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                              <span class="material-symbols-outlined">error</span>
-                              <div>
-                                {mov.errores.detalle}
-                              </div>
+                        {mov.errores.detalle && (
+                          <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                            <span class="material-symbols-outlined">error</span>
+                            <div>
+                              {mov.errores.detalle}
                             </div>
-                          )
-                        }
+                          </div>
+                        )}
                       </th>
                       <th>${mov.valorUnitario}
-                        {
-                          mov.errores.valorUnitario && (
-                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                              <span class="material-symbols-outlined">error</span>
-                              <div>
-                                {mov.errores.valorUnitario}
-                              </div>
+                        {mov.errores.valorUnitario && (
+                          <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                            <span class="material-symbols-outlined">error</span>
+                            <div>
+                              {mov.errores.valorUnitario}
                             </div>
-                          )
-                        }
+                          </div>
+                        )}
                       </th>
                       <th>{mov.cantidad}
-                        {
-                          mov.errores.cantidad && (
-                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                              <span class="material-symbols-outlined">error</span>
-                              <div>
-                                {mov.errores.cantidad}
-                              </div>
+                        {mov.errores.cantidad && (
+                          <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                            <span class="material-symbols-outlined">error</span>
+                            <div>
+                              {mov.errores.cantidad}
                             </div>
-                          )
-                        }
+                          </div>
+                        )}
                       </th>
                       <th>${parseFloat(mov.total).toFixed(2)}
-                        {
-                          mov.errores.total && (
-                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                              <span class="material-symbols-outlined">error</span>
-                              <div>
-                                {mov.errores.total}
-                              </div>
+                        {mov.errores.total && (
+                          <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                            <span class="material-symbols-outlined">error</span>
+                            <div>
+                              {mov.errores.total}
                             </div>
-                          )
-                        }
+                          </div>
+                        )}
                       </th>
                       <th>{mov.tipo}
-                        {
-                          mov.errores.tipo && (
-                            <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                              <span class="material-symbols-outlined">error</span>
-                              <div>
-                                {mov.errores.tipo}
-                              </div>
+                        {mov.errores.tipo && (
+                          <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
+                            <span class="material-symbols-outlined">error</span>
+                            <div>
+                              {mov.errores.tipo}
                             </div>
-                          )
-                        }
+                          </div>
+                        )}
                       </th>
                       <th>
-                          <div className="btn-group">
-                            <button type="button" className="btn btn-light pt-1 pb-0.5" style={{background:'none', border:'none'}} data-bs-toggle="dropdown" aria-expanded="false">
-                              <span className="material-symbols-outlined">more_horiz</span>
-                            </button>
-                            <ul className="dropdown-menu">
-                              <li><a className="dropdown-item" >
-                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}}>edit</span>
-                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Editar</a>
-                                </button>
-                              </a></li>
-                              <li><a className="dropdown-item" >
-                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}} >delete</span>
-                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Eliminar</a>
-                                </button>
-                              </a></li>
-                            </ul>
-                          </div>
+                        <div className="btn-group">
+                          <button type="button" className="btn btn-light pt-1 pb-0.5" style={{ background: 'none', border: 'none' }} data-bs-toggle="dropdown" aria-expanded="false">
+                            <span className="material-symbols-outlined">more_horiz</span>
+                          </button>
+                          <ul className="dropdown-menu">
+                            <li><a className="dropdown-item">
+                              <button type="button" className='btn btn-light btn-sm' style={{ background: 'none', border: 'none' }}>
+                                <span className="material-symbols-outlined" style={{ fontSize: '25px' }}>edit</span>
+                                <a style={{ fontSize: '16px', paddingLeft: '8px', paddingBottom: '10px' }}>Editar</a>
+                              </button>
+                            </a></li>
+                            <li><a className="dropdown-item">
+                              <button type="button" className='btn btn-light btn-sm' style={{ background: 'none', border: 'none' }}>
+                                <span className="material-symbols-outlined" style={{ fontSize: '25px' }}>delete</span>
+                                <a style={{ fontSize: '16px', paddingLeft: '8px', paddingBottom: '10px' }}>Eliminar</a>
+                              </button>
+                            </a></li>
+                          </ul>
+                        </div>
                       </th>
                     </tr>
-                )
-              ))}
-            </tbody>
-          </table>
+                  )
+                ))}
+              </tbody>
+            </table>
+            <div className='container text-center'>
+              <div className="row justify-content-md-center">
+                <div className='col-md-auto'>
+                  <ReactPaginate
+                      previousLabel={'Previous'}
+                      nextLabel={'Next'}
+                      breakLabel={'...'}
+                      pageCount={pageCount}
+                      marginPagesDisplayed={2}
+                      pageRangeDisplayed={5}
+                      onPageChange={({ selected }) => setCurrentPage(selected)}
+                      pageClassName="page-item"
+                      pageLinkClassName="page-link"
+                      previousClassName="page-item"
+                      previousLinkClassName="page-link"
+                      nextClassName="page-item"
+                      nextLinkClassName="page-link"
+                      breakClassName="page-item"
+                      breakLinkClassName="page-link"
+                      containerClassName="pagination"
+                      activeClassName="active"
+                      renderOnZeroPageCount={null} />
+                </div>
+                <div className='col-md-auto'>
+                  <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+              </div>
+            </div>
+            </>
+          }
+        </>
         }
       </div>
     </div>

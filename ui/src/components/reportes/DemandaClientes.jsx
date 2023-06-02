@@ -33,14 +33,6 @@ function DemandaClientes() {
         NOVEMBER: 'Noviembre',
         DECEMBER: 'Diciembre'
     };
-    const TIME_SLOTS = {
-        1: '8:00 AM',
-        2: '10:00 AM',
-        3: '12:00 PM',
-        4: '2:00 PM',
-        5: '3:00 PM',
-        6: '4:00 PM'
-    };
     const [reporte, setReporte] = useState(null);
     async function handleFilter(e) {
         // Prevent the browser from reloading the page
@@ -90,13 +82,7 @@ function DemandaClientes() {
                             ))}
                         </select>
                         <label className="form-label mt-2">Hora:</label>
-                        <select name='filterHora' className="form-select">
-                            {Object.keys(TIME_SLOTS).map((hora) => (
-                            <option key={hora} value={hora}>
-                                {TIME_SLOTS[hora]}
-                            </option>
-                            ))}
-                        </select>
+                        <input type="time" name='filterHora' className="form-control" />
                         <div className="d-grid gap-2 mt-4">
                             <button type="submit" className="btn btn-primary">Mostrar resultados</button>
                         </div>
