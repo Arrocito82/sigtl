@@ -5,6 +5,7 @@ import axios from 'axios';
 import Papa from "papaparse";
 import {ProgressBar,Toast, ToastContainer} from 'react-bootstrap';
 import moment from 'moment';
+import ReactPaginate from 'react-paginate';
 
 function CargarDatosProductosDanados() {
   const [archivo, setArchivo]=useState();
@@ -18,7 +19,12 @@ function CargarDatosProductosDanados() {
   const [loadingSpinner, setLoadingSpinner] = useState(false);
   const [showTable, setShowTable] = useState(false);
   // Tabla
-  const [posts, setPosts] = useState([{productos:[]}]);
+  const [posts, setPosts] = useState({productos:[]});
+  //Paginacion
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 5; // Number of items to display per page
+  const pageCount = Math.ceil(posts.productos.length / itemsPerPage); // Total number of pages
+
 
 // Eliminar archivo
 const eliminarArchivo = e => {
@@ -42,6 +48,7 @@ headers: {
   }, 1000);
   setPosts({productos:res.data});
   setShowTable(true);
+  setCurrentPage(0);
   console.log(res);
 });
 }
@@ -78,6 +85,8 @@ const file = event.target.files[0];
   };
   reader.readAsText(file);
 };
+const offset = currentPage * itemsPerPage;
+const currentPageItems = posts.productos.slice(offset, offset + itemsPerPage);
 
 return (
   <div className="App">
@@ -142,7 +151,11 @@ return (
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>)}
-        {showTable && 
+        {showTable && <>
+          {posts.movimientos &&
+          <>
+
+          </>}
           <table className="table table-striped table-hover">
             <thead>
               <tr>
@@ -155,7 +168,7 @@ return (
               </tr>
             </thead>
             <tbody>
-              {posts.productos.map((prod) =>(
+              {currentPageItems.map((prod) =>(
                 prod.valido ?(
                   // muestra productos validos
                   <tr className='text-center' key={prod.id_movimiento}>
@@ -275,6 +288,35 @@ return (
               ))}
             </tbody>
           </table>
+          <div className='container text-center'>
+              <div className="row justify-content-md-center">
+                <div className='col-md-auto'>
+                  <ReactPaginate
+                      previousLabel={'Previous'}
+                      nextLabel={'Next'}
+                      breakLabel={'...'}
+                      pageCount={pageCount}
+                      marginPagesDisplayed={2}
+                      pageRangeDisplayed={5}
+                      onPageChange={({ selected }) => setCurrentPage(selected)}
+                      pageClassName="page-item"
+                      pageLinkClassName="page-link"
+                      previousClassName="page-item"
+                      previousLinkClassName="page-link"
+                      nextClassName="page-item"
+                      nextLinkClassName="page-link"
+                      breakClassName="page-item"
+                      breakLinkClassName="page-link"
+                      containerClassName="pagination"
+                      activeClassName="active"
+                      renderOnZeroPageCount={null} />
+                </div>
+                <div className='col-md-auto'>
+                  <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+              </div>
+            </div>
+        </>
         }
       </div>
   </div>
