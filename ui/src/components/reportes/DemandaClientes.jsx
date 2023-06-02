@@ -9,7 +9,7 @@ function DemandaClientes() {
         DELGADO: 'Delgado',
         ILOPANGO: 'Ilopango',
         MEJICANOS: 'Mejicanos'
-      };
+    };
     const DAYS_OF_WEEK = {
         SUNDAY: 'Domingo',
         MONDAY: 'Lunes',
@@ -97,7 +97,7 @@ function DemandaClientes() {
                             </option>
                             ))}
                         </select>
-                        <div class="d-grid gap-2 mt-4">
+                        <div className="d-grid gap-2 mt-4">
                             <button type="submit" className="btn btn-primary">Mostrar resultados</button>
                         </div>
                     </form>

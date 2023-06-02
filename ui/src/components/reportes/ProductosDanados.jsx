@@ -51,7 +51,7 @@ function ProductosDanados() {
                         </select>
                         <label className="form-label mt-2">Fecha:</label>
                         <input type="date" name="filterFecha" className="form-control" />
-                        <div class="d-grid gap-2 mt-4">
+                        <div className="d-grid gap-2 mt-4">
                             <button type="submit" className="btn btn-primary">Mostrar resultados</button>
                         </div>
                     </form>

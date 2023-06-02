@@ -1,49 +1,85 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from 'react';
+import axios from 'axios';
+
 function FrecuenciaCompra() {
-    const [archivo, setArchivo]=useState(null);
-    // Verificar datos del archivo cargado
-      const subirArchivo = e => {
-        setArchivo(e);
-      }
-    
-      return (
-        <div classNameName="App">
-          <div className="container-sm">
-            <div className="row justify-content-md-center">
+  const SUCURSALES = {
+    SAN_SALVADOR: 'San Salvador',
+    SOYAPANGO: 'Soyapango',
+    SANTA_TECLA: 'Santa Tecla',
+    DELGADO: 'Delgado',
+    ILOPANGO: 'Ilopango',
+    MEJICANOS: 'Mejicanos'
+  };
+  const PRODUCTOS = {
+    TV: 'Televisor',
+    SMARTPHONE: 'Teléfono inteligente',
+    LAPTOP: 'Portátil',
+    HEADPHONES: 'Audífonos',
+    CAMERA: 'Cámara',
+    SMARTWATCH: 'Reloj inteligente',
+    SPEAKERS: 'Altavoces',
+    GAMING_CONSOLE: 'Consola de videojuegos',
+    BLENDER: 'Licuadora',
+    VACUUM_CLEANER: 'Aspiradora',
+    COFFEE_MACHINE: 'Máquina de café'
+  };
+
+  const [reporte, setReporte] = useState(null);
+  async function handleFilter(e) {
+      // Prevent the browser from reloading the page
+      e.preventDefault();
+      // Read the form data
+      const form = e.target;
+      const formData = new FormData(form);
+      const formJson = Object.fromEntries(formData.entries());
+      console.log(formJson); 
+      await axios.post('/some-api', formJson,{
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      } ).then((response) => {
+          console.log(response);
+          setReporte(response.data);
+      });
+  }
+  return(
+      <div className="container">
+          <div className="row">
               <div className="col-md-auto">
-                <h1 className="text-center">Frecuencia de compra de productos</h1>
-                <div className="cargar-archivo container text-center mt-5"  >
-                  <div className="row justify-content-md-center">
-                    <img src='excel_icon.png' className="icon-excel"/>
-                    <h5>Seleccione un archivo para cargar.</h5>
-                    <h6>O arrastra y suelte aquí.</h6>
-                  </div>
-                  <input className="entrada" type="file" name='files' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onChange={(e)=>subirArchivo(e.target.files)}/>
-                </div>
-                    {archivo &&
-                      <>
-                        <div className="row justify-content-md-center archivo-cargado bg-primary-subtle border border-primary-subtle rounded-3 mt-5 pt-3">
-                            <div className="col-md-auto">
-                            <img img src='excel_icon.png' className="icon-excel"/>
-                            </div>
-                            <div className="col-md-auto pt-2">
-                            <h5>{archivo && `${archivo[0].name}`}</h5>
-                            </div>
-                            <div className="col-md-auto">
-                            <button type="button" className="btn btn-success">Validar</button>
-                            </div>
-                            <div className="col-md-auto">
-                            <button type="button" className="btn btn-danger" onClick={(e)=>subirArchivo(null)}>Eliminar</button>
-                            </div>
-                        </div>
-                        </>
-                    }
+                  <form method="post" onSubmit={handleFilter}>
+                      <h5>Seleccione los filtros necesarios</h5>
+                      <label className="form-label mt-2">Sucursal:</label>
+                      <select name='filterSucursal' className="form-select">
+                          {Object.keys(SUCURSALES).map((suc) => (
+                          <option key={suc} value={suc}>
+                              {SUCURSALES[suc]}
+                          </option>
+                          ))}
+                      </select>
+                      <label className="form-label mt-2">Producto:</label>
+                      <select name='filterProducto' className="form-select">
+                          {Object.keys(PRODUCTOS).map((pro) => (
+                          <option key={pro} value={pro}>
+                              {PRODUCTOS[pro]}
+                          </option>
+                          ))}
+                      </select>
+                      <div className="d-grid gap-2 mt-4">
+                            <button type="submit" className="btn btn-primary">Mostrar resultados</button>
+                      </div>
+                  </form>
               </div>
-            </div>      
+              <div className="col-lg text-center reporte" >
+                  {reporte ? (
+                      <><h2>reporte aqui</h2></>
+                      ):
+                      <><img src='Waiting-amico.png' alt='Waiting' style={{ width: '30%', marginTop: '30px' }}></img><h2>Seleccione los filtros necesarios...</h2></>
+                  }
+              </div>
           </div>
-        </div>
-      );
+      </div>
+  );
 }
 
 export default FrecuenciaCompra;
