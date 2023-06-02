@@ -25,3 +25,10 @@
   tbody th{
     font-weight: normal;
   }
+  .reporte{
+    width: 320px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid rgb(77, 145, 248);
+    margin: 0;
+  }
