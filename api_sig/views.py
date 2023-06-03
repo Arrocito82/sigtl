@@ -149,20 +149,24 @@ def validarProductosDanados(request):
     for l in data_dict:
 
         productoDanado=ProductoDanado()
-        productoDanado.id_productoDanado=int(l["id_productoDanado"])
-        productoDanado.id_producto_id=int(l["id_producto_id"])
+        if l["id_productoDanado"] != "":
+            productoDanado.id_productoDanado=int(l["id_productoDanado"])
+        if l["id_producto_id"] != "":    
+            productoDanado.id_producto_id=int(l["id_producto_id"])
 
         # print(l["fecha_registro"])
-        fecha_div=l["fecha_registro"].split("+")
-        # print(fecha_div[0])
-        fecha=datetime.strptime(fecha_div[0], "%Y-%m-%d %H:%M:%S")
-        # print(type(fecha_div))
-        #my_datetime_utc = fecha.strftime('%Y-%m-%d %H:%M:%S %Z%z')
-        #print("hola", my_datetime_utc)
-        productoDanado.fecha_registro=fecha
-
-        productoDanado.detalle=l["detalle"]
-        productoDanado.cantidad=int(l["cantidad"])
+        if l["fecha_registro"] != "":
+            fecha_div=l["fecha_registro"].split("+")
+            # print(fecha_div[0])
+            fecha=datetime.strptime(fecha_div[0], "%Y-%m-%d %H:%M:%S")
+            # print(type(fecha_div))
+            #my_datetime_utc = fecha.strftime('%Y-%m-%d %H:%M:%S %Z%z')
+            #print("hola", my_datetime_utc)
+            productoDanado.fecha_registro=fecha
+        if l["detalle"] != "":
+            productoDanado.detalle=l["detalle"]
+        if l["cantidad"] != "":
+            productoDanado.cantidad=int(l["cantidad"])
 
         try:
             productoDanado.full_clean()
@@ -187,20 +191,24 @@ def crearProductosDanados(request):
     for l in data_dict:
 
         productoDanado=ProductoDanado()
-        productoDanado.id_productoDanado=int(l["id_productoDanado"])
-        productoDanado.id_producto_id=int(l["id_producto_id"])
+        if l["id_productoDanado"] != "":
+            productoDanado.id_productoDanado=int(l["id_productoDanado"])
+        if l["id_producto_id"] != "":    
+            productoDanado.id_producto_id=int(l["id_producto_id"])
 
         # print(l["fecha_registro"])
-        fecha_div=l["fecha_registro"].split("+")
-        # print(fecha_div[0])
-        fecha=datetime.strptime(fecha_div[0], "%Y-%m-%d %H:%M:%S")
-        # print(type(fecha_div))
-        #my_datetime_utc = fecha.strftime('%Y-%m-%d %H:%M:%S %Z%z')
-        #print("hola", my_datetime_utc)
-        productoDanado.fecha_registro=fecha
-
-        productoDanado.detalle=l["detalle"]
-        productoDanado.cantidad=int(l["cantidad"])
+        if l["fecha_registro"] != "":
+            fecha_div=l["fecha_registro"].split("+")
+            # print(fecha_div[0])
+            fecha=datetime.strptime(fecha_div[0], "%Y-%m-%d %H:%M:%S")
+            # print(type(fecha_div))
+            #my_datetime_utc = fecha.strftime('%Y-%m-%d %H:%M:%S %Z%z')
+            #print("hola", my_datetime_utc)
+            productoDanado.fecha_registro=fecha
+        if l["detalle"] != "":
+            productoDanado.detalle=l["detalle"]
+        if l["cantidad"] != "":
+            productoDanado.cantidad=int(l["cantidad"])
 
         try:
             productoDanado.full_clean()
@@ -216,6 +224,16 @@ def crearProductosDanados(request):
 
 #Reporte de ingresos y Costos
 @csrf_exempt
-def reporteIngresosCostos(request):
-
-    return
+def reporteIngresosCostos(filtro):
+    data_dic={}
+    movimientos=Movimiento.objects.all()
+    totalE=0
+    totalS=0
+    for m in movimientos:
+        if m.tipo=="E":
+            totalE+=(m.valorUnitario*m.cantidad)
+        else:
+            totalS+=(m.valorUnitario*m.cantidad)
+    data_dic["ingresos"]=totalE
+    data_dic["costos"]=totalS
+    return data_dic
