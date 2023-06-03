@@ -13,7 +13,6 @@ from django.views.decorators.csrf import csrf_exempt
 from dateutil.parser import parser
 
 
-
 def index(request):
     mensaje = ["Hello, World", "Hello, Universe!", "Hola, Mundo!"]
     index=random.randrange(0,len(mensaje))
@@ -46,13 +45,14 @@ def validarMovimientos(request):
         movimiento.id_producto_id=int(l["id_producto_id"])
 
         # print(l["fecha_registro"])
-        fecha_div=l["fecha_registro"].split("+")
-        # print(fecha_div[0])
-        fecha=datetime.strptime(fecha_div[0], "%Y-%m-%d %H:%M:%S")
-        # print(type(fecha_div))
-        #my_datetime_utc = fecha.strftime('%Y-%m-%d %H:%M:%S %Z%z')
-        #print("hola", my_datetime_utc)
-        movimiento.fecha_registro=fecha
+        if l["fecha_registro"] != "":
+            fecha_div=l["fecha_registro"].split("+")
+            # print(fecha_div[0])
+            fecha=datetime.strptime(fecha_div[0], "%Y-%m-%d %H:%M:%S")
+            # print(type(fecha_div))
+            #my_datetime_utc = fecha.strftime('%Y-%m-%d %H:%M:%S %Z%z')
+            #print("hola", my_datetime_utc)
+            movimiento.fecha_registro=fecha
 
         movimiento.valorUnitario=float(l["valorUnitario"])
         movimiento.detalle=l["detalle"]
