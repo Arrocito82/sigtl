@@ -40,33 +40,60 @@ def validarMovimientos(request):
     for l in data_dict:
 
         movimiento=Movimiento()
-        if l["id_movimiento"] != "":
-            movimiento.id_movimiento=int(l["id_movimiento"])
+        if l["id_movimiento"] != "" and l["id_movimiento"].isdigit():
+            try:
+                movimiento.id_movimiento=int(l["id_movimiento"])
+            except Exception as e:
+                l["errores"]="formato no valido"
         if l["id_sucursal_id"] != "":
-            movimiento.id_sucursal_id=int(l["id_sucursal_id"])
+            try:
+                movimiento.id_sucursal_id=int(l["id_sucursal_id"])
+            except Exception as e:
+                l["errores"]={"formato no valido"}
         if l["id_producto_id"] != "":    
-            movimiento.id_producto_id=int(l["id_producto_id"])
+            try:
+                movimiento.id_producto_id=int(l["id_producto_id"])
+            except Exception as e:
+                l["errores"]={"formato no valido"}
 
         # print(l["fecha_registro"])
         if l["fecha_registro"] != "":
             fecha_div=l["fecha_registro"].split("+")
             # print(fecha_div[0])
-            fecha=datetime.strptime(fecha_div[0], "%Y-%m-%d %H:%M:%S")
-            # print(type(fecha_div))
-            #my_datetime_utc = fecha.strftime('%Y-%m-%d %H:%M:%S %Z%z')
-            #print("hola", my_datetime_utc)
-            movimiento.fecha_registro=fecha
+            try:
+                fecha=datetime.strptime(fecha_div[0], "%Y-%m-%d %H:%M:%S")
+                # print(type(fecha_div))
+                #my_datetime_utc = fecha.strftime('%Y-%m-%d %H:%M:%S %Z%z')
+                #print("hola", my_datetime_utc)
+                movimiento.fecha_registro=fecha
+            except Exception as e:
+                l["errores"]="formato no valido"
 
         if l["valorUnitario"] != "":
-            movimiento.valorUnitario=float(l["valorUnitario"])
+            try:
+                movimiento.valorUnitario=float(l["valorUnitario"])
+            except Exception as e:
+                l["errores"]={"formato no valido"}
         if l["detalle"] != "":
-            movimiento.detalle=l["detalle"]
+            try:
+                movimiento.detalle=l["detalle"]
+            except Exception as e:
+                l["errores"]={"formato no valido"}
         if l["cantidad"] != "":
-            movimiento.cantidad=int(l["cantidad"])
+            try:
+                movimiento.cantidad=int(l["cantidad"])
+            except Exception as e:
+                l["errores"]={"formato no valido"}
         if l["total"] != "":
-            movimiento.total=float(l["total"])
+            try:
+                movimiento.total=float(l["total"])
+            except Exception as e:
+                l["errores"]={"formato no valido"}
         if l["tipo"] != "":
-            movimiento.tipo =l["tipo"].strip(" ")
+            try:
+                movimiento.tipo =l["tipo"].strip(" ")
+            except Exception as e:
+                l["errores"]={"formato no valido"}
         try:
             movimiento.full_clean()
             l["valido"]=True
@@ -98,38 +125,64 @@ def crearMovimientos(request):
     for l in data_dict:
 
         movimiento=Movimiento()
-        if l["id_movimiento"] != "":
-            movimiento.id_movimiento=int(l["id_movimiento"])
+        if l["id_movimiento"] != "" and l["id_movimiento"].isdigit():
+            try:
+                movimiento.id_movimiento=int(l["id_movimiento"])
+            except Exception as e:
+                l["errores"]="formato no valido"
         if l["id_sucursal_id"] != "":
-            movimiento.id_sucursal_id=int(l["id_sucursal_id"])
+            try:
+                movimiento.id_sucursal_id=int(l["id_sucursal_id"])
+            except Exception as e:
+                l["errores"]={"formato no valido"}
         if l["id_producto_id"] != "":    
-            movimiento.id_producto_id=int(l["id_producto_id"])
+            try:
+                movimiento.id_producto_id=int(l["id_producto_id"])
+            except Exception as e:
+                l["errores"]={"formato no valido"}
 
         # print(l["fecha_registro"])
         if l["fecha_registro"] != "":
             fecha_div=l["fecha_registro"].split("+")
             # print(fecha_div[0])
-            fecha=datetime.strptime(fecha_div[0], "%Y-%m-%d %H:%M:%S")
-            # print(type(fecha_div))
-            #my_datetime_utc = fecha.strftime('%Y-%m-%d %H:%M:%S %Z%z')
-            #print("hola", my_datetime_utc)
-            movimiento.fecha_registro=fecha
+            try:
+                fecha=datetime.strptime(fecha_div[0], "%Y-%m-%d %H:%M:%S")
+                # print(type(fecha_div))
+                #my_datetime_utc = fecha.strftime('%Y-%m-%d %H:%M:%S %Z%z')
+                #print("hola", my_datetime_utc)
+                movimiento.fecha_registro=fecha
+            except Exception as e:
+                l["errores"]="formato no valido"
 
         if l["valorUnitario"] != "":
-            movimiento.valorUnitario=float(l["valorUnitario"])
+            try:
+                movimiento.valorUnitario=float(l["valorUnitario"])
+            except Exception as e:
+                l["errores"]={"formato no valido"}
         if l["detalle"] != "":
-            movimiento.detalle=l["detalle"]
+            try:
+                movimiento.detalle=l["detalle"]
+            except Exception as e:
+                l["errores"]={"formato no valido"}
         if l["cantidad"] != "":
-            movimiento.cantidad=int(l["cantidad"])
+            try:
+                movimiento.cantidad=int(l["cantidad"])
+            except Exception as e:
+                l["errores"]={"formato no valido"}
         if l["total"] != "":
-            movimiento.total=float(l["total"])
+            try:
+                movimiento.total=float(l["total"])
+            except Exception as e:
+                l["errores"]={"formato no valido"}
         if l["tipo"] != "":
-            movimiento.tipo =l["tipo"].strip(" ")
+            try:
+                movimiento.tipo =l["tipo"].strip(" ")
+            except Exception as e:
+                l["errores"]={"formato no valido"}
         try:
             movimiento.full_clean()
             l["valido"]=True
             l["errores"]={}
-            movimiento.save()
         except ValidationError as e:
             l["valido"]=False
             l["errores"]=e.message_dict
