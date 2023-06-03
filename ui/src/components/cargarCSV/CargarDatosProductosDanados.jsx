@@ -246,7 +246,7 @@ return (
                   <tr className='text-center' key={prod.id_producto}>
                       <th>{prod.id_productoDanado}</th>
                       <th>{prod.id_producto_id}</th>
-                      <th>{moment(prod.fecha_registro).format('YYYY-MM-DDTHH:mm')}</th>
+                      <th>{moment(prod.fecha_registro).format('YYYY/MM/DD')}</th>
                       <th>{prod.detalle}</th>
                       <th>{prod.cantidad}</th>
                       <th>
@@ -298,7 +298,7 @@ return (
                           )
                         }
                       </th>
-                      <th>{moment(prod.fecha_registro).format('YYYY-MM-DDTHH:mm')}
+                      <th>{moment(prod.fecha_registro).format('YYYY/MM/DD')}
                         {
                           prod.errores.fecha_registro && (
                             <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
@@ -413,8 +413,8 @@ return (
                 value={productoSeleccionado && productoSeleccionado.id_producto_id}
                 onChange={handleChange} />
                 <label class="form-label">Fecha de registro</label>
-                <input className='form-control' type='datetime-local' name='fecha_registro' 
-                value={productoSeleccionado && moment(productoSeleccionado.fecha_registro).format('YYYY-MM-DDTHH:mm')}
+                <input className='form-control' type='date' name='fecha_registro' 
+                value={productoSeleccionado && moment(productoSeleccionado.fecha_registro).format('YYYY-MM-DD')}
                 onChange={handleChange}/>
                 <label class="form-label">Detalle</label>
                 <input className='form-control' type='text' name='detalle' 
