@@ -120,7 +120,19 @@ async function Guardar(){
   },
 }).then(res => { // then print response status
   console.log(posts.productos);
+  if(res.valido===true){
+    MySwal.fire({
+      title:'Productos dañados guardados con exito.',
+      icon:'success'
+    });
+  }else{
+    MySwal.fire({
+      title:'Verifique que los datos sean correctos.',
+      icon:'error'
+    });
+  }
   setPosts({productos:res.data});
+
 });
 }
 

@@ -128,6 +128,18 @@ async function Guardar(){
     'Content-Type': 'application/json'
   },
 }).then(res => { // then print response status
+  console.log(res.data)
+  if(res.valido===true){
+    MySwal.fire({
+      title:'Movimientos guardados con exito.',
+      icon:'success'
+    });
+  }else{
+    MySwal.fire({
+      title:'Verifique que los datos sean correctos.',
+      icon:'error'
+    });
+  }
   setPosts({movimientos:res.data});
 });
 }
