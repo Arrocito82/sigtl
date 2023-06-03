@@ -3,9 +3,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Papa from "papaparse";
-import {ProgressBar, Toast, ToastContainer} from 'react-bootstrap';
+import {ProgressBar} from 'react-bootstrap';
 import moment from 'moment';
 import ReactPaginate from 'react-paginate';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content'
 
 
 function CargarDatosMovimientos() {
@@ -14,8 +16,6 @@ function CargarDatosMovimientos() {
     //Barra de progreso
     const [loading, setLoading] = useState(false);
     const [progress, setProgress] = useState(0);
-    //Toast
-    const [show, setShow] = useState(false);
     // Spinner
     const [loadingSpinner, setLoadingSpinner] = useState(false);
     const [showTable, setShowTable] = useState(false);
@@ -25,15 +25,78 @@ function CargarDatosMovimientos() {
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 5; // Number of items to display per page
     const pageCount = Math.ceil(posts.movimientos.length / itemsPerPage); // Total number of pages
+    const [movimientoSeleccionado, setMovimientoSeleccionado] = useState({
+      id_movimiento:'',
+      id_sucursal_id:'',
+      id_producto_id:'',
+      fecha_registro:'',
+      detalle:'',
+      valorUnitario:'',
+      cantidad:'',
+      total:'',
+      tipo:''
+    });
 
+    // Mensaje de alerta
+    const MySwal = withReactContent(Swal);
+    
+    const seleccionarMovimiento = (movimiento) => {
+      setMovimientoSeleccionado(movimiento);
+    }
+    const handleChange=(evt)=> {
+      const {name, value} = evt.target;
+      setMovimientoSeleccionado((movimientoSeleccionado)=>({
+        ...movimientoSeleccionado,
+        [name]: value
+      }))
+    }
+    
+    // Eliminar archivo
+    const eliminarArchivo = e => {
+      setArchivo(e);
+      MySwal.fire({
+        title: 'Archivo ELiminado',
+        icon:'success'
+      });
+    }
+    // Editar movimiento
+    const editarMovimiento=()=>{
+      var newMovimiento= posts.movimientos;
+      newMovimiento.forEach(mov=>{
+        if(mov.id_movimiento===movimientoSeleccionado.id_movimiento){
+          mov.fecha_registro=movimientoSeleccionado.fecha_registro;
+          mov.detalle=movimientoSeleccionado.detalle;
+          mov.valorUnitario=movimientoSeleccionado.valorUnitario;
+          mov.cantidad=movimientoSeleccionado.cantidad;
+          mov.total=movimientoSeleccionado.total;
+          mov.tipo=movimientoSeleccionado.tipo;
+        }
+      });
+      setPosts({movimientos:newMovimiento});
+      MySwal.fire({
+        title:'Movimiento editado con exito.',
+        icon:'success'
+      });
+      document.getElementById("btn-cerrar").click();
+    }
 
-
-  // Eliminar archivo
-  const eliminarArchivo = e => {
-    setArchivo(e);
-    setShow(true);
-  }
-
+    // Eliminar movimiento
+    const eliminarMovimiento=(id)=>{
+      MySwal.fire({
+        title: '¿Está seguro de eliminar el movimiento?',
+        icon:'question',
+        showCancelButton:true, confirmButtonText:'Sí, eliminar', cancelButtonText:'Cancelar'
+      }).then((result)=>{
+        if(result.isConfirmed){
+          setPosts({movimientos:posts.movimientos.filter(mov=>mov.id_movimiento!==id)});
+        }else{
+          MySwal.fire({
+            title:'Movimiento no eliminado',
+            icon:'info'
+          });
+        }
+      });
+    }
 
 async function onClickHandler(){
   // console.log(data);
@@ -53,6 +116,16 @@ async function onClickHandler(){
   setShowTable(true);
   setCurrentPage(0);
   console.log(res.data);
+});
+}
+async function Guardar(){
+  await axios.post("http://localhost:8000/api/save/", posts.movimientos, {
+  headers: {
+    // Overwrite Axios's automatically set Content-Type
+    'Content-Type': 'application/json'
+  },
+}).then(res => { // then print response status
+  console.log(posts.movimientos);
 });
 }
 const changeHandler = (event) => {
@@ -91,19 +164,11 @@ const changeHandler = (event) => {
 const offset = currentPage * itemsPerPage;
 const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
 
+
+
   return (
     <div className="App">
       <div className="container-sm">
-      {/* Toast */}
-        <ToastContainer position="top-end" className="p-3">
-          <Toast  onClose={() => setShow(false)} show={show} delay={3000} autohide>
-              <Toast.Header className="bg-success">
-                <span className="material-symbols-outlined rounded me-2">check_circle</span>
-                <strong className="me-auto">Success</strong>
-              </Toast.Header>
-              <Toast.Body style={{textAlign:'center'}}>El archivo ha sido eliminado.</Toast.Body>
-          </Toast>
-        </ToastContainer>
         <div className="row justify-content-md-center">
           <div className="col-md-auto">
             <h1 className="text-center">Cargar CSV Movimientos</h1>
@@ -179,26 +244,26 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                       <th>{mov.id_movimiento}</th>
                       <th>{mov.id_sucursal_id}</th>
                       <th>{mov.id_producto_id}</th>
-                      <th>{moment(mov.fecha_registro).format("DD/MM/YYYY")}</th>
+                      <th>{moment(mov.fecha_registro).format('YYYY-MM-DDTHH:mm')}</th>
                       <th>{mov.detalle}</th>
                       <th>${mov.valorUnitario}</th>
                       <th>{mov.cantidad}</th>
                       <th>${parseFloat(mov.total).toFixed(2)}</th>
                       <th>{mov.tipo}</th>
                       <th>
-                        <div className="btn-group">
+                      <div className="btn-group">
                           <button type="button" className="btn btn-light pt-1 pb-0.5" style={{ background: 'none', border: 'none' }} data-bs-toggle="dropdown" aria-expanded="false">
                             <span className="material-symbols-outlined">more_horiz</span>
                           </button>
                           <ul className="dropdown-menu">
                             <li><a className="dropdown-item">
-                              <button type="button" className='btn btn-light btn-sm' style={{ background: 'none', border: 'none' }}>
+                              <button type="button" className='btn btn-light btn-sm' onClick={()=> seleccionarMovimiento(mov)} data-bs-toggle='modal' data-bs-target='#modalMovimientos' style={{ background: 'none', border: 'none' }}>
                                 <span className="material-symbols-outlined" style={{ fontSize: '25px' }}>edit</span>
                                 <a style={{ fontSize: '16px', paddingLeft: '8px', paddingBottom: '10px' }}>Editar</a>
                               </button>
                             </a></li>
                             <li><a className="dropdown-item">
-                              <button type="button" className='btn btn-light btn-sm' style={{ background: 'none', border: 'none' }}>
+                              <button type="button" className='btn btn-light btn-sm' onClick={()=>eliminarMovimiento(mov.id_movimiento)} style={{ background: 'none', border: 'none' }}>
                                 <span className="material-symbols-outlined" style={{ fontSize: '25px' }}>delete</span>
                                 <a style={{ fontSize: '16px', paddingLeft: '8px', paddingBottom: '10px' }}>Eliminar</a>
                               </button>
@@ -240,7 +305,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                           </div>
                         )}
                       </th>
-                      <th>{moment(mov.fecha_registro).format("DD/MM/YYYY")}
+                      <th>{moment(mov.fecha_registro).format('YYYY-MM-DDTHH:mm')}
                         {mov.errores.fecha_registro && (
                           <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
                             <span class="material-symbols-outlined">error</span>
@@ -307,13 +372,13 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                           </button>
                           <ul className="dropdown-menu">
                             <li><a className="dropdown-item">
-                              <button type="button" className='btn btn-light btn-sm' style={{ background: 'none', border: 'none' }}>
+                              <button type="button" className='btn btn-light btn-sm' onClick={()=> seleccionarMovimiento(mov)} data-bs-toggle='modal' data-bs-target='#modalMovimientos' style={{ background: 'none', border: 'none' }}>
                                 <span className="material-symbols-outlined" style={{ fontSize: '25px' }}>edit</span>
                                 <a style={{ fontSize: '16px', paddingLeft: '8px', paddingBottom: '10px' }}>Editar</a>
                               </button>
                             </a></li>
                             <li><a className="dropdown-item">
-                              <button type="button" className='btn btn-light btn-sm' style={{ background: 'none', border: 'none' }}>
+                              <button type="button" className='btn btn-light btn-sm' onClick={()=>eliminarMovimiento(mov.id_movimiento)} style={{ background: 'none', border: 'none' }}>
                                 <span className="material-symbols-outlined" style={{ fontSize: '25px' }}>delete</span>
                                 <a style={{ fontSize: '16px', paddingLeft: '8px', paddingBottom: '10px' }}>Eliminar</a>
                               </button>
@@ -350,7 +415,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                       renderOnZeroPageCount={null} />
                 </div>
                 <div className='col-md-auto'>
-                  <button type="button" class="btn btn-primary">Guardar</button>
+                  <button type="button" class="btn btn-primary" onClick={()=>Guardar()}>Guardar</button>
                 </div>
               </div>
             </div>
@@ -358,6 +423,61 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
           }
         </>
         }
+      </div>
+      {/* Modal para editar el movimiento */}
+      <div id='modalMovimientos' className='modal fade' aria-hidden='true'>
+        <div className='modal-dialog'>
+          <div className='modal-content'>
+            <div className='modal-header'>
+              <h3>Editar movimiento</h3>
+              <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+            </div>
+            <div className='modal-body'>
+              <div class="mb-3">
+                <label class="form-label">Id movimiento</label>
+                <input className='form-control' type='number' name='id_movimiento' readOnly
+                value={movimientoSeleccionado.id_movimiento}
+                onChange={handleChange} />
+                <label class="form-label">Id sucursal</label>
+                <input className='form-control' type='number' name='id_sucursal_id' readOnly
+                value={movimientoSeleccionado && movimientoSeleccionado.id_sucursal_id}
+                onChange={handleChange} />
+                <label class="form-label">Id producto</label>
+                <input className='form-control' type='number' name='id_producto_id' readOnly
+                value={movimientoSeleccionado && movimientoSeleccionado.id_producto_id}
+                onChange={handleChange}/>
+                <label class="form-label">Fecha de registro</label>
+                <input className='form-control' type='datetime-local' name='fecha_registro' 
+                value={movimientoSeleccionado && moment(movimientoSeleccionado.fecha_registro).format('YYYY-MM-DDTHH:mm')}
+                onChange={handleChange}/>
+                <label class="form-label">Detalle</label>
+                <input className='form-control' type='text' name='detalle' 
+                value={movimientoSeleccionado && movimientoSeleccionado.detalle}
+                onChange={handleChange}/>
+                <label class="form-label">Valor unitario</label>
+                <input className='form-control' type='number' name='valorUnitario' 
+                value={movimientoSeleccionado && movimientoSeleccionado.valorUnitario}
+                onChange={handleChange}/>
+                <label class="form-label">Cantidad</label>
+                <input className='form-control' type='number' name='cantidad' 
+                value={movimientoSeleccionado && movimientoSeleccionado.cantidad}
+                onChange={handleChange}/>
+                <label class="form-label">Total</label>
+                <input className='form-control' type='number' name='total' 
+                value={movimientoSeleccionado && movimientoSeleccionado.total}
+                onChange={handleChange}/>
+                <label class="form-label">Tipo</label>
+                <input className='form-control' type='text' name='tipo' 
+                value={movimientoSeleccionado && movimientoSeleccionado.tipo}
+                onChange={handleChange}/>
+              </div>
+            </div>
+            <div className='modal-footer'>
+              <button type='button' className='btn btn-secondary' id='btn-cerrar' data-bs-dismiss='modal'>Cerrar</button>
+              <button type='button' className='btn btn-success' onClick={()=>editarMovimiento()} >Guardar</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
