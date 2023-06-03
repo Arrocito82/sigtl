@@ -122,6 +122,7 @@ async function onClickHandler(){
 }
 // Función para guardar los movimientos
 async function Guardar(){
+  console.log(posts.movimientos);
   await axios.post("http://localhost:8000/api/saveMovimientos/", posts.movimientos, {
   headers: {
     // Overwrite Axios's automatically set Content-Type
@@ -260,7 +261,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                       <th>{mov.id_movimiento}</th>
                       <th>{mov.id_sucursal_id}</th>
                       <th>{mov.id_producto_id}</th>
-                      <th>{moment(mov.fecha_registro).format('YYYY-MM-DDTHH:mm')}</th>
+                      <th>{moment(mov.fecha_registro).format('YYYY/MM/DD')}</th>
                       <th>{mov.detalle}</th>
                       <th>${mov.valorUnitario}</th>
                       <th>{mov.cantidad}</th>
@@ -321,7 +322,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                           </div>
                         )}
                       </th>
-                      <th>{moment(mov.fecha_registro).format('YYYY-MM-DDTHH:mm')}
+                      <th>{moment(mov.fecha_registro).format('YYYY/MM/DD')}
                         {mov.errores.fecha_registro && (
                           <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
                             <span className="material-symbols-outlined">error</span>
@@ -463,8 +464,8 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                 value={movimientoSeleccionado && movimientoSeleccionado.id_producto_id}
                 onChange={handleChange}/>
                 <label className="form-label">Fecha de registro</label>
-                <input className='form-control' type='datetime-local' name='fecha_registro' 
-                value={movimientoSeleccionado && moment(movimientoSeleccionado.fecha_registro).format('YYYY-MM-DDTHH:mm')}
+                <input className='form-control' type='date' name='fecha_registro' 
+                value={movimientoSeleccionado && moment(movimientoSeleccionado.fecha_registro).format('YYYY-MM-DD')}
                 onChange={handleChange}/>
                 <label className="form-label">Detalle</label>
                 <input className='form-control' type='text' name='detalle' 
