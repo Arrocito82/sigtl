@@ -3,9 +3,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Papa from "papaparse";
-import {ProgressBar,Toast, ToastContainer} from 'react-bootstrap';
+import {ProgressBar} from 'react-bootstrap';
 import moment from 'moment';
 import ReactPaginate from 'react-paginate';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content'
 
 function CargarDatosProductosDanados() {
   const [archivo, setArchivo]=useState();
@@ -13,8 +15,6 @@ function CargarDatosProductosDanados() {
   //Barra de progreso
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
-  //Toast
-  const [show, setShow] = useState(false);
   // Spinner
   const [loadingSpinner, setLoadingSpinner] = useState(false);
   const [showTable, setShowTable] = useState(false);
@@ -24,12 +24,69 @@ function CargarDatosProductosDanados() {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 5; // Number of items to display per page
   const pageCount = Math.ceil(posts.productos.length / itemsPerPage); // Total number of pages
+  const [productoSeleccionado, setProductoSeleccionado] = useState({
+    id_productoDanado:'',
+    id_producto_id:'',
+    fecha_registro:'',
+    detalle:'',
+    cantidad:''
+  });
 
+// Mensaje de alerta
+const MySwal = withReactContent(Swal);
+
+const seleccionarProducto = (producto) => {
+  setProductoSeleccionado(producto);
+}
+const handleChange=(evt)=> {
+  const {name, value} = evt.target;
+  setProductoSeleccionado((productoSeleccionado)=>({
+    ...productoSeleccionado,
+    [name]: value
+  }))
+}
 
 // Eliminar archivo
 const eliminarArchivo = e => {
   setArchivo(e);
-  setShow(true);
+  MySwal.fire({
+    title: 'Archivo ELiminado',
+    icon:'success'
+  });
+}
+// Editar producto
+const editarProducto=()=>{
+  var newProducto= posts.productos;
+  newProducto.forEach(pro=>{
+    if(pro.id_productoDanado===productoSeleccionado.id_productoDanado){
+      pro.fecha_registro=productoSeleccionado.fecha_registro;
+      pro.detalle=productoSeleccionado.detalle;
+      pro.cantidad=productoSeleccionado.cantidad;
+    }
+  });
+  setPosts({productos:newProducto});
+  MySwal.fire({
+    title:'Producto editado con exito.',
+    icon:'success'
+  });
+  document.getElementById("btn-cerrar").click();
+}
+//Eliminar producto
+const eliminarProducto=(id)=>{
+  MySwal.fire({
+    title: '¿Está seguro de eliminar el movimiento?',
+    icon:'question',
+    showCancelButton:true, confirmButtonText:'Sí, eliminar', cancelButtonText:'Cancelar'
+  }).then((result)=>{
+    if(result.isConfirmed){
+      setPosts({productos:posts.productos.filter(pro=>pro.id_productoDanado!==id)});
+    }else{
+      MySwal.fire({
+        title:'Producto no eliminado',
+        icon:'info'
+      });
+    }
+  });
 }
 
 async function onClickHandler(){
@@ -52,6 +109,18 @@ headers: {
   console.log(res);
 });
 }
+// Funcion para guardar los productos
+async function Guardar(){
+  await axios.post("http://localhost:8000/api/save/", posts.productos, {
+  headers: {
+    // Overwrite Axios's automatically set Content-Type
+    'Content-Type': 'application/json'
+  },
+}).then(res => { // then print response status
+  console.log(posts.productos);
+});
+}
+
 const changeHandler = (event) => {
 setArchivo(event.target.files[0]);
 // console.log(event.target.files[0]);
@@ -91,16 +160,6 @@ const currentPageItems = posts.productos.slice(offset, offset + itemsPerPage);
 return (
   <div className="App">
     <div className="container-sm">
-      {/* Toast */}
-      <ToastContainer position="top-end" className="p-3">
-          <Toast  onClose={() => setShow(false)} show={show} delay={3000} autohide>
-              <Toast.Header className="bg-success">
-                <span className="material-symbols-outlined rounded me-2">check_circle</span>
-                <strong className="me-auto">Success</strong>
-              </Toast.Header>
-              <Toast.Body style={{textAlign:'center'}}>El archivo ha sido eliminado.</Toast.Body>
-          </Toast>
-      </ToastContainer>
       <div className="row justify-content-md-center">
         <div className="col-md-auto">
           <h1 className="text-center">Cargar CSV Productos dañados</h1>
@@ -152,10 +211,8 @@ return (
           </div>
         </div>)}
         {showTable && <>
-          {posts.movimientos &&
+          {posts.productos &&
           <>
-
-          </>}
           <table className="table table-striped table-hover">
             <thead>
               <tr>
@@ -171,37 +228,37 @@ return (
               {currentPageItems.map((prod) =>(
                 prod.valido ?(
                   // muestra productos validos
-                  <tr className='text-center' key={prod.id_movimiento}>
+                  <tr className='text-center' key={prod.id_producto}>
                       <th>{prod.id_productoDanado}</th>
                       <th>{prod.id_producto_id}</th>
-                      <th>{moment(prod.fecha_registro).format("DD/MM/YYYY")}</th>
+                      <th>{moment(prod.fecha_registro).format('YYYY-MM-DDTHH:mm')}</th>
                       <th>{prod.detalle}</th>
                       <th>{prod.cantidad}</th>
                       <th>
-                          <div className="btn-group">
-                            <button type="button" className="btn btn-light pt-1 pb-0.5" style={{background:'none', border:'none'}} data-bs-toggle="dropdown" aria-expanded="false">
+                        <div className="btn-group">
+                            <button type="button" className="btn btn-light pt-1 pb-0.5" style={{ background: 'none', border: 'none' }} data-bs-toggle="dropdown" aria-expanded="false">
                               <span className="material-symbols-outlined">more_horiz</span>
                             </button>
                             <ul className="dropdown-menu">
-                              <li><a className="dropdown-item" >
-                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}}>edit</span>
-                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Editar</a>
+                              <li><a className="dropdown-item">
+                                <button type="button" className='btn btn-light btn-sm' onClick={()=> seleccionarProducto(prod)} data-bs-toggle='modal' data-bs-target='#modalMovimientos' style={{ background: 'none', border: 'none' }}>
+                                  <span className="material-symbols-outlined" style={{ fontSize: '25px' }}>edit</span>
+                                  <a style={{ fontSize: '16px', paddingLeft: '8px', paddingBottom: '10px' }}>Editar</a>
                                 </button>
                               </a></li>
-                              <li><a className="dropdown-item" >
-                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}} >delete</span>
-                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Eliminar</a>
+                              <li><a className="dropdown-item">
+                                <button type="button" className='btn btn-light btn-sm' onClick={()=>eliminarProducto(prod.id_productoDanado)} style={{ background: 'none', border: 'none' }}>
+                                  <span className="material-symbols-outlined" style={{ fontSize: '25px' }}>delete</span>
+                                  <a style={{ fontSize: '16px', paddingLeft: '8px', paddingBottom: '10px' }}>Eliminar</a>
                                 </button>
                               </a></li>
                             </ul>
-                          </div>
+                        </div>
                       </th>
                     </tr>
                 ):(
                   // muestra productos invalidos
-                  <tr className='text-center' key={prod.id_movimiento}>
+                  <tr className='text-center' key={prod.id_producto}>
                       <th>{prod.id_productoDanado}
                         {
                           prod.errores.id_productoDanado && (
@@ -226,7 +283,7 @@ return (
                           )
                         }
                       </th>
-                      <th>{moment(prod.fecha_registro).format("DD/MM/YYYY")}
+                      <th>{moment(prod.fecha_registro).format('YYYY-MM-DDTHH:mm')}
                         {
                           prod.errores.fecha_registro && (
                             <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
@@ -263,24 +320,24 @@ return (
                         }
                       </th>
                       <th>
-                          <div className="btn-group">
-                            <button type="button" className="btn btn-light pt-1 pb-0.5" style={{background:'none', border:'none'}} data-bs-toggle="dropdown" aria-expanded="false">
-                              <span className="material-symbols-outlined">more_horiz</span>
-                            </button>
-                            <ul className="dropdown-menu">
-                              <li><a className="dropdown-item" >
-                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}}>edit</span>
-                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Editar</a>
-                                </button>
-                              </a></li>
-                              <li><a className="dropdown-item" >
-                                <button type="button" className='btn btn-light btn-sm' style={{background:'none', border:'none'}}>
-                                  <span className="material-symbols-outlined" style={{fontSize:'25px'}} >delete</span>
-                                  <a style={{fontSize:'16px', paddingLeft:'8px', paddingBottom:'10px'}}>Eliminar</a>
-                                </button>
-                              </a></li>
-                            </ul>
+                        <div className="btn-group">
+                              <button type="button" className="btn btn-light pt-1 pb-0.5" style={{ background: 'none', border: 'none' }} data-bs-toggle="dropdown" aria-expanded="false">
+                                <span className="material-symbols-outlined">more_horiz</span>
+                              </button>
+                              <ul className="dropdown-menu">
+                                <li><a className="dropdown-item">
+                                  <button type="button" className='btn btn-light btn-sm' onClick={()=> seleccionarProducto(prod)} data-bs-toggle='modal' data-bs-target='#modalProducto' style={{ background: 'none', border: 'none' }}>
+                                    <span className="material-symbols-outlined" style={{ fontSize: '25px' }}>edit</span>
+                                    <a style={{ fontSize: '16px', paddingLeft: '8px', paddingBottom: '10px' }}>Editar</a>
+                                  </button>
+                                </a></li>
+                                <li><a className="dropdown-item">
+                                  <button type="button" className='btn btn-light btn-sm' onClick={()=>eliminarProducto(prod.id_productoDanado)} style={{ background: 'none', border: 'none' }}>
+                                    <span className="material-symbols-outlined" style={{ fontSize: '25px' }}>delete</span>
+                                    <a style={{ fontSize: '16px', paddingLeft: '8px', paddingBottom: '10px' }}>Eliminar</a>
+                                  </button>
+                                </a></li>
+                              </ul>
                           </div>
                       </th>
                     </tr>
@@ -288,6 +345,7 @@ return (
               ))}
             </tbody>
           </table>
+
           <div className='container text-center'>
               <div className="row justify-content-md-center">
                 <div className='col-md-auto'>
@@ -312,12 +370,53 @@ return (
                       renderOnZeroPageCount={null} />
                 </div>
                 <div className='col-md-auto'>
-                  <button type="button" class="btn btn-primary">Guardar</button>
+                  <button type="button" class="btn btn-primary" onClick={()=>Guardar()}>Guardar</button>
                 </div>
               </div>
             </div>
+          </>
+          }
         </>
         }
+      </div>
+      {/* Modal para editar el producto */}
+      <div id='modalProducto' className='modal fade' aria-hidden='true'>
+        <div className='modal-dialog'>
+          <div className='modal-content'>
+            <div className='modal-header'>
+              <h3>Editar Producto dañado</h3>
+              <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+            </div>
+            <div className='modal-body'>
+              <div class="mb-3">
+                <label class="form-label">Id Producto Dañado</label>
+                <input className='form-control' type='number' name='id_productoDanado' readOnly
+                value={productoSeleccionado.id_productoDanado}
+                onChange={handleChange} />
+                <label class="form-label">Id Producto</label>
+                <input className='form-control' type='number' name='id_producto_id' readOnly
+                value={productoSeleccionado && productoSeleccionado.id_producto_id}
+                onChange={handleChange} />
+                <label class="form-label">Fecha de registro</label>
+                <input className='form-control' type='datetime-local' name='fecha_registro' 
+                value={productoSeleccionado && moment(productoSeleccionado.fecha_registro).format('YYYY-MM-DDTHH:mm')}
+                onChange={handleChange}/>
+                <label class="form-label">Detalle</label>
+                <input className='form-control' type='text' name='detalle' 
+                value={productoSeleccionado && productoSeleccionado.detalle}
+                onChange={handleChange}/>
+                <label class="form-label">Cantidad</label>
+                <input className='form-control' type='number' name='cantidad' 
+                value={productoSeleccionado && productoSeleccionado.cantidad}
+                onChange={handleChange}/>
+              </div>
+            </div>
+            <div className='modal-footer'>
+              <button type='button' className='btn btn-secondary' id='btn-cerrar' data-bs-dismiss='modal'>Cerrar</button>
+              <button type='button' className='btn btn-success' onClick={()=>editarProducto()} >Guardar</button>
+            </div>
+          </div>
+        </div>
       </div>
   </div>
 );

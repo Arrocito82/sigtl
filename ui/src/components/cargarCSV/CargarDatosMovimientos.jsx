@@ -118,6 +118,7 @@ async function onClickHandler(){
   console.log(res.data);
 });
 }
+// Función para guardar los movimientos
 async function Guardar(){
   await axios.post("http://localhost:8000/api/save/", posts.movimientos, {
   headers: {
@@ -128,6 +129,7 @@ async function Guardar(){
   console.log(posts.movimientos);
 });
 }
+
 const changeHandler = (event) => {
   setArchivo(event.target.files[0]);
   // console.log(event.target.files[0]);
@@ -269,7 +271,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                               </button>
                             </a></li>
                           </ul>
-                        </div>
+                      </div>
                       </th>
                     </tr>
                   ) : (
