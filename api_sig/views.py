@@ -40,9 +40,12 @@ def validarMovimientos(request):
     for l in data_dict:
 
         movimiento=Movimiento()
-        movimiento.id_movimiento=int(l["id_movimiento"])
-        movimiento.id_sucursal_id=int(l["id_sucursal_id"])
-        movimiento.id_producto_id=int(l["id_producto_id"])
+        if l["id_movimiento"] != "":
+            movimiento.id_movimiento=int(l["id_movimiento"])
+        if l["id_sucursal_id"] != "":
+            movimiento.id_sucursal_id=int(l["id_sucursal_id"])
+        if l["id_producto_id"] != "":    
+            movimiento.id_producto_id=int(l["id_producto_id"])
 
         # print(l["fecha_registro"])
         if l["fecha_registro"] != "":
@@ -54,11 +57,16 @@ def validarMovimientos(request):
             #print("hola", my_datetime_utc)
             movimiento.fecha_registro=fecha
 
-        movimiento.valorUnitario=float(l["valorUnitario"])
-        movimiento.detalle=l["detalle"]
-        movimiento.cantidad=int(l["cantidad"])
-        movimiento.total=float(l["total"])
-        movimiento.tipo =l["tipo"].strip(" ")
+        if l["valorUnitario"] != "":
+            movimiento.valorUnitario=float(l["valorUnitario"])
+        if l["detalle"] != "":
+            movimiento.detalle=l["detalle"]
+        if l["cantidad"] != "":
+            movimiento.cantidad=int(l["cantidad"])
+        if l["total"] != "":
+            movimiento.total=float(l["total"])
+        if l["tipo"] != "":
+            movimiento.tipo =l["tipo"].strip(" ")
         try:
             movimiento.full_clean()
             l["valido"]=True
@@ -67,7 +75,7 @@ def validarMovimientos(request):
             l["valido"]=False
             l["errores"]=e.message_dict
             # print(e)
-    # print(data_dict)
+    print(data_dict)
     return JsonResponse(data_dict, safe=False)
 
 #GUARDAR EXCEL MOVIMIENTOS EN DB
@@ -90,24 +98,33 @@ def crearMovimientos(request):
     for l in data_dict:
 
         movimiento=Movimiento()
-        movimiento.id_movimiento=int(l["id_movimiento"])
-        movimiento.id_sucursal_id=int(l["id_sucursal_id"])
-        movimiento.id_producto_id=int(l["id_producto_id"])
+        if l["id_movimiento"] != "":
+            movimiento.id_movimiento=int(l["id_movimiento"])
+        if l["id_sucursal_id"] != "":
+            movimiento.id_sucursal_id=int(l["id_sucursal_id"])
+        if l["id_producto_id"] != "":    
+            movimiento.id_producto_id=int(l["id_producto_id"])
 
         # print(l["fecha_registro"])
-        fecha_div=l["fecha_registro"].split("+")
-        # print(fecha_div[0])
-        fecha=datetime.strptime(fecha_div[0], "%Y-%m-%d %H:%M:%S")
-        # print(type(fecha_div))
-        #my_datetime_utc = fecha.strftime('%Y-%m-%d %H:%M:%S %Z%z')
-        #print("hola", my_datetime_utc)
-        movimiento.fecha_registro=fecha
+        if l["fecha_registro"] != "":
+            fecha_div=l["fecha_registro"].split("+")
+            # print(fecha_div[0])
+            fecha=datetime.strptime(fecha_div[0], "%Y-%m-%d %H:%M:%S")
+            # print(type(fecha_div))
+            #my_datetime_utc = fecha.strftime('%Y-%m-%d %H:%M:%S %Z%z')
+            #print("hola", my_datetime_utc)
+            movimiento.fecha_registro=fecha
 
-        movimiento.valorUnitario=float(l["valorUnitario"])
-        movimiento.detalle=l["detalle"]
-        movimiento.cantidad=int(l["cantidad"])
-        movimiento.total=float(l["total"])
-        movimiento.tipo =l["tipo"].strip(" ")
+        if l["valorUnitario"] != "":
+            movimiento.valorUnitario=float(l["valorUnitario"])
+        if l["detalle"] != "":
+            movimiento.detalle=l["detalle"]
+        if l["cantidad"] != "":
+            movimiento.cantidad=int(l["cantidad"])
+        if l["total"] != "":
+            movimiento.total=float(l["total"])
+        if l["tipo"] != "":
+            movimiento.tipo =l["tipo"].strip(" ")
         try:
             movimiento.full_clean()
             l["valido"]=True
@@ -158,7 +175,7 @@ def validarProductosDanados(request):
     # print(data_dict)
     return JsonResponse(data_dict, safe=False)
 
-#VALIDAR EXCEL PRODUCTOS DAÑADOS
+#Guardar EXCEL PRODUCTOS DAÑADOS
 @csrf_exempt
 def crearProductosDanados(request):
 
@@ -196,7 +213,9 @@ def crearProductosDanados(request):
             # print(e)
     # print(data_dict)
     return JsonResponse(data_dict, safe=False)
+
+#Reporte de ingresos y Costos
 @csrf_exempt
 def reporteIngresosCostos(request):
-    
+
     return
