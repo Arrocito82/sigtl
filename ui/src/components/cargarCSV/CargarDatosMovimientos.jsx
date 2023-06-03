@@ -54,6 +54,8 @@ function CargarDatosMovimientos() {
     // Eliminar archivo
     const eliminarArchivo = e => {
       setArchivo(e);
+      setShowTable(false);
+      setLoadingSpinner(false);
       MySwal.fire({
         title: 'Archivo ELiminado',
         icon:'success'
@@ -118,16 +120,18 @@ async function onClickHandler(){
   console.log(res.data);
 });
 }
+// Función para guardar los movimientos
 async function Guardar(){
-  await axios.post("http://localhost:8000/api/save/", posts.movimientos, {
+  await axios.post("http://localhost:8000/api/saveMovimientos/", posts.movimientos, {
   headers: {
     // Overwrite Axios's automatically set Content-Type
     'Content-Type': 'application/json'
   },
 }).then(res => { // then print response status
-  console.log(posts.movimientos);
+  setPosts({movimientos:res.data});
 });
 }
+
 const changeHandler = (event) => {
   setArchivo(event.target.files[0]);
   // console.log(event.target.files[0]);
@@ -269,7 +273,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                               </button>
                             </a></li>
                           </ul>
-                        </div>
+                      </div>
                       </th>
                     </tr>
                   ) : (
@@ -278,7 +282,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                       <th>{mov.id_movimiento}
                         {mov.errores.id_movimiento && (
                           <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                            <span class="material-symbols-outlined">error</span>
+                            <span className="material-symbols-outlined">error</span>
                             <div>
                               {mov.errores.id_movimiento}
                             </div>
@@ -288,7 +292,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                       <th>{mov.id_sucursal_id}
                         {mov.errores.id_sucursal_id && (
                           <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                            <span class="material-symbols-outlined">error</span>
+                            <span className="material-symbols-outlined">error</span>
                             <div>
                               {mov.errores.id_sucursal_id}
                             </div>
@@ -298,7 +302,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                       <th>{mov.id_producto_id}
                         {mov.errores.id_producto_id && (
                           <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                            <span class="material-symbols-outlined">error</span>
+                            <span className="material-symbols-outlined">error</span>
                             <div>
                               {mov.errores.id_producto_id}
                             </div>
@@ -308,7 +312,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                       <th>{moment(mov.fecha_registro).format('YYYY-MM-DDTHH:mm')}
                         {mov.errores.fecha_registro && (
                           <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                            <span class="material-symbols-outlined">error</span>
+                            <span className="material-symbols-outlined">error</span>
                             <div>
                               {mov.errores.fecha_registro}
                             </div>
@@ -318,7 +322,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                       <th>{mov.detalle}
                         {mov.errores.detalle && (
                           <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                            <span class="material-symbols-outlined">error</span>
+                            <span className="material-symbols-outlined">error</span>
                             <div>
                               {mov.errores.detalle}
                             </div>
@@ -328,7 +332,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                       <th>${mov.valorUnitario}
                         {mov.errores.valorUnitario && (
                           <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                            <span class="material-symbols-outlined">error</span>
+                            <span className="material-symbols-outlined">error</span>
                             <div>
                               {mov.errores.valorUnitario}
                             </div>
@@ -338,7 +342,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                       <th>{mov.cantidad}
                         {mov.errores.cantidad && (
                           <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                            <span class="material-symbols-outlined">error</span>
+                            <span className="material-symbols-outlined">error</span>
                             <div>
                               {mov.errores.cantidad}
                             </div>
@@ -348,7 +352,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                       <th>${parseFloat(mov.total).toFixed(2)}
                         {mov.errores.total && (
                           <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                            <span class="material-symbols-outlined">error</span>
+                            <span className="material-symbols-outlined">error</span>
                             <div>
                               {mov.errores.total}
                             </div>
@@ -358,7 +362,7 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
                       <th>{mov.tipo}
                         {mov.errores.tipo && (
                           <div className="alert alert-danger d-flex align-items-center p-1 fs-6" role="alert">
-                            <span class="material-symbols-outlined">error</span>
+                            <span className="material-symbols-outlined">error</span>
                             <div>
                               {mov.errores.tipo}
                             </div>
@@ -433,40 +437,40 @@ const currentPageItems = posts.movimientos.slice(offset, offset + itemsPerPage);
               <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
             </div>
             <div className='modal-body'>
-              <div class="mb-3">
-                <label class="form-label">Id movimiento</label>
+              <div className="mb-3">
+                <label className="form-label">Id movimiento</label>
                 <input className='form-control' type='number' name='id_movimiento' readOnly
                 value={movimientoSeleccionado.id_movimiento}
                 onChange={handleChange} />
-                <label class="form-label">Id sucursal</label>
+                <label className="form-label">Id sucursal</label>
                 <input className='form-control' type='number' name='id_sucursal_id' readOnly
                 value={movimientoSeleccionado && movimientoSeleccionado.id_sucursal_id}
                 onChange={handleChange} />
-                <label class="form-label">Id producto</label>
+                <label className="form-label">Id producto</label>
                 <input className='form-control' type='number' name='id_producto_id' readOnly
                 value={movimientoSeleccionado && movimientoSeleccionado.id_producto_id}
                 onChange={handleChange}/>
-                <label class="form-label">Fecha de registro</label>
+                <label className="form-label">Fecha de registro</label>
                 <input className='form-control' type='datetime-local' name='fecha_registro' 
                 value={movimientoSeleccionado && moment(movimientoSeleccionado.fecha_registro).format('YYYY-MM-DDTHH:mm')}
                 onChange={handleChange}/>
-                <label class="form-label">Detalle</label>
+                <label className="form-label">Detalle</label>
                 <input className='form-control' type='text' name='detalle' 
                 value={movimientoSeleccionado && movimientoSeleccionado.detalle}
                 onChange={handleChange}/>
-                <label class="form-label">Valor unitario</label>
+                <label className="form-label">Valor unitario</label>
                 <input className='form-control' type='number' name='valorUnitario' 
                 value={movimientoSeleccionado && movimientoSeleccionado.valorUnitario}
                 onChange={handleChange}/>
-                <label class="form-label">Cantidad</label>
+                <label className="form-label">Cantidad</label>
                 <input className='form-control' type='number' name='cantidad' 
                 value={movimientoSeleccionado && movimientoSeleccionado.cantidad}
                 onChange={handleChange}/>
-                <label class="form-label">Total</label>
+                <label className="form-label">Total</label>
                 <input className='form-control' type='number' name='total' 
                 value={movimientoSeleccionado && movimientoSeleccionado.total}
                 onChange={handleChange}/>
-                <label class="form-label">Tipo</label>
+                <label className="form-label">Tipo</label>
                 <input className='form-control' type='text' name='tipo' 
                 value={movimientoSeleccionado && movimientoSeleccionado.tipo}
                 onChange={handleChange}/>
