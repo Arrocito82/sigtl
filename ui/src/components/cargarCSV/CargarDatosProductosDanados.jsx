@@ -49,6 +49,8 @@ const handleChange=(evt)=> {
 // Eliminar archivo
 const eliminarArchivo = e => {
   setArchivo(e);
+  setShowTable(false);
+  setLoadingSpinner(false);
   MySwal.fire({
     title: 'Archivo ELiminado',
     icon:'success'
@@ -93,7 +95,7 @@ async function onClickHandler(){
 // console.log(data);
 // Iniciar la validación de los datos
 setLoadingSpinner(true);
-await axios.post("http://localhost:8000/api/save/", data, {
+await axios.post("http://localhost:8000/api/valProdDan/", data, {
 headers: {
   // Overwrite Axios's automatically set Content-Type
   'Content-Type': 'application/json'
@@ -111,13 +113,14 @@ headers: {
 }
 // Funcion para guardar los productos
 async function Guardar(){
-  await axios.post("http://localhost:8000/api/save/", posts.productos, {
+  await axios.post("http://localhost:8000/api/saveProdDan/", posts.productos, {
   headers: {
     // Overwrite Axios's automatically set Content-Type
     'Content-Type': 'application/json'
   },
 }).then(res => { // then print response status
   console.log(posts.productos);
+  setPosts({productos:res.data});
 });
 }
 
@@ -215,7 +218,7 @@ return (
           <>
           <table className="table table-striped table-hover">
             <thead>
-              <tr>
+              <tr className='text-center'>
                 <th>id_productoDanado</th>
                 <th>id_producto</th>
                 <th>fecha_registro</th>
@@ -241,7 +244,7 @@ return (
                             </button>
                             <ul className="dropdown-menu">
                               <li><a className="dropdown-item">
-                                <button type="button" className='btn btn-light btn-sm' onClick={()=> seleccionarProducto(prod)} data-bs-toggle='modal' data-bs-target='#modalMovimientos' style={{ background: 'none', border: 'none' }}>
+                                <button type="button" className='btn btn-light btn-sm' onClick={()=> seleccionarProducto(prod)} data-bs-toggle='modal' data-bs-target='#modalProducto' style={{ background: 'none', border: 'none' }}>
                                   <span className="material-symbols-outlined" style={{ fontSize: '25px' }}>edit</span>
                                   <a style={{ fontSize: '16px', paddingLeft: '8px', paddingBottom: '10px' }}>Editar</a>
                                 </button>
