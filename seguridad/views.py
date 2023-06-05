@@ -30,7 +30,9 @@ def iniciarSesion(request):
     # diccionario de datos a retornar
     data = {
         'token': random_string,
-        'email': email
+        'email': email,
+        'isAdmin': True,
+        'isConfigured':True
     }
     return JsonResponse(data)
 
@@ -58,7 +60,9 @@ def registrarAdmin(request):
     # diccionario de datos a retornar
     data = {
         'token': random_string,
-        'email': email
+        'email': email,
+        'isAdmin': True,
+        'isConfigured':True
     }
     return JsonResponse(data)
 

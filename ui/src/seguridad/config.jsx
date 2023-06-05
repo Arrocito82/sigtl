@@ -33,10 +33,13 @@ function Config() {
         }).then(response => { // then print response status
             //get token from response
             const token  =  response.data.token;
+            const isConfigured  =  response.data.isConfigured;
+            const isAdmin= response.data.isAdmin;
             
             //set JWT token to local
             localStorage.setItem("token", token);
-            localStorage.setItem("isConfig", true);
+            localStorage.setItem("isConfigured", isConfigured);
+            localStorage.setItem("isAdmin", isAdmin);
             // console.log(localStorage.getItem("token"));
             //set token to axios common header
             setAuthToken(token);

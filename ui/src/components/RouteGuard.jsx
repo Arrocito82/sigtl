@@ -4,43 +4,52 @@ import Nav from '../navbar/Nav';
 import Menu from '../navbar/Menu';
 import IniciarSesion from '../seguridad/IniciarSesion';
 import Config from '../seguridad/config';
+import MenuSeguridad from '../navbar/menuSeguridad';
 
 const RouteGuard = ({ component: Component, ...rest }) => {
  
    function hasJWT() {
        let flag = false;
- 
+
        //check user has JWT token
        localStorage.getItem("token") ? flag=true : flag=false
       
-       return flag
+       return flag;
     }
-    function isConfig() {
-        let isConfig=false;
-        localStorage.getItem("isConfig") ? isConfig=true : isConfig=false
-        console.log(isConfig);
-        return isConfig
-   }
-   if (!isConfig()) {
+   function isAdmin() {
+       let isAdmin = false;
+
+       //check user has JWT token
+       localStorage.getItem("isAdmin") ? isAdmin=true : isAdmin=false
+      
+       return isAdmin;
+    }
+    function isConfigured() {
+        let isConfigured=false;
+        localStorage.getItem("isConfigured") ? isConfigured=true : isConfigured=false
+        // console.log(isConfigured);
+        return isConfigured;
+    }
+   if (!isConfigured()) {
         return (
         <Route {...rest}
             render={props =>(<Config/>)}
         />
     );
    }else if(hasJWT()){
-        return (
-            <Route {...rest}
+            return(
+                <Route {...rest}
                 render={props => (
                             <div>
-                                <header className=' bg-body-tertiary'>        
+                                <header className='bg-body-tertiary'>        
                                     <Nav/>
-                                    <Menu/>
+                                    {isAdmin()?<MenuSeguridad/>:<Menu/>}
                                 </header>
                                 <Component {...props} />               
                             </div>
-                )}
-            />
-        );
+                        )}/>
+            );
+       
    }else{
     return (
         <Route {...rest}
