@@ -18,16 +18,14 @@ const RouteGuard = ({ component: Component, ...rest }) => {
     }
    function isAdmin() {
        let isAdmin = false;
-
-       //check user has JWT token
-       localStorage.getItem("isAdmin") ? isAdmin=true : isAdmin=false
-      
+       isAdmin=localStorage.getItem("isAdmin")
+       console.log(isAdmin);
        return isAdmin;
     }
     function isConfigured() {
         let isConfigured=false;
-        localStorage.getItem("isConfigured") ? isConfigured=true : isConfigured=false
-        // console.log(isConfigured);
+        isConfigured=localStorage.getItem("isConfigured");
+        console.log(isConfigured);
         return isConfigured;
     }
    if (!isConfigured()) {
@@ -43,7 +41,7 @@ const RouteGuard = ({ component: Component, ...rest }) => {
                             <div>
                                 <header className='bg-body-tertiary'>        
                                     <Nav/>
-                                    {isAdmin()?<MenuSeguridad/>:<Menu/>}
+                                    {isAdmin()===true?<MenuSeguridad/>:<Menu/>}
                                 </header>
                                 <Component {...props} />               
                             </div>

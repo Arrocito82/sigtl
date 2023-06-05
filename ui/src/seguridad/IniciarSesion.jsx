@@ -30,11 +30,14 @@ function IniciarSesion() {
             const token  =  response.data.token;
             const isConfigured  =  response.data.isConfigured;
             const isAdmin= response.data.isAdmin;
+            console.log(response.data);
+            console.log(isAdmin);
             
             //set JWT token to local
             localStorage.setItem("token", token);
             localStorage.setItem("isConfigured", isConfigured);
             localStorage.setItem("isAdmin", isAdmin);
+            localStorage.setItem("username", email);
             // console.log(localStorage.getItem("token"));
             //set token to axios common header
             setAuthToken(token);

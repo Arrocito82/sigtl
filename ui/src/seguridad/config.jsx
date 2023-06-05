@@ -40,6 +40,7 @@ function Config() {
             localStorage.setItem("token", token);
             localStorage.setItem("isConfigured", isConfigured);
             localStorage.setItem("isAdmin", isAdmin);
+            localStorage.setItem("username", email);
             // console.log(localStorage.getItem("token"));
             //set token to axios common header
             setAuthToken(token);
@@ -85,7 +86,9 @@ function Config() {
                             <label className="form-check-label" htmlFor="recordar-contrasena">Recordar Contraseña</label>
                         </div>
                         <div>
-                            <button type="button" className="btn btn-primary" onClick={iniciarSesion}>Registrar</button>
+                            <button
+                            disabled={!((contrasena===contrasena2)&&(contrasena!=="")&&(contrasena2!=="")&&(email!==""))}
+                             type="button" className="btn btn-primary" onClick={iniciarSesion}>Registrar</button>
                         </div>
                     </form>
                 </div>

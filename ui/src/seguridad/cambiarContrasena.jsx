@@ -3,23 +3,27 @@ import axios from 'axios';
 import { setAuthToken } from "./setAuthToken";
 
 function CambiarContrasena() {
-    const [mensajeError, setMensajeError]=useState();
-    const [contrasena, setContrasena]=useState();
-    const [contrasena2, setContrasena2]=useState();
+    const [mensajeError, setMensajeError]=useState("");
+    const [contrasena, setContrasena]=useState("");
+    const [contrasena2, setContrasena2]=useState("");
+
     function handlePasswordlChange(event) {
+        
         setContrasena(event.target.value);
+        console.log(event.target.value);
     }
     function handlePasswordlChange2(event) {
         setContrasena2(event.target.value);
+        console.log(event.target.value);
     }
-   
+
     async function cambiarContraseña() {
         // función para iniciar sesion que retorna un token
         setMensajeError();
         let data={
             'password':contrasena
         }
-        await axios.post("http://localhost:8000/auth/cambiar-contraseña", data, {
+        await axios.post("http://localhost:8000/auth/cambiar-contrasena", data, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
@@ -29,11 +33,13 @@ function CambiarContrasena() {
             const token  =  response.data.token;
             const isConfigured  =  response.data.isConfigured;
             const isAdmin= response.data.isAdmin;
+            const email=response.data.email;
             
             //set JWT token to local
             localStorage.setItem("token", token);
             localStorage.setItem("isConfigured", isConfigured);
             localStorage.setItem("isAdmin", isAdmin);
+            localStorage.setItem("username", email);
             // console.log(localStorage.getItem("token"));
             //set token to axios common header
             setAuthToken(token);
@@ -73,7 +79,7 @@ function CambiarContrasena() {
                             <input type="password" className="form-control" id="password2" value={contrasena2} onChange={handlePasswordlChange2}/>
                         </div>
                         <div>
-                            <button type="button" className="btn btn-primary" onClick={cambiarContraseña} disabled={contrasena===contrasena2} >Cambiar Contraseña</button>
+                            <button disabled={!((contrasena===contrasena2)&&(contrasena!=="")&&(contrasena2!==""))} type="button" className="btn btn-primary" onClick={cambiarContraseña} >Cambiar Contraseña</button>
                         </div>
                     </form>
                 </div>

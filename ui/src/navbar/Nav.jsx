@@ -1,37 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { setAuthToken } from '../seguridad/setAuthToken';
 
 function Nav(){
+    const [username, setUsername]=useState();
     const logout=()=>{
       setAuthToken();
       localStorage.removeItem("token");
+      // localStorage.removeItem("isConfigured");
+      localStorage.removeItem("isAdmin");
+      localStorage.removeItem("username");
       // console.log(localStorage.getItem("token"));
       window.location.href = '/'
       // history.forward();
 
     }
+    useEffect(()=>{
+      let email=localStorage.getItem("username");
+      setUsername(email);
+    },[])
     return(
       <nav className="navbar"> 
-      <div className="container-fluid pt-3">
-        <div>
-          <img src="cover.png" alt="Tienda Luisito" style={{width:'300px'}}/>
-        </div> 
-        
-        {/* Botones de configuración */}
-        <div>
-          <button name='configuracion' className="btn btn-outline-dark mx-1">
-            <span style={{position:'relative',bottom:'0.5rem'}} >Configuración</span>
-            <span className='material-symbols-outlined m-2'>settings</span>
-          </button>
-          <button 
-          onClick={logout}
-          name='cerrar-sesion' 
-          className="btn btn-outline-dark mx-1 ">
-            <span style={{position:'relative',bottom:'0.5rem'}}>Cerrar Sesión</span> 
-            <span className="material-symbols-outlined m-2">logout</span>
-          </button>
-        </div>
-      </div>
+          <div className="pt-3 justify-content-between container-fluid">
+                <div className="btn-group" >
+                  <img src="cover.png" alt="Tienda Luisito" style={{width:'300px'}}/>
+                </div>
+                <div className="btn-group" >
+                    <button type="button" className="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span className="material-symbols-outlined" style={{position:'relative',top:'5px'}}>person</span>
+                      <span>{username}</span> 
+                    </button>
+                    <ul className="dropdown-menu">
+                        <li>
+                          <p
+                          onClick={logout}
+                          name='cerrar-sesion' 
+                          className="dropdown-item">
+                            <span className="material-symbols-outlined m-2">logout</span>
+                            <span style={{position:'relative',bottom:'0.2rem'}}>Cerrar Sesión</span> 
+                          </p>
+                        </li>
+                        <li>
+                          <a
+                          href="/cambiar-contrasena"
+                          name='cambiar-contrasena' 
+                          className='dropdown-item' 
+                          >
+                            <span className="material-symbols-outlined m-2">password</span>
+                            <span style={{position:'relative',bottom:'0.2rem'}}>Cambiar Contraseña</span> 
+                          </a>
+                        </li>
+                    </ul>
+                </div>
+          </div>
       </nav>
     );
 }
