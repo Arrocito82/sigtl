@@ -29,7 +29,7 @@ function Nav(){
                       <span className="material-symbols-outlined" style={{position:'relative',top:'5px'}}>person</span>
                       <span>{username}</span> 
                     </button>
-                    <ul className="dropdown-menu">
+                    <ul className="dropdown-menu dropdown-menu-end">
                         <li>
                           <p
                           onClick={logout}
