@@ -32,7 +32,28 @@ def iniciarSesion(request):
         'token': random_string,
         'email': email,
         'isAdmin': False,
-        'isConfigured':True
+        'isConfigured':True,
+        'rol':'estrategico',
+        # 'rol':'tactico',
+        # 'rol':'admin',
+        'permisos':[
+            'cargar-movimientos',
+            'cargar-productos-danados',
+            # 'cargar-sucursales',
+            # 'cargar-categorias',
+            # 'cargar-productos',
+            'ver-reporte-demanda-clientes',
+            'ver-reporte-frecuencia-de-compra',
+            'ver-reporte-productos-danados',
+            'ver-reporte-ingresos-y-costos',
+            'ver-reporte-productos-mas-vendidos',
+            # 'ver-historial-usuarios',
+            # 'ver-configuracion-usuarios',
+            # 'crear-usuarios',
+            # 'suspender-usuarios',
+            # 'cambiar-contrasena-usuarios',
+            'cambiar-mi-contrasena',
+        ]
     }
     return JsonResponse(data)
 
@@ -62,7 +83,28 @@ def registrarAdmin(request):
         'token': random_string,
         'email': email,
         'isAdmin': True,
-        'isConfigured':True
+        'isConfigured':True,
+        # 'rol':'estrategico',
+        # 'rol':'tactico',
+        'rol':'admin',
+        'permisos':[
+            # 'cargar-movimientos',
+            # 'cargar-productos-danados',
+            'cargar-sucursales',
+            'cargar-categorias',
+            'cargar-productos',
+            # 'ver-reporte-demanda-clientes',
+            # 'ver-reporte-frecuencia-de-compra',
+            # 'ver-reporte-productos-danados',
+            # 'ver-reporte-ingresos-y-costos',
+            # 'ver-reporte-productos-mas-vendidos'
+            'ver-historial-usuarios',
+            'ver-configuracion-usuarios',
+            'crear-usuarios',
+            'suspender-usuarios',
+            'cambiar-contrasena-usuarios',
+            'cambiar-mi-contrasena',
+        ]
     }
     return JsonResponse(data)
 
@@ -92,7 +134,28 @@ def cambiarContrasena(request):
         'token': random_string,
         'email': "ejemplo@tiendaluisito.com",
         'isAdmin': False,
-        'isConfigured':True
+        'isConfigured':True,
+        # 'rol':'estrategico',
+        'rol':'tactico',
+        # 'rol':'admin',
+        'permisos':[
+            'cargar-movimientos',
+            'cargar-productos-danados',
+            # 'cargar-sucursales',
+            # 'cargar-categorias',
+            # 'cargar-productos',
+            'ver-reporte-demanda-clientes',
+            'ver-reporte-frecuencia-de-compra',
+            'ver-reporte-productos-danados',
+            'ver-reporte-ingresos-y-costos',
+            'ver-reporte-productos-mas-vendidos',
+            # 'ver-historial-usuarios',
+            # 'ver-configuracion-usuarios',
+            # 'crear-usuarios',
+            # 'suspender-usuarios',
+            # 'cambiar-contrasena-usuarios',
+            'cambiar-mi-contrasena',
+        ]
     }
     return JsonResponse(data)
 
