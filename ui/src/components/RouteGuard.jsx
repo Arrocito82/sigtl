@@ -18,14 +18,14 @@ const RouteGuard = ({ component: Component, ...rest }) => {
     }
    function isAdmin() {
        let isAdmin = false;
-       isAdmin=localStorage.getItem("isAdmin")
-       console.log(isAdmin);
+       isAdmin=JSON.parse(localStorage.getItem("isAdmin"));
+    //    console.log(isAdmin);
        return isAdmin;
     }
     function isConfigured() {
         let isConfigured=false;
-        isConfigured=localStorage.getItem("isConfigured");
-        console.log(isConfigured);
+        isConfigured=JSON.parse(localStorage.getItem("isConfigured"));
+        // console.log(isConfigured);
         return isConfigured;
     }
    if (!isConfigured()) {
@@ -35,6 +35,8 @@ const RouteGuard = ({ component: Component, ...rest }) => {
         />
     );
    }else if(hasJWT()){
+    // console.log(typeof(isAdmin()));
+    // console.log(isAdmin()===true);
             return(
                 <Route {...rest}
                 render={props => (
