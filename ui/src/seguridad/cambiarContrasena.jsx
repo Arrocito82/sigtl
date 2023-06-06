@@ -34,12 +34,14 @@ function CambiarContrasena() {
             const isConfigured  =  response.data.isConfigured;
             const isAdmin= response.data.isAdmin;
             const email=response.data.email;
+            const rol= response.data.rol;
             
             //set JWT token to local
             localStorage.setItem("token", token);
             localStorage.setItem("isConfigured", isConfigured);
             localStorage.setItem("isAdmin", isAdmin);
             localStorage.setItem("username", email);
+            localStorage.setItem("rol", rol);
             // console.log(localStorage.getItem("token"));
             //set token to axios common header
             setAuthToken(token);

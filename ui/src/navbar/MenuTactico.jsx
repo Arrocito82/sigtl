@@ -1,6 +1,6 @@
-function Menu(){
+function MenuTactico(){
   return(
-      <div className="d-flex pt-2 pb-3 justify-content-between container-fluid">
+      <div className="d-flex pt-2 pb-3 justify-content-center container-fluid">
         
           <div className="btn-group">
             <button type="button" className="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -12,7 +12,7 @@ function Menu(){
                 <a href="/cargar-movimientos"
                   name='cargar-movimientos' 
                   className='dropdown-item' 
-                  >Cargar Movimientos</a>
+                  >Cargar Movimientos del Inventario</a>
             </li>
             <li>
               <a
@@ -53,32 +53,8 @@ function Menu(){
           </span>
           <span className="material-symbols-outlined fs-2 m-2">shopping_cart</span>
         </a>
-
-
-        <a 
-        href="/ingresos-costos"
-        name='ingresos-costos' 
-        className='btn btn-outline-primary mx-1'>
-          <span style={{position:'relative',bottom:'10px'}}>
-          Ingresos y Costos
-          </span>
-          <span className="material-symbols-outlined fs-2 m-2">request_quote</span>
-        </a>
-
-
-        <a
-        href="/productos-mas-vendidos"
-        name='productos-mas-vendidos' 
-        className='btn btn-outline-primary mx-1'>
-          <span style={{position:'relative',bottom:'10px'}}>
-          Productos más vendidos
-          </span>
-          <span className="material-symbols-outlined fs-2 m-2">monitoring</span>
-        </a>
-
-
       </div>
   );
 }
 
-export default Menu;
+export default MenuTactico;
