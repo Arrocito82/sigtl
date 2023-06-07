@@ -49,6 +49,15 @@ function MenuSeguridad(){
             </span>
             <span className="material-symbols-outlined fs-2 m-2">history</span>
           </a>
+          <a
+           href="/respaldo-datos"
+           name='respaldo-datos'
+           className='btn btn-outline-primary mx-1'>
+            <span style={{position:'relative',bottom:'10px'}}>
+              Respaldo de Datos
+            </span>
+            <span className="material-symbols-outlined fs-2 m-2">settings_backup_restore</span>
+          </a>
   
   
          

@@ -1,0 +1,11 @@
+id_categoria,nombre_categoria,descripcion_categoria
+1,Ropa,"Prendas de vestir para hombres, mujeres y niños"
+2,Calzado,"Zapatos, zapatillas y sandalias para todas las edades"
+3,Electrónica,"Dispositivos electrónicos, desde teléfonos móviles hasta televisores"
+4,Hogar,"Artículos para el hogar, como muebles, decoración y electrodomésticos"
+5,Deportes,Equipos y accesorios para deportes y actividades al aire libre
+6,Belleza,"Productos de belleza y cuidado personal, como maquillaje y perfumes"
+7,Alimentación,"Productos alimenticios, como frutas, verduras, carne y lácteos"
+8,Libros,"Libros de diferentes géneros y temáticas, tanto físicos como digitales"
+9,Juguetes,Juguetes y juegos para todas las edades y gustos
+10,Instrumentos musicales,Instrumentos para músicos profesionales y aficionados

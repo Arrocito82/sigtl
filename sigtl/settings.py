@@ -106,7 +106,7 @@ WSGI_APPLICATION = "sigtl.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'SIGTLINIT01',
+        'NAME': 'SIGTL05',
         'USER': 'dsi115',
         'PASSWORD': 'dsi115',
         'HOST': 'proyectos.czoy1vdwgmhj.us-east-1.rds.amazonaws.com',
@@ -143,7 +143,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "es-es"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/El_Salvador"
 
 USE_I18N = True
 

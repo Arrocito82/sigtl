@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Nav from '../navbar/Nav';
-import MenuTactico from '../navbar/MenuTactico';
-import MenuEstrategico from '../navbar/MenuEstrategico';
-import IniciarSesion from '../seguridad/IniciarSesion';
-import Config from '../seguridad/config';
-import MenuSeguridad from '../navbar/menuSeguridad';
+import Nav from '../components/navbar/Nav';
+import MenuTactico from '../components/navbar/MenuTactico';
+import MenuEstrategico from '../components/navbar/MenuEstrategico';
+import IniciarSesion from '../components/seguridad/IniciarSesion';
+import Config from '../components/seguridad/RegistrarAdmin';
+import MenuSeguridad from '../components/navbar/MenuSeguridad';
 
 const RouteGuard = ({ component: Component, ...rest }) => {
  
