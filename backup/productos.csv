@@ -1,0 +1,125 @@
+id_producto,id_categoria,nombre,precio,descripcion_producto,descuento,cantidad_disponible,valorInv
+28,2,Botas de montaña,99.5,Botas de montaña con forro de Gore-Tex y suela antideslizante.,0.0,44,4975.0
+3,1,Chaqueta de cuero,150.0,Chaqueta de cuero genuino con cierre de cremallera.,0.2,59,6000.0
+43,3,Impresora HP,149.0,Impresora HP con conectividad Wi-Fi y capacidad de impresión a doble cara.,0.0,43,7450.0
+40,3,Drone DJI Mavic Air 2,799.0,Drone DJI Mavic Air 2 con cámara 4K y tiempo de vuelo de hasta 34 minutos.,0.0,32,7990.0
+16,2,Zapatos deportivos,79.99,Zapatos deportivos con suela de goma y material transpirable.,0.1,180,15998.0
+10,1,Traje de bajo,50.0,Traje de bajo de dos piezas con estampado tropical.,0.0,91,5000.0
+31,3,Televisor LED de 50 pulgadas,599.99,Televisor LED de 50 pulgadas con resolución Full HD y función Smart TV.,0.0,45,29999.5
+41,3,Proyector Epson,499.99,Proyector Epson con resolución Full HD y 3600 lúmenes de brillo.,0.0,13,7499.85
+25,2,Sandalias de tacón,55.0,Sandalias de tacón alto con tiras entrecruzadas y cierre de hebilla.,0.1,74,2475.0
+12,1,Gorra de béisbol,12.5,Gorra de béisbol con logo bordado en la parte frontal.,0.0,434,6250.0
+34,3,Cámara Nikon,699.0,Cámara Nikon con sensor CMOS de 24.2 megapíxeles y lente zoom de 18-55mm.,0.0,16,13980.0
+2,1,Pantalón vaquero,45.5,Pantalón vaquero con corte recto y detalles desgastados.,0.1,242,10125.0
+22,2,Zapatos de vestir,99.99,Zapatos de vestir con cierre de cordones y suela antideslizante.,0.0,139,14998.5
+6,1,Falda plisada,29.99,Falda plisada de longitud media con estampado floral.,0.0,135,4498.5
+32,3,Laptop HP,849.0,Laptop HP con procesador Intel Core i7 y pantalla de 14 pulgadas.,0.1,30,21225.0
+46,4,Sofá gris,150.0,Sofá cómodo y elegante en color gris,0.1,438,75000.0
+13,1,Jersey de punto,22.0,Jersey de punto con cuello redondo y diseño de ochos.,0.1,167,3960.0
+17,2,Zapatillas de lona,29.5,Zapatillas de lona con cordones y suela de goma.,0.0,409,14750.0
+30,2,Zapatillas de skate,69.0,Zapatillas de skate con suela plana y detalles de tela vaquera.,0.0,198,10350.0
+4,1,Vestido de fiesta,75.99,Elegante vestido de fiesta con escote en V y falda de tul.,0.0,111,7599.0
+45,3,Consola de videojuegos Xbox,499.0,Consola de videojuegos Xbox con capacidad de reproducción de juegos en 4K.,0.0,17,9980.0
+39,3,Smartwatch Apple Watch,399.0,Smartwatch Apple Watch con pantalla Retina y GPS integrado.,0.0,27,11970.0
+18,2,Botas de cuero,129.99,Botas de cuero genuino con forro de piel y cierre de cremallera.,0.0,86,9749.25
+14,1,Parka acolchada,120.0,Parka acolchada con capucha y forro de piel sintética.,0.0,42,6000.0
+36,3,Parlante portátil JBL,129.99,Parlante portátil JBL con conexión Bluetooth y batería recargable.,0.0,137,19498.5
+47,4,Mesa de comedor,100.0,Mesa de comedor de madera resistente,0.0,187,20000.0
+1,1,Camisa de algodón,25.99,Camisa de manga larga hecha de algod?n de alta calidad.,0.0,405,12995.0
+26,2,Zapatillas de baloncesto,149.99,Zapatillas de baloncesto con suela de goma y amortiguación de aire.,0.0,21,3749.75
+9,1,Pijama de algodón,15.99,Pijama de dos piezas hecho de algodón suave y transpirable.,0.0,384,6396.0
+37,3,Smartphone Samsung Galaxy,599.0,Smartphone Samsung Galaxy con pantalla de 6.2 pulgadas y cámara trasera de 12 megapíxeles.,0.0,43,29950.0
+35,3,Reproductor de Blu-ray LG,69.99,Reproductor de Blu-ray LG con capacidad de reproducción de discos en 3D.,0.05,167,13998.0
+7,1,Abrigo de lana,99.99,Abrigo de lana con cierre de botones y solapas amplias.,0.15,92,7499.25
+44,3,Monitor de 27 pulgadas,299.99,Monitor de 27 pulgadas con resolución Quad HD y tiempo de respuesta de 1ms.,0.0,30,8999.7
+24,2,Botines de cuero,89.99,Botines de cuero con tacón bajo y cierre de cremallera lateral.,0.0,80,6749.25
+19,2,Sandalias de playa,15.0,Sandalias de playa con plantilla de espuma y correas ajustables.,0.0,279,4500.0
+15,1,Camiseta de tirantes,10.99,Camiseta de tirantes básica en varios colores.,0.0,407,5495.0
+23,2,Zapatillas de running,119.0,Zapatillas de running con amortiguación y soporte para el arco.,0.0,128,11900.0
+20,2,Mocasines de ante,69.99,Mocasines de ante con detalles de borlas y suela de goma.,0.0,95,6999.0
+29,2,Mocasines de cuero,59.99,Mocasines de cuero con detalle de lazo y suela de goma.,0.15,176,5099.0
+42,3,Teclado mecánico Logitech,99.99,Teclado mecánico Logitech con retroiluminación RGB y reposamuñecas desmontable.,0.0,90,9999.0
+33,3,Tablet Samsung,399.99,Tablet Samsung con pantalla de 10.1 pulgadas y almacenamiento de 64GB.,0.0,138,39999.0
+21,2,Zapatos de tacón,89.5,Zapatos de tacón alto con puntera redondeada y acabado brillante.,0.05,42,4225.0
+8,1,Polo de rayas,20.0,Polo de manga corta con rayas horizontales en tonos azules.,0.0,262,6000.0
+5,1,Sudadera con capucha,35.0,Sudadera con capucha y bolsillos canguro.,0.05,179,7000.0
+11,1,Chaleco de lana,45.99,Chaleco de lana con cuello alto y cierre de botones.,0.0,134,6898.5
+63,5,Bicicleta de montaña,549.0,Bicicleta de montaña para todo terreno,0.15,5,2745.0
+75,5,Equipo de buceo,599.99,Equipo de buceo para buceadores avanzados,0.15,3,1799.97
+76,6,Crema facial hidratante,25.99,Crema facial hidratante con ingredientes naturales,0.0,401,12995.0
+74,5,Tabla de surf,399.0,Tabla de surf para principiantes,0.1,7,1995.0
+86,7,Arroz,2.99,"Arroz blanco de grano largo,ideal para acompañar tus comidas.",0.0,403,1495.0
+48,4,Juego de sabanas,50.0,Sabanas de algodón suave y resistente,0.05,241,15000.0
+56,4,Ollas y sartenes,70.0,Juego de ollas y sartenes de acero inoxidable,0.0,42,3500.0
+91,7,Leche en polvo,3.49,"Leche en polvo fortificada,ideal para preparar bebidas y postres.",0.0,208,872.5
+88,7,Sardinas en lata,0.99,"Sardinas en salsa de tomate,una opción práctica para tus comidas.",0.1,164,158.0
+57,4,Cafetera,40.0,Cafetera eléctrica para preparar café?,0.05,87,3000.0
+55,4,Vajilla de porcelana,60.0,Juego de vajilla de porcelana para 6 personas,0.1,85,6000.0
+62,5,Raqueta de tenis,89.99,Raqueta de tenis de alta calidad,0.2,10,1079.88
+79,6,Esmalte de uñas rojo intenso,7.99,Esmalte de uñas de larga duración y alto brillo,0.0,647,6392.0
+58,4,Cortina de ducha,20.0,Cortina de ducha de tela resistente al agua,0.0,274,6000.0
+92,7,Mermelada de fresa,2.29,"Mermelada de fresa con trozos de fruta, deliciosa para untar en pan o galletas.",0.0,147,343.5
+94,7,Galletas,1.49,"Galletas de chocolate, ideales para tus antojos dulces.",0.05,521,894.0
+82,6,Kit de manicura y pedicura,28.5,Kit de manicura y pedicura con herramientas de acero inoxidable,0.0,137,4275.0
+77,6,Mascarilla capilar reparadora,12.5,Mascarilla capilar con aceites esenciales y keratina,0.1,209,3125.0
+52,4,Cortinas opacas,25.0,Cortinas opacas de color gris oscuro,0.15,209,5000.0
+98,8, Don Quijote de la Mancha,15.99, Don Quijote de la Mancha es una novela escrita por el español Miguel de Cervantes Saavedra.,0.1,642,10232.0
+53,4,Toallas de baño,15.0,Toallas de baño suaves y absorbentes,0.0,349,6000.0
+93,7,Cereal,2.99,"Cereal de avena y miel, una opción nutritiva para tu desayuno.",0.0,330,1196.0
+60,4,Espejo de pared,50.0,Espejo de pared grande y elegante,0.0,120,5000.0
+64,5,Guantes de boxeo,49.99,Guantes de boxeo para entrenamiento,0.05,43,2499.5
+90,7,Atún enlatado,1.49,"Atún en agua, bajo en calorías y alto en proteínas.",0.15,332,596.0
+49,4,Alfombra roja,80.0,Alfombra de lana roja suave y cálida,0.2,152,12000.0
+95,7,Mantequilla de mano,3.99,"Mantequilla de mano natural, sin aditivos ni conservantes.",0.0,165,798.0
+67,5,Patines en línea,89.0,Patines en línea para adultos,0.0,11,1335.0
+51,4,Cojines decorativos,10.0,Juego de cojines decorativos de colores,0.0,429,5000.0
+73,5,Parapente,799.0,Parapente para vuelo libre,0.25,10,3196.0
+65,5,Balón de baloncesto,25.0,Balón de baloncesto tamaño oficial,0.0,37,750.0
+54,4,Cubiertos de acero inoxidable,40.0,Juego de cubiertos de acero inoxidable de alta calidad,0.0,127,6000.0
+84,6,Agua micelar desmaquillante,14.5,Agua micelar para limpieza facial y desmaquillado,0.0,321,5800.0
+70,5,Mancuernas,39.99,Juego de mancuernas de 10 libras,0.0,15,799.8
+85,6,Crema para manos y cuerpo,8.99,Crema hidratante para manos y cuerpo con aroma a lavanda,0.0,563,6293.0
+83,6,Barra de labios nude,9.99,Barra de labios de larga duración con acabado mate,0.0,888,9990.0
+72,5,Colchoneta de yoga,29.95,Colchoneta de yoga antideslizante,0.0,82,898.5
+87,7,Frijoles,1.99,"Frijoles negros,excelentes para preparar platillos mexicanos.",0.0,691,1592.0
+68,5,Caña de pescar,59.99,Caña de pescar para pesca de agua dulce,0.1,16,1499.75
+80,6,Aceite corporal de almendras,18.99,Aceite corporal hidratante y nutritivo,0.0,320,5697.0
+50,4,Lámpara de techo,30.0,Lámpara de techo moderna y elegante,0.0,842,30000.0
+59,4,Estantería de madera,120.0,Estantería de madera resistente con varios compartimentos,0.0,64,6000.0
+69,5,Pelota de golf,15.99,Pelota de golf de alta calidad,0.05,42,639.6
+89,7,Aceite de oliva,5.99,Aceite de oliva extra virgen de alta calidad.,0.0,280,1797.0
+66,5,Casco de ciclismo,79.95,Casco de ciclismo de alta calidad,0.1,12,1599.0
+71,5,Pelota de voleibol,19.99,Pelota de voleibol tamaño oficial,0.0,32,499.75
+81,6,Loción corporal de vainilla,12.99,Loción corporal con aroma a vainilla y manteca de karito?,0.0,502,7794.0
+61,5,Pelota de fútbol,20.99,Pelota de fútbol tamaño estándar,0.1,23,524.75
+96,8, La Metamorfosis,10.99, La Metamorfosis es una novela corta escrita por Franz Kafka en 1915.,0.0,1221,16485.0
+120,10,Teclado Yamaha PSR-E373,299.99,Teclado portátil de 61 teclas con más de 600 voces y 165 estilos de acompañamiento. Incluye soporte y adaptador de corriente.,0.0,6,1799.94
+122,10,Bajo eléctrico Squier Classic Vibe '60s Precisión Bass,399.99,"Bajo eléctrico con cuerpo de pino,diapasón de arce y pastilla de bobina dividida. Incluye funda y correa.",0.0,3,1199.97
+123,10,Sintetizador Korg minilogue xd,649.99,Sintetizador analógico polifónico de 4 voces con 500 programas preestablecidos y efectos digitales. Incluye adaptador de corriente.,0.0,2,1299.98
+111,9,Figura de acción,12.0,Figura de acción de superhéroe,0.0,569,8400.0
+118,10,Piano digital Casio Privia PX-870,999.0,"Piano digital con teclas de acción martillo escalado,simulación de resonancia y pedal triple. Incluye soporte y pedal.",0.0,2,1998.0
+115,9,Juego de bolos,22.0,Set de bolos para niños con 6 pins y bola,0.04,416,11000.0
+97,8, Cien años de soledad,12.99, Cien años de soledad es una novela del escritor colombiano Gabriel García Márquez.,0.2,1088,11616.0
+112,9,Rompecabezas,18.0,Rompecabezas de 500 piezas,0.0,338,7200.0
+116,10,Guitarra acústica Yamaha FG800,249.99,Guitarra acústica de calidad con cuerpo de abeto y diapasón de palisandro. Incluye funda y afinador digital.,0.0,5,1249.95
+106,9,Muñeca Barbie,20.0,Muñeca Barbie con vestido rosa,0.05,423,10000.0
+108,9,Juego de bloques,25.0,Set de 100 bloques para construcción,0.0,355,11250.0
+110,9,Juego de mesa,30.0,Juego de mesa para la familia,0.1,291,9000.0
+124,10,Armónica Hohner Special 20,44.99,Armónica diatónica de 10 agujeros con cuerpo de plástico y lengüetas de latón. Disponible en varias tonalidades.,0.0,12,449.9
+99,8,1984,11.99," 1984 es una novela política de ficción dística,  escrita por George Orwell en 1949.",0.0,1594,23980.0
+104,8, El viejo y el mar,6.99, El viejo y el mar es una novela corta del autor estadounidense Ernest Hemingway.,0.05,2387,18855.0
+105,8, Orgullo y prejuicio,14.99, Orgullo y prejuicio es una novela de la autora británica Jane Austen.,0.25,658,8994.0
+121,10,Amplificador de guitarra Fender Champion 20,129.99,Amplificador de 20 vatios con altavoz de 8 y efectos de modelado de amplificadores y pedales.,0.0,4,1039.92
+27,2,Zapatos náuticos,45.99,Zapatos náuticos de cuero con detalles de cordones y suela de goma.,0.0,235,9198.0
+102,8, Matar a un ruiseñor,7.99, Matar a un ruiseñor es una novela de la autora estadounidense Harper Lee.,0.0,821,7990.0
+101,8, El Hobbit,8.99, El Hobbit es una novela de fantasía del autor británico J. R. R. Tolkien.,0.15,2050,20122.5
+100,8, El Gran Gatsby,9.99, El Gran Gatsby es una novela escrita por el autor estadounidense F. Scott Fitzgerald.,0.0,411,4995.0
+113,9,Juguete de peluche,8.0,Oso de peluche suave y tierno,0.01,1004,9600.0
+117,10,Batería electrónica Alesis Nitro Mesh,399.0,"Batería electrónica con módulo de sonido de 40 kits,pads de malla,pedales de bombo y charles, y más de 350 sonidos.",0.1,13,1197.0
+78,6,Set de brochas de maquillaje,35.99,Set de brochas de maquillaje de alta calidad,0.05,103,3599.0
+119,10,Trompeta Jupiter JTR700,699.0,Trompeta en Si bemol con campana de 123 mm y boquilla plateada. Incluye estuche y accesorios.,0.05,4,2796.0
+114,9,Instrumento musical,40.0,Guitarra de juguete para niños,0.08,218,8000.0
+109,9,Pelota de fútbol,10.0,Pelota de fútbol tamaño infantil,0.03,812,10000.0
+107,9,Carro de carreras,15.0,Carro de carreras de juguete con control remoto,0.02,696,12000.0
+38,3,Auriculares inalámbricos Bose,249.0,Auriculares inalámbricos Bose con cancelación de ruido y conexión Bluetooth.,0.0,65,18675.0
+103,8, El Señor de los Anillos,20.99, El Señor de los Anillos es una novela de fantasía del autor británico J. R. R. Tolkien.,0.1,1223,28303.5

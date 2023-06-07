@@ -8,5 +8,7 @@ urlpatterns = [
     path("valProdDan/", views.validarProductosDanados),
     path("saveProdDan/", views.crearProductosDanados),
     path("ingresosCostos", views.reporteIngresosCostos),
+    path("crearRespaldoDatos/", views.crearBackup),
+    path("descargarRespaldoDatos/", views.descargarBackup)
 ]
 

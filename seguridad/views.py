@@ -30,7 +30,132 @@ def iniciarSesion(request):
     # diccionario de datos a retornar
     data = {
         'token': random_string,
-        'email': email
+        'email': email,
+        'isAdmin': False,
+        'isConfigured':True,
+        'rol':'estrategico',
+        # 'rol':'tactico',
+        # 'rol':'admin',
+        'permisos':[
+            'cargar-movimientos',
+            'cargar-productos-danados',
+            # 'cargar-sucursales',
+            # 'cargar-categorias',
+            # 'cargar-productos',
+            'ver-reporte-demanda-clientes',
+            'ver-reporte-frecuencia-de-compra',
+            'ver-reporte-productos-danados',
+            'ver-reporte-ingresos-y-costos',
+            'ver-reporte-productos-mas-vendidos',
+            # 'ver-historial-usuarios',
+            # 'ver-configuracion-usuarios',
+            # 'crear-usuarios',
+            # 'suspender-usuarios',
+            # 'cambiar-contrasena-usuarios',
+            'cambiar-mi-contrasena',
+        ]
+    }
+    return JsonResponse(data)
+
+@csrf_exempt
+def registrarAdmin(request):
+    # Simulador de Token JWT, eliminar cuando ya se genere el token real
+    random_string = generate_random_string(255)
+
+    # Decode the byte string to UTF-8 and convert it to a string
+    string_data=request.body.decode('utf-8')
+
+    # Parse the string as JSON and convert it to a dictionary
+    data_dict = json.loads(string_data)
+
+    # Access the values in the dictionary
+    password = data_dict['password']
+    email = data_dict['email']
+
+    if(email=="" or password == ""):
+        return HttpResponse("Credenciales Inválidas", status=401)
+
+    # print(password)  # Output: YzMSuERT2D8Kwjb
+    # print(email)  # Output: hemdad.tahaj@theboty.com
+
+    # diccionario de datos a retornar
+    data = {
+        'token': random_string,
+        'email': email,
+        'isAdmin': True,
+        'isConfigured':True,
+        # 'rol':'estrategico',
+        # 'rol':'tactico',
+        'rol':'admin',
+        'permisos':[
+            # 'cargar-movimientos',
+            # 'cargar-productos-danados',
+            'cargar-sucursales',
+            'cargar-categorias',
+            'cargar-productos',
+            # 'ver-reporte-demanda-clientes',
+            # 'ver-reporte-frecuencia-de-compra',
+            # 'ver-reporte-productos-danados',
+            # 'ver-reporte-ingresos-y-costos',
+            # 'ver-reporte-productos-mas-vendidos'
+            'ver-historial-usuarios',
+            'ver-configuracion-usuarios',
+            'crear-usuarios',
+            'suspender-usuarios',
+            'cambiar-contrasena-usuarios',
+            'cambiar-mi-contrasena',
+        ]
+    }
+    return JsonResponse(data)
+
+@csrf_exempt
+def cambiarContrasena(request):
+    # Simulador de Token JWT, eliminar cuando ya se genere el token real
+    random_string = generate_random_string(255)
+
+    # Decode the byte string to UTF-8 and convert it to a string
+    string_data=request.body.decode('utf-8')
+
+    # Parse the string as JSON and convert it to a dictionary
+    data_dict = json.loads(string_data)
+
+    # Access the values in the dictionary
+    password = data_dict['password']
+    # email = data_dict['email']
+
+    if(password == ""):
+        return HttpResponse("Credenciales Inválidas", status=401)
+
+    # print(password)  # Output: YzMSuERT2D8Kwjb
+    # print(email)  # Output: hemdad.tahaj@theboty.com
+
+    # diccionario de datos a retornar
+    data = {
+        'token': random_string,
+        'email': "ejemplo@tiendaluisito.com",
+        'isAdmin': False,
+        'isConfigured':True,
+        # 'rol':'estrategico',
+        'rol':'tactico',
+        # 'rol':'admin',
+        'permisos':[
+            'cargar-movimientos',
+            'cargar-productos-danados',
+            # 'cargar-sucursales',
+            # 'cargar-categorias',
+            # 'cargar-productos',
+            'ver-reporte-demanda-clientes',
+            'ver-reporte-frecuencia-de-compra',
+            'ver-reporte-productos-danados',
+            'ver-reporte-ingresos-y-costos',
+            'ver-reporte-productos-mas-vendidos',
+            # 'ver-historial-usuarios',
+            # 'ver-configuracion-usuarios',
+            # 'crear-usuarios',
+            # 'suspender-usuarios',
+            # 'cambiar-contrasena-usuarios',
+            'cambiar-mi-contrasena',
+        ]
     }
     return JsonResponse(data)
 

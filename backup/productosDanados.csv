@@ -1,0 +1,5 @@
+id_productoDanado,id_producto,fecha_registro,detalle,cantidad
+3,1,2022-01-04,vencido,3
+4,2,2022-01-04,vencido,4
+5,2,2022-01-04,vencido,5
+2,1,2022-01-03,vencido,2
