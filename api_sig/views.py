@@ -316,11 +316,84 @@ def reporteIngresosCostos(filtro):
     movimientos=Movimiento.objects.all()
     totalE=0
     totalS=0
+    anios=set()
+    #extraer años registrados 
+    for a in movimientos:
+        anios.add(a.fecha_registro.year)
+
     for m in movimientos:
-        if m.tipo=="E":
-            totalE+=(m.valorUnitario*m.cantidad)
-        else:
-            totalS+=(m.valorUnitario*m.cantidad)
-    data_dic["ingresos"]=totalE
-    data_dic["costos"]=totalS
-    return data_dic
+        for anio in anios:
+            if m.fecha_registro.year== anio:
+                if m.fecha_registro.month <=3:
+                    data_dic["anio"]=m.fecha_registro.year
+                    data_dic["trimestre"]="Primer trimestre"
+                    if m.tipo=="E":
+                        totalE+=(m.valorUnitario*m.cantidad)
+                        data_dic["ingresos"]=totalE
+                    else:
+                        totalS+=(m.valorUnitario*m.cantidad)
+                        data_dic["costos"]=totalS
+                elif m.fecha_registro.month <=6:
+                    data_dic["anio"]=m.fecha_registro.year
+                    data_dic["trimestre"]="Segundo trimestre"
+                    data_dic["total"]
+                    if m.tipo=="E":
+                        totalE+=(m.valorUnitario*m.cantidad)
+                        data_dic["ingresos"]=totalE
+                    else:
+                        totalS+=(m.valorUnitario*m.cantidad)
+                        data_dic["costos"]=totalS
+                elif m.fecha_registro.month <=9:
+                    data_dic["anio"]=m.fecha_registro.year
+                    data_dic["trimestre"]="Tercer trimestre"
+                    data_dic["total"]
+                    if m.tipo=="E":
+                        totalE+=(m.valorUnitario*m.cantidad)
+                        data_dic["ingresos"]=totalE
+                    else:
+                        totalS+=(m.valorUnitario*m.cantidad)
+                        data_dic["costos"]=totalS
+                else:
+                    data_dic["anio"]=m.fecha_registro.year
+                    data_dic["trimestre"]="Cuarto trimestre"
+                    data_dic["total"]
+                    if m.tipo=="E":
+                        totalE+=(m.valorUnitario*m.cantidad)
+                        data_dic["ingresos"]=totalE
+                    else:
+                        totalS+=(m.valorUnitario*m.cantidad)
+                        data_dic["costos"]=totalS
+            #fin comparación de años
+        #fin for de años
+    #fin for de lista de movimientos        
+
+    dicci=[
+        {
+            "anio": "2022",
+            "trimestre": "primero",
+            "ingresos": 7134.56,
+            "costos": 4128.45,
+        },
+        {
+            "anio": "2022",
+            "trimestre": "segundo",
+            "ingresos": 6873.31,
+            "costos": 4035.12,
+        },
+        {
+            "anio": "2022",
+            "trimestre": "tercero",
+            "ingresos": 6214.94,
+            "costos":4035.12,
+        },
+        {
+            "anio": "2022",
+            "trimestre": "cuarto",
+            "ingresos": 7417.28,
+            "costos": 5259.75,
+        },
+    ]
+
+    jsonString= json.dumps(dicci)   
+        
+    return jsonString
