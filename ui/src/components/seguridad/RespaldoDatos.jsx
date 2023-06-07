@@ -44,8 +44,14 @@ function RespaldoDatos() {
     }
     async function descargarRespaldo(){
         window.open("http://127.0.0.1:8000/api/descargarRespaldoDatos/", "_top", "noreferrer");
+        const current = new Date();
+        const time = current.toLocaleString("es-es");
+        setEstadoRespaldo("Respaldo de datos descargados con éxito.");
+        setFecha(time);
     }
     async function onClickHandler(){
+        const current = new Date();
+        const time = current.toLocaleString("es-es");
         // console.log(data);
         // Iniciar la validación de los datos
         setLoadingSpinner(true);
@@ -53,7 +59,43 @@ function RespaldoDatos() {
         setTimeout(() => {
           setLoadingSpinner(false);
         }, 1000);
-      }
+        setEstadoRespaldo("Respaldo de datos cargado con éxito.");
+        setFecha(time);
+    }
+
+    const changeHandler = (event) => {
+        setArchivo(event.target.files[0]);
+        // console.log(event.target.files[0]);
+        // Papa.parse(event.target.files[0], {
+        //   header: true,
+        //   skipEmptyLines: true,
+        //   complete: function (results) {
+        //     setData(results.data);
+        //   },
+        // });
+        const file = event.target.files[0];
+          
+          // Iniciar la carga del archivo
+          setLoading(true);
+      
+          const reader = new FileReader();
+      
+          reader.onloadend = () => {
+            // Simular un retardo para mostrar la barra de progreso
+            setTimeout(() => {
+              setLoading(false);
+              setProgress(0);
+            }, 1000);
+          };
+      
+          reader.onprogress = (event) => {
+            if (event.lengthComputable) {
+              const porcentaje = Math.round((event.loaded * 100) / event.total);
+              setProgress(porcentaje);
+            }
+          };
+          reader.readAsText(file);
+    };
     return(
         <div className="d-flex container flex-column">
             {loadingSpinner && 
@@ -103,7 +145,7 @@ function RespaldoDatos() {
                                             ):
                                             <><div className="row justify-content-around">
                                                 <div className="col-md-auto">
-                                                    <button type="button" className="btn btn-success" onClick={() => onClickHandler()}>Validar</button>
+                                                    <button type="button" className="btn btn-success" onClick={() => onClickHandler()}>Cargar</button>
                                                 </div><div className="col-md-auto">
                                                     <button type="button" className="btn btn-danger" onClick={(e) => eliminarArchivo(null)}>Eliminar</button>
                                                 </div>
@@ -118,7 +160,7 @@ function RespaldoDatos() {
                                         <img src='zip-file-format.png' style={{ width: '4rem'}} />
                                         <h5>Seleccione un archivo para cargar.</h5>
                                         <h6>O arrastra y suelte aquí.</h6>
-                                    </div><input className="entrada" type="file" accept=".zip" name='files' />
+                                    </div><input className="entrada" type="file" accept=".zip" name='files' onChange={changeHandler}/>
                                     </>
                                 }
                             </div>

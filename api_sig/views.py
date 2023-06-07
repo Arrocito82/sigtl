@@ -1,5 +1,6 @@
 
 from datetime import datetime
+import time
 import json
 from django.forms import ValidationError
 from django.http import  HttpResponse, JsonResponse
@@ -333,7 +334,8 @@ def crearBackup(request):
     # crearBackupProductos()
     # crearBackupMovimientos()
     # crearBackupProductosDanados()
-    return JsonResponse({"mensaje":"Respaldo de datos creado con éxito.", "fecha": datetime.now()}, safe=False)
+    fecha=time.strftime("%d/%m/%Y, %H:%M:%S",time.localtime())
+    return JsonResponse({"mensaje":"Respaldo de datos creado con éxito.", "fecha":fecha }, safe=False)
 
 def descargarBackup(request):
     filenames = [
