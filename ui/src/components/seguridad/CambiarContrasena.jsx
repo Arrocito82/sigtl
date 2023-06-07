@@ -1,31 +1,29 @@
 import { useState } from "react";
 import axios from 'axios';
-import { setAuthToken } from "./setAuthToken";
+import { setAuthToken } from "../../seguridad/setAuthToken";
 
-function Config() {
-    const [mensajeError, setMensajeError]=useState();
+function CambiarContrasena() {
+    const [mensajeError, setMensajeError]=useState("");
     const [contrasena, setContrasena]=useState("");
     const [contrasena2, setContrasena2]=useState("");
-    const [email, setEmail]=useState("");
 
-    function handleEmailChange(event) {
-        setEmail(event.target.value);
-    }
     function handlePasswordlChange(event) {
+        
         setContrasena(event.target.value);
+        console.log(event.target.value);
     }
     function handlePasswordlChange2(event) {
         setContrasena2(event.target.value);
+        console.log(event.target.value);
     }
-    async function iniciarSesion() {
+
+    async function cambiarContraseña() {
         // función para iniciar sesion que retorna un token
         setMensajeError();
         let data={
-            'password':contrasena,
-            'checkedPassword':contrasena2,
-            'email': email
+            'password':contrasena
         }
-        await axios.post("http://localhost:8000/auth/register-admin", data, {
+        await axios.post("http://localhost:8000/auth/cambiar-contrasena", data, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
@@ -35,6 +33,7 @@ function Config() {
             const token  =  response.data.token;
             const isConfigured  =  response.data.isConfigured;
             const isAdmin= response.data.isAdmin;
+            const email=response.data.email;
             const rol= response.data.rol;
             
             //set JWT token to local
@@ -53,12 +52,12 @@ function Config() {
             if (error.response) {
                 // The request was made and the server responded with a status code
                 // that falls out of the range of 2xx
-                // console.log(error.response.data);
-                // console.log(error.response.status);
-                // console.log(error.response.headers);
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
             }
             setMensajeError(<div className="bg-light-subtle rounded border fw-bold text-danger-emphasis border-danger text-center my-3 py-1">          
-                                <span style={{"position":"relative","bottom":"10px"}}>Credenciales Incorrectas</span>
+                                <span style={{"position":"relative","bottom":"10px"}}>Token Caducado</span>
                                 <span className="material-symbols-outlined m-1 fs-2" >report</span>
                             </div>);
         });
@@ -68,33 +67,25 @@ function Config() {
                 <div className="d-flex justify-content-center" style={{height: "100vh"}}>                   
                     <form action="/login" method="post" className="m-3 bg-body-tertiary p-4 rounded  align-self-center">
                         <img src="cover.png" alt="Bienvenidos a Tienda Luisito" className="pb-2 pt-3 logo-login"/>
-                        <p className="text-center"><span className="h4 text-dark-emphasis" >Registrar Administrador</span></p>
+                        <p className="text-center">
+                            <span className="h4 text-dark-emphasis" >Cambiar Contraseña</span>
+                        </p>
                         {mensajeError}
+
                         <div className="mb-3">
-                            <label htmlFor="email" className="form-label">Correo Electrónico</label>
-                            <input type="email" className="form-control" id="email" aria-describedby="emailHelp" value={email} onChange={handleEmailChange}/>
-                            <div id="emailHelp" className="form-text">Ej. carnet@tiendaluisito.com</div>
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="password1" className="form-label">Contraseña</label>
+                            <label htmlFor="password1" className="form-label">Contraseña Nueva</label>
                             <input type="password" className="form-control" id="password1" value={contrasena} onChange={handlePasswordlChange}/>
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="password2" className="form-label">Confirmar Contraseña</label>
+                            <label htmlFor="password2" className="form-label">Introduce otra vez tu nueva contraseña</label>
                             <input type="password" className="form-control" id="password2" value={contrasena2} onChange={handlePasswordlChange2}/>
                         </div>
-                        <div className="mb-3 form-check">
-                            <input type="checkbox" className="form-check-input" id="recordar-contrasena"/>
-                            <label className="form-check-label" htmlFor="recordar-contrasena">Recordar Contraseña</label>
-                        </div>
                         <div>
-                            <button
-                            disabled={!((contrasena===contrasena2)&&(contrasena!=="")&&(contrasena2!=="")&&(email!==""))}
-                             type="button" className="btn btn-primary" onClick={iniciarSesion}>Registrar</button>
+                            <button disabled={!((contrasena===contrasena2)&&(contrasena!=="")&&(contrasena2!==""))} type="button" className="btn btn-primary" onClick={cambiarContraseña} >Cambiar Contraseña</button>
                         </div>
                     </form>
                 </div>
     );
 }
 
-export default Config;
+export default CambiarContrasena;

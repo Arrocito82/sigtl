@@ -2,10 +2,13 @@
 from datetime import datetime
 import json
 from django.forms import ValidationError
-from django.http import  JsonResponse
+from django.http import  HttpResponse, JsonResponse
 from .models import *
 import random
 import csv
+import os
+import zipfile
+from io import BytesIO
 from django.views.decorators.csrf import csrf_exempt
 from dateutil.parser import parser
 
@@ -322,15 +325,51 @@ def reporteIngresosCostos(filtro):
     data_dic["costos"]=totalS
     return data_dic
 
+
 # BACKUP
-def crearBackup():
+def crearBackup(request):
     # crearBackupCategorias()
     # crearBackupSucursales()
     # crearBackupProductos()
     # crearBackupMovimientos()
-    crearBackupProductosDanados()
+    # crearBackupProductosDanados()
+    return JsonResponse({"mensaje":"Respaldo de datos creado con éxito."}, safe=False)
 
-    return 0
+def descargarBackup(request):
+    filenames = [
+        "backup/categorias.csv", 
+        "backup/sucursales.csv",
+        "backup/productos.csv",
+        "backup/movimientos.csv",
+        "backup/productosDanados.csv",
+                 ]
+    zip_subdir = "backup"
+    zip_filename = "%s.zip" % zip_subdir
+    
+    # Open StringIO to grab in-memory ZIP contents
+    s=BytesIO()
+
+    # The zip compressor
+    zf = zipfile.ZipFile(s, "w")
+
+    for fpath in filenames:
+        # Calculate path for file in zip
+        fdir, fname = os.path.split(fpath)
+        zip_path = os.path.join(zip_subdir, fname)
+
+        # Add file, at correct path
+        zf.write(fpath, zip_path)
+
+    # Must close zip for all contents to be written
+    zf.close()
+
+    # Grab ZIP file from in-memory, make response with correct MIME-type
+    response = HttpResponse(s.getvalue(), content_type = "application/x-zip-compressed")
+    # ..and correct content-disposition
+    response['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
+
+    return response
+
 def crearBackupProductos():
     productos=Producto.objects.all()
     with open('backup/productos.csv', 'w', newline='') as file:
@@ -359,6 +398,7 @@ def crearBackupProductos():
                 ])
         file.close()
     return
+
 def crearBackupSucursales():
     sucursales=Sucursal.objects.all()
     with open('backup/sucursales.csv', 'w', newline='') as file:
@@ -377,6 +417,7 @@ def crearBackupSucursales():
                 ])
         file.close()
     return
+
 def crearBackupCategorias():
     categorias=Categoria.objects.all()
     with open('backup/categorias.csv', 'w', newline='') as file:
@@ -395,6 +436,7 @@ def crearBackupCategorias():
                 ])
         file.close()
     return
+
 def crearBackupMovimientos():
     movimientos=Movimiento.objects.all()
     with open('backup/movimientos.csv', 'w', newline='') as file:
@@ -425,6 +467,7 @@ def crearBackupMovimientos():
                 ])
         file.close()
     return
+
 def crearBackupProductosDanados():
     productos=ProductoDanado.objects.all()
     with open('backup/productosDanados.csv', 'w', newline='') as file:

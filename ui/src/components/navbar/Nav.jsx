@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { setAuthToken } from '../seguridad/setAuthToken';
+import { setAuthToken } from '../../seguridad/setAuthToken';
 
 function Nav(){
     const [username, setUsername]=useState();

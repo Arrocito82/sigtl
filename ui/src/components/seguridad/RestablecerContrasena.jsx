@@ -1,29 +1,25 @@
 import { useState } from "react";
 import axios from 'axios';
-import { setAuthToken } from "./setAuthToken";
+import { setAuthToken } from "../../seguridad/setAuthToken";
 
-function CambiarContrasena() {
-    const [mensajeError, setMensajeError]=useState("");
-    const [contrasena, setContrasena]=useState("");
-    const [contrasena2, setContrasena2]=useState("");
-
+function RestablecerContrasena() {
+    const [mensajeError, setMensajeError]=useState();
+    const [contrasena, setContrasena]=useState();
+    const [contrasena2, setContrasena2]=useState();
     function handlePasswordlChange(event) {
-        
         setContrasena(event.target.value);
-        console.log(event.target.value);
     }
     function handlePasswordlChange2(event) {
         setContrasena2(event.target.value);
-        console.log(event.target.value);
     }
-
+   
     async function cambiarContraseña() {
         // función para iniciar sesion que retorna un token
         setMensajeError();
         let data={
             'password':contrasena
         }
-        await axios.post("http://localhost:8000/auth/cambiar-contrasena", data, {
+        await axios.post("http://localhost:8000/auth/cambiar-contraseña", data, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
@@ -33,15 +29,11 @@ function CambiarContrasena() {
             const token  =  response.data.token;
             const isConfigured  =  response.data.isConfigured;
             const isAdmin= response.data.isAdmin;
-            const email=response.data.email;
-            const rol= response.data.rol;
             
             //set JWT token to local
             localStorage.setItem("token", token);
             localStorage.setItem("isConfigured", isConfigured);
             localStorage.setItem("isAdmin", isAdmin);
-            localStorage.setItem("username", email);
-            localStorage.setItem("rol", rol);
             // console.log(localStorage.getItem("token"));
             //set token to axios common header
             setAuthToken(token);
@@ -68,7 +60,10 @@ function CambiarContrasena() {
                     <form action="/login" method="post" className="m-3 bg-body-tertiary p-4 rounded  align-self-center">
                         <img src="cover.png" alt="Bienvenidos a Tienda Luisito" className="pb-2 pt-3 logo-login"/>
                         <p className="text-center">
-                            <span className="h4 text-dark-emphasis" >Cambiar Contraseña</span>
+                            <span className="h4 text-dark-emphasis" >Restablecer Contraseña</span>
+                        </p>
+                        <p>
+                            Elige una nueva contraseña para terminar de iniciar sesión.
                         </p>
                         {mensajeError}
 
@@ -81,11 +76,11 @@ function CambiarContrasena() {
                             <input type="password" className="form-control" id="password2" value={contrasena2} onChange={handlePasswordlChange2}/>
                         </div>
                         <div>
-                            <button disabled={!((contrasena===contrasena2)&&(contrasena!=="")&&(contrasena2!==""))} type="button" className="btn btn-primary" onClick={cambiarContraseña} >Cambiar Contraseña</button>
+                            <button type="button" className="btn btn-primary" onClick={cambiarContraseña} disabled={contrasena===contrasena2} >Cambiar Contraseña</button>
                         </div>
                     </form>
                 </div>
     );
 }
 
-export default CambiarContrasena;
+export default RestablecerContrasena;

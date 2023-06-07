@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from 'axios';
-import { setAuthToken } from "./setAuthToken";
+import { setAuthToken } from "../../seguridad/setAuthToken";
 
 function IniciarSesion() {
     const [mensajeError, setMensajeError]=useState();

@@ -3,7 +3,7 @@ import { Redirect, Switch, Router } from "react-router-dom";
  
 //history
 import { history } from './history';
-import RouteGuard from "../components/RouteGuard";
+import RouteGuard from "./RouteGuard";
  
 //pages
 import Bienvenida from '../components/Bienvenida';
@@ -17,11 +17,9 @@ import FrecuenciaCompra from "../components/reportes/FrecuenciaCompra";
 import IngresosCostos from "../components/reportes/IngresosCostos";
 import ProductosDanados from "../components/reportes/ProductosDanados";
 import ProductosMasVendidos from "../components/reportes/ProductosMasVendidos";
-import HistorialUsuarios from "./historialUsuarios";
-import Usuarios from "./usuarios";
-import CambiarContrasena from "./cambiarContrasena";
-import IniciarSesion from "./IniciarSesion";
-import Config from "./config";
+import HistorialUsuarios from "../components/seguridad/HistorialUsuarios";
+import Usuarios from "../components/seguridad/Usuarios";
+import CambiarContrasena from "../components/seguridad/CambiarContrasena";
 
 function Routes() {
    return (
