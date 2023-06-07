@@ -20,6 +20,7 @@ import ProductosMasVendidos from "../components/reportes/ProductosMasVendidos";
 import HistorialUsuarios from "../components/seguridad/HistorialUsuarios";
 import Usuarios from "../components/seguridad/Usuarios";
 import CambiarContrasena from "../components/seguridad/CambiarContrasena";
+import RespaldoDatos from "../components/seguridad/RespaldoDatos";
 
 function Routes() {
    return (
@@ -94,6 +95,11 @@ function Routes() {
                 exact
                 path="/cambiar-contrasena"
                 component={CambiarContrasena}
+                />
+            <RouteGuard
+                exact
+                path="/respaldo-datos"
+                component={RespaldoDatos}
                 />
             <Redirect to="/" />
         </Switch>

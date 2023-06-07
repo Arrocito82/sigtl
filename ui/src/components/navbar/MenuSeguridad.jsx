@@ -56,7 +56,7 @@ function MenuSeguridad(){
             <span style={{position:'relative',bottom:'10px'}}>
               Respaldo de Datos
             </span>
-            <span className="material-symbols-outlined fs-2 m-2">data</span>
+            <span className="material-symbols-outlined fs-2 m-2">settings_backup_restore</span>
           </a>
   
   

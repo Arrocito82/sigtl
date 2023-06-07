@@ -333,7 +333,7 @@ def crearBackup(request):
     # crearBackupProductos()
     # crearBackupMovimientos()
     # crearBackupProductosDanados()
-    return JsonResponse({"mensaje":"Respaldo de datos creado con éxito."}, safe=False)
+    return JsonResponse({"mensaje":"Respaldo de datos creado con éxito.", "fecha": datetime.now()}, safe=False)
 
 def descargarBackup(request):
     filenames = [
