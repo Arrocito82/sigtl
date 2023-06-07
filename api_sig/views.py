@@ -2,13 +2,10 @@
 from datetime import datetime
 import json
 from django.forms import ValidationError
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-from django.http import HttpRequest
-from rest_framework import serializers
+from django.http import  JsonResponse
 from .models import *
 import random
-import pandas as pd
+import csv
 from django.views.decorators.csrf import csrf_exempt
 from dateutil.parser import parser
 
@@ -324,3 +321,129 @@ def reporteIngresosCostos(filtro):
     data_dic["ingresos"]=totalE
     data_dic["costos"]=totalS
     return data_dic
+
+# BACKUP
+def crearBackup():
+    # crearBackupCategorias()
+    # crearBackupSucursales()
+    # crearBackupProductos()
+    # crearBackupMovimientos()
+    crearBackupProductosDanados()
+
+    return 0
+def crearBackupProductos():
+    productos=Producto.objects.all()
+    with open('backup/productos.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([
+            "id_producto",
+            "id_categoria",
+            "nombre",
+            "precio",
+            "descripcion_producto",
+            "descuento",
+            "cantidad_disponible",
+            "valorInv"
+            ])
+        for producto in productos:
+            
+            writer.writerow([
+                producto.id_producto,
+                producto.id_categoria.id_categoria,
+                producto.nombre,
+                producto.precio,
+                producto.descripcion_producto,
+                producto.descuento,
+                producto.cantidad_disponible,
+                producto.valorInv
+                ])
+        file.close()
+    return
+def crearBackupSucursales():
+    sucursales=Sucursal.objects.all()
+    with open('backup/sucursales.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([
+            "id_sucursal",
+            "nombre_sucursal",
+            "direccion"
+            ])
+        for sucursal in sucursales:
+            
+            writer.writerow([
+                sucursal.id_sucursal,
+                sucursal.nombre_sucursal,
+                sucursal.direccion
+                ])
+        file.close()
+    return
+def crearBackupCategorias():
+    categorias=Categoria.objects.all()
+    with open('backup/categorias.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([
+            "id_categoria",
+            "nombre_categoria",
+            "descripcion_categoria"
+            ])
+        for categoria in categorias:
+            
+            writer.writerow([
+                categoria.id_categoria,
+                categoria.nombre_categoria,
+                categoria.descripcion_categoria
+                ])
+        file.close()
+    return
+def crearBackupMovimientos():
+    movimientos=Movimiento.objects.all()
+    with open('backup/movimientos.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([
+            "id_movimiento",
+            "id_sucursal",
+            "id_producto",
+            "fecha_registro",
+            "detalle",
+            "valorUnitario",
+            "cantidad",
+            "total",
+            "tipo"
+            ])
+        for movimiento in movimientos:
+            
+            writer.writerow([
+                movimiento.id_movimiento,
+                movimiento.id_sucursal.id_sucursal,
+                movimiento.id_producto.id_producto,
+                movimiento.fecha_registro,
+                movimiento.detalle,
+                movimiento.valorUnitario,
+                movimiento.cantidad,
+                movimiento.total,
+                movimiento.tipo
+                ])
+        file.close()
+    return
+def crearBackupProductosDanados():
+    productos=ProductoDanado.objects.all()
+    with open('backup/productosDanados.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([
+            "id_productoDanado",
+            "id_producto",
+            "fecha_registro",
+            "detalle",
+            "cantidad"
+            ])
+        for producto in productos:
+            
+            writer.writerow([
+                producto.id_productoDanado,
+                producto.id_producto.id_producto,
+                producto.fecha_registro,
+                producto.detalle,
+                producto.cantidad
+                ])
+        file.close()
+    return
