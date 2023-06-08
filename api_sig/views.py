@@ -397,7 +397,7 @@ def reporteIngresosCostos(filtro):
 
     jsonString= json.dumps(dicci)   
         
-    return jsonString
+    return HttpResponse(jsonString)
 
 
 # BACKUP
