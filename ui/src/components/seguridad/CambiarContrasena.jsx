@@ -19,48 +19,57 @@ function CambiarContrasena() {
 
     async function cambiarContraseña() {
         // función para iniciar sesion que retorna un token
-        setMensajeError();
-        let data={
-            'password':contrasena
-        }
-        await axios.post("http://localhost:8000/auth/cambiar-contrasena", data, {
-        headers: {
-          // Overwrite Axios's automatically set Content-Type
-          'Content-Type': 'application/json'
-        }
-        }).then(response => { // then print response status
-            //get token from response
-            const token  =  response.data.token;
-            const isConfigured  =  response.data.isConfigured;
-            const isAdmin= response.data.isAdmin;
-            const email=response.data.email;
-            const rol= response.data.rol;
-            
-            //set JWT token to local
-            localStorage.setItem("token", token);
-            localStorage.setItem("isConfigured", isConfigured);
-            localStorage.setItem("isAdmin", isAdmin);
-            localStorage.setItem("username", email);
-            localStorage.setItem("rol", rol);
-            // console.log(localStorage.getItem("token"));
-            //set token to axios common header
-            setAuthToken(token);
-
+        let username=localStorage.getItem("username");
+        console.log(username);
+        if(!username){
             //redirect user to home page
             window.location.href = '/'
-        }).catch(error=>{
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
+        }else{
+
+            setMensajeError();
+            let data={
+                'password':contrasena,
+                'username':username
             }
-            setMensajeError(<div className="bg-light-subtle rounded border fw-bold text-danger-emphasis border-danger text-center my-3 py-1">          
-                                <span style={{"position":"relative","bottom":"10px"}}>Token Caducado</span>
-                                <span className="material-symbols-outlined m-1 fs-2" >report</span>
-                            </div>);
-        });
+            await axios.post("http://localhost:8000/auth/cambiar-contrasena", data, {
+            headers: {
+              // Overwrite Axios's automatically set Content-Type
+              'Content-Type': 'application/json'
+            }
+            }).then(response => { // then print response status
+                //get token from response
+                const token  =  response.data.token;
+                const isConfigured  =  response.data.isConfigured;
+                const isAdmin= response.data.isAdmin;
+                const username=response.data.username;
+                const rol= response.data.rol;
+                
+                //set JWT token to local
+                localStorage.setItem("token", token);
+                localStorage.setItem("isConfigured", isConfigured);
+                localStorage.setItem("isAdmin", isAdmin);
+                localStorage.setItem("username", username);
+                localStorage.setItem("rol", rol);
+                // console.log(localStorage.getItem("token"));
+                //set token to axios common header
+                setAuthToken(token);
+    
+                //redirect user to home page
+                window.location.href = '/'
+            }).catch(error=>{
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                }
+                setMensajeError(<div className="bg-light-subtle rounded border fw-bold text-danger-emphasis border-danger text-center my-3 py-1">          
+                                    <span style={{"position":"relative","bottom":"10px"}}>{error.response.data}</span>
+                                    <span className="material-symbols-outlined m-1 fs-2" >report</span>
+                                </div>);
+            });
+        }
     }
 
     return(
