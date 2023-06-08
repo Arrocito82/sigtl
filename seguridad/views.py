@@ -10,10 +10,32 @@ from django.contrib.contenttypes.models import ContentType
 import random
 import string
 import json
+import time
 
 from api_sig.models import *
 
-# Create your views here.
+def getUsuarios(request):
+    # users=User.objects.prefetch_related("groups").values('first_name','last_name', 'email', 'username', 'last_login').filter(groups__isnull=False).distinct()
+    users = []
+    for user in User.objects.prefetch_related("groups"):
+        if user.groups.exists():
+            if str(user.groups.get())=='sig_usuario_admin':
+                rol='Admin'
+            if str(user.groups.get())=='sig_usuario_tactico':
+                rol='Táctico'
+            if str(user.groups.get())=='sig_usuario_estrategico':
+                rol='Estratégico'
+            data={
+                'nombre': user.first_name,
+                'apellidos': user.last_name,
+                'email':user.email,
+                'rol': rol,
+                'usuario':user.username,
+                'fecha_creacion':user.date_joined.strftime("%d/%m/%Y %H:%M:%S")
+            }
+            users.append(data)
+    return JsonResponse(users, safe=False)
+
 @csrf_exempt
 def iniciarSesion(request):
     # Simulador de Token JWT, eliminar cuando ya se genere el token real
