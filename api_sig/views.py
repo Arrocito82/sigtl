@@ -403,6 +403,189 @@ def reporteIngresosCostos(filtro):
         
     return HttpResponse(jsonString)
 
+#Reporte de Productos mas vendidos por sucursal
+@csrf_exempt
+def reporteProductosMasVendidos(filtro):
+
+    dicci=[
+        {
+            "sucursal": "Sucursal San Salvador",
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":"Esmalte de uÃ±as rojo intenso",
+        },
+        {
+            "sucursal": "Sucursal Santa Tecla",
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":" El SeÃ±or de los Anillos",
+        },
+        {
+            "sucursal": "Sucursal San Miguel",
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":" Don Quijote de la Mancha",
+        },
+        {
+            "sucursal": "Sucursal Santa Ana",
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":"El SeÃ±or de los Anillos",
+        },
+        {
+            "sucursal": "Sucursal Sonsonate",
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":"Sudadera con capucha",
+        },
+    ]
+
+    jsonString= json.dumps(dicci)   
+        
+    return HttpResponse(jsonString)
+
+#Reporte de Frecuencia de compra
+@csrf_exempt
+def reporteFrecuenciaDeCompra(filtro):
+
+    dicci=[
+        {
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":"Cien aÃ±os de soledad",
+            "cantidad promedio": 1
+        },
+        {
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":" Don Quijote de la Mancha",
+            "cantidad promedio": 1.75
+        },
+        {
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":" El Gran Gatsby",
+            "cantidad promedio": 1.5
+        },
+        {
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":" El Hobbit",
+            "cantidad promedio": 1
+        },
+        {
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":" El SeÃ±or de los Anillos",
+            "cantidad promedio": 2.25
+        },
+        {
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":" El viejo y el mar",
+            "cantidad promedio": 1.5
+        },
+        {
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":" Matar a un ruiseÃ±or",
+            "cantidad promedio": 1.25
+        },
+        {
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":" Orgullo y prejuicio",
+            "cantidad promedio": 1.5
+        },
+        {
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":"Abrigo de lana",
+            "cantidad promedio": 0.5
+        },
+        {
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":"BalÃ³n de baloncesto",
+            "cantidad promedio": 0.25
+        },
+        {
+            "anio": "2022",
+            "trimestre": "primero",
+            "producto":"Barra de labios nude",
+            "cantidad promedio": 1.75
+        },
+    ]
+
+    jsonString= json.dumps(dicci)   
+        
+    return HttpResponse(jsonString)
+
+#Reporte de Productos Dañados
+@csrf_exempt
+def reporteProductosDaniados(filtro):
+
+    dicci=[
+        {
+            "sucursal": "Sucursal San Salvador",
+            "producto":"Esmalte de uÃ±as rojo intenso",
+            "fecha de vencimiento": "2022-01-04",
+            "descuento": 0.2,
+        },
+        {
+            "sucursal": "Sucursal Santa Tecla",
+            "producto":" Atun Enlatado",
+            "fecha de vencimiento": "2022-01-03",
+            "descuento": 0.3,
+        },
+        {
+            "sucursal": "Sucursal San Miguel",
+            "producto":"Mantequilla de Mano",
+            "fecha de vencimiento": "2022-01-05",
+            "descuento": 0.3,
+        },
+    ]
+
+    jsonString= json.dumps(dicci)   
+        
+    return HttpResponse(jsonString)
+
+#Reporte de Clientes
+@csrf_exempt
+def reporteDemandaClientes(filtro):
+
+    dicci=[
+        {
+            "sucursal": "Sucursal San Salvador",
+            "mañana": 7,
+            "Tarde-noche": 8, 
+        },
+        {
+            "sucursal": "Sucursal San Salvador",
+            "mañana": 9,
+            "Tarde-noche": 7, 
+        },
+        {
+            "sucursal": "Sucursal San Salvador",
+            "mañana": 8,
+            "Tarde-noche": 9,  
+        },
+        {
+            "sucursal": "Sucursal San Salvador",
+            "mañana": 9,
+            "Tarde-noche": 9, 
+        },
+        {
+            "sucursal": "Sucursal San Salvador",
+            "mañana": 7,
+            "Tarde-noche": 9, 
+        },
+    ]
+
+    jsonString= json.dumps(dicci)   
+        
+    return HttpResponse(jsonString)
+
 
 # BACKUP
 def crearBackup(request):
