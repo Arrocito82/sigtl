@@ -11,11 +11,14 @@ function Usuarios() {
                 <table class="table">
                     <thead>
                         <tr>
+                        <th scope="col">Usuario</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Es Administrador</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Rol</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Editar</th>
-                        <th scope="col">Ver</th>
+                        <th scope="col">Eliminar</th>
                         </tr>
                     </thead>
                 </table>

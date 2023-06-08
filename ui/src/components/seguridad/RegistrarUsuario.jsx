@@ -51,11 +51,12 @@ function Config() {
             MySwal.fire({
                 title: response.data.mensaje,
                 icon:'success'
+            }).then((result)=>{
+                if(result.isConfirmed){
+                    //redirect user to home page
+                    window.location.href = '/usuarios'
+                }
             });
-            setTimeout(() => {
-                //redirect user to home page
-                window.location.href = '/usuarios'
-              }, 1000);
         }).catch(error=>{
             if (error.response) {
                 // The request was made and the server responded with a status code
