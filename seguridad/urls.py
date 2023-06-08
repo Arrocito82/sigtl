@@ -8,6 +8,7 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path("login", views.iniciarSesion),
     path("register-admin", views.registrarAdmin),
+    path("register-usuario", views.registrarUsuario),
     path("cambiar-contrasena", views.cambiarContrasena),
     # agregar aqui path para refrescar el token
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
