@@ -45,13 +45,12 @@ function IngresosCostos() {
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
         console.log(formJson); 
-        await axios.post('/some-api', formJson,{
+        await axios.post('http://localhost:8000/api/ingresosCostos', formJson,{
             headers: {
                 'Content-Type': 'application/json'
             }
         } ).then((response) => {
-            console.log(response);
-            setReporte(response.data);
+            setReporte(JSON.stringify(response.data, null, 2));
         });
     }
     return(
@@ -97,15 +96,21 @@ function IngresosCostos() {
                         </div>
                     </form>
                 </div>
-                <div className="col-lg text-center reporte" >
+                
                     {reporte ? (
-                        <><h2>reporte aqui</h2></>
+                        <>
+                        <div className="col-md ps-5 reporte" >
+                         <pre>{reporte}</pre>
+                        </div></>
                         ):
-                        <><img src='Waiting-amico.png' alt='Waiting' style={{ width: '30%', marginTop: '30px' }}></img><h2>Seleccione los filtros necesarios...</h2></>
+                        <>
+                        <div className="col-md text-center reporte" >
+                            <img src='Waiting-amico.png' alt='Waiting' style={{ width: '30%', marginTop: '30px' }}></img><h2>Seleccione los filtros necesarios...</h2>
+                        </div>
+                        </>
                     }
                 </div>
             </div>
-        </div>
   );
 
 }
