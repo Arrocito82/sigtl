@@ -370,24 +370,28 @@ def reporteIngresosCostos(filtro):
 
     dicci=[
         {
+            "sucursal": "todas",
             "anio": "2022",
             "trimestre": "primero",
             "ingresos": 7134.56,
             "costos": 4128.45,
         },
         {
+            "sucursal": "todas",
             "anio": "2022",
             "trimestre": "segundo",
             "ingresos": 6873.31,
             "costos": 4035.12,
         },
         {
+            "sucursal": "todas",
             "anio": "2022",
             "trimestre": "tercero",
             "ingresos": 6214.94,
             "costos":4035.12,
         },
         {
+            "sucursal": "todas",
             "anio": "2022",
             "trimestre": "cuarto",
             "ingresos": 7417.28,
