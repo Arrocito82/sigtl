@@ -239,8 +239,8 @@ def validarProductosDanados(request):
         productoDanado=ProductoDanado()
         if l["id_productoDanado"] != "":
             productoDanado.id_productoDanado=int(l["id_productoDanado"])
-        if l["id_producto_id"] != "":    
-            productoDanado.id_producto_id=int(l["id_producto_id"])
+        if l["id_producto"] != "":    
+            productoDanado.id_producto_id=int(l["id_producto"])
 
         # print(l["fecha_registro"])
         if l["fecha_registro"] != "":
