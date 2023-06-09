@@ -9,6 +9,10 @@ urlpatterns = [
     path("saveProdDan/", views.crearProductosDanados),
     path("ingresosCostos", views.reporteIngresosCostos),
     path("crearRespaldoDatos/", views.crearBackup),
-    path("descargarRespaldoDatos/", views.descargarBackup)
+    path("descargarRespaldoDatos/", views.descargarBackup),
+    path("prodMasVendidos/", views.reporteProductosMasVendidos),
+    path("frecuenciaCompra/", views.reporteFrecuenciaDeCompra),
+    path("prodDaniados/", views.reporteProductosDaniados),
+    path("demandaClientes/", views.reporteDemandaClientes)
 ]
 

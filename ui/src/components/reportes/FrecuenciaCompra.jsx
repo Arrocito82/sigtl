@@ -34,52 +34,57 @@ function FrecuenciaCompra() {
       const formData = new FormData(form);
       const formJson = Object.fromEntries(formData.entries());
       console.log(formJson); 
-      await axios.post('/some-api', formJson,{
-          headers: {
-              'Content-Type': 'application/json'
-          }
+      await axios.post('http://localhost:8000/api/frecuenciaCompra/', formJson,{
+        headers: {
+            'Content-Type': 'application/json'
+        }
       } ).then((response) => {
-          console.log(response);
-          setReporte(response.data);
+        setReporte(JSON.stringify(response.data, null, 4));
       });
   }
   return(
-      <div className="container">
-          <div className="row">
-              <div className="col-md-auto">
-                  <form method="post" onSubmit={handleFilter}>
-                      <h5>Seleccione los filtros necesarios</h5>
-                      <label className="form-label mt-2">Sucursal:</label>
-                      <select name='filterSucursal' className="form-select">
-                          {Object.keys(SUCURSALES).map((suc) => (
-                          <option key={suc} value={suc}>
-                              {SUCURSALES[suc]}
-                          </option>
-                          ))}
-                      </select>
-                      <label className="form-label mt-2">Producto:</label>
-                      <select name='filterProducto' className="form-select">
-                          {Object.keys(PRODUCTOS).map((pro) => (
-                          <option key={pro} value={pro}>
-                              {PRODUCTOS[pro]}
-                          </option>
-                          ))}
-                      </select>
-                      <div className="d-grid gap-2 mt-4">
-                            <button type="submit" className="btn btn-primary">Mostrar resultados</button>
-                      </div>
-                  </form>
-              </div>
-              <div className="col-lg text-center reporte" >
-                  {reporte ? (
-                      <><h2>reporte aqui</h2></>
-                      ):
-                      <><img src='Waiting-amico.png' alt='Waiting' style={{ width: '30%', marginTop: '30px' }}></img><h2>Seleccione los filtros necesarios...</h2></>
-                  }
-              </div>
-          </div>
-      </div>
-  );
+    <div className="container">
+        <h2 className='text-center'>Frecuencia de compra</h2>
+        <div className="row">
+            <div className="col-md-auto">
+                <form method="post" onSubmit={handleFilter}>
+                    <h5>Seleccione los filtros necesarios</h5>
+                    <label className="form-label mt-2">Sucursal:</label>
+                    <select name='filterSucursal' className="form-select">
+                        {Object.keys(SUCURSALES).map((suc) => (
+                        <option key={suc} value={suc}>
+                            {SUCURSALES[suc]}
+                        </option>
+                        ))}
+                    </select>
+                    <label className="form-label mt-2">Producto:</label>
+                    <select name='filterProducto' className="form-select">
+                        {Object.keys(PRODUCTOS).map((pro) => (
+                        <option key={pro} value={pro}>
+                            {PRODUCTOS[pro]}
+                        </option>
+                        ))}
+                    </select>
+                    <div className="d-grid gap-2 mt-4">
+                        <button type="submit" className="btn btn-primary">Mostrar resultados</button>
+                    </div>
+                </form>
+            </div>
+            {reporte ? (
+                    <>
+                    <div className="col-md ps-5 reporte" >
+                        <pre>{reporte}</pre>
+                    </div></>
+                    ):
+                    <>
+                    <div className="col-md text-center reporte" >
+                        <img src='Waiting-amico.png' alt='Waiting' style={{ width: '30%', marginTop: '30px' }}></img><h2>Seleccione los filtros necesarios...</h2>
+                    </div>
+                    </>
+                }
+        </div>
+    </div>
+);
 }
 
 export default FrecuenciaCompra;
