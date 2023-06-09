@@ -50,11 +50,12 @@ function IngresosCostos() {
                 'Content-Type': 'application/json'
             }
         } ).then((response) => {
-            setReporte(JSON.stringify(response.data, null, 2));
+            setReporte(JSON.stringify(response.data, null, 4));
         });
     }
     return(
         <div className="container">
+            <h2 className='text-center'>Ingresos y costos trimestrales</h2>
             <div className="row">
                 <div className="col-md-auto">
                     <form method="post" onSubmit={handleFilter}>
