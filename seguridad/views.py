@@ -7,12 +7,56 @@ from django.db import IntegrityError
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
+from django.core.paginator import Paginator
+from django.core import serializers
 import random
 import string
 import json
 import time
-
+from seguridad.models import *
 from api_sig.models import *
+import datetime
+
+from seguridad.serializers import AccionSerializer
+
+def getAcciones(request):
+    acciones_list = Accion.objects.all().order_by('fecha')
+    page_number = request.GET.get("page")
+    paginator = Paginator(acciones_list, 10)  # Show 25 contacts per page.
+    # print(page_number)
+    # string_data=request.body.decode('utf-8')
+    # data_dict = json.loads(string_data)
+    # # Access the values in the dictionary
+    # page_number = int(data_dict['page'])
+    page_obj = paginator.get_page(int(page_number))
+    # items = serializers.serialize('json',page_obj, fields=("fecha", "usuario", "contexto" ,"evento", "descripcion"))
+    items=AccionSerializer(page_obj, many=True)
+    data={
+        "items":items.data, 
+        "count":paginator.num_pages
+        }
+    print(data)
+    return JsonResponse(data, safe=False)
+
+def crearAcciones():
+    andrea=User.objects.get(username='mm18057')
+    carolina=User.objects.get(username='ml17017')
+    marvin=User.objects.get(username='mh18083')
+    # fecha=datetime.datetime(2023,6,4, 20,23)
+    fecha=datetime.datetime(2023,6,5, 8,3,tzinfo=datetime.timezone.utc) 
+    categorias=Movimiento.objects.all()
+    for categoria in categorias:
+        cargar=Accion(
+            fecha=fecha,
+            usuario=marvin,
+            registro_afectado="/cargar-movimientos?id="+str(categoria.id_movimiento),
+            contexto="/cargar-movimientos",
+            evento="Crear Movimiento",
+            descripcion="El usuario "+marvin.username+" creó el movimiento "+str(categoria.id_movimiento) )
+        cargar.save()
+    return
+
+
 
 def getUsuarios(request):
     # users=User.objects.prefetch_related("groups").values('first_name','last_name', 'email', 'username', 'last_login').filter(groups__isnull=False).distinct()
@@ -58,11 +102,11 @@ def iniciarSesion(request):
         if user is not None:
             # A backend authenticated the credentials
             token=get_tokens_for_user(user)
-            if User.objects.filter(username="mm18057@ues.edu.sv",groups__name='sig_usuario_admin').exists():
+            if User.objects.filter(username=user.username,groups__name='sig_usuario_admin').exists():
                 rol='admin'
-            elif User.objects.filter(username="mm18057@ues.edu.sv",groups__name='sig_usuario_tactico').exists():
+            elif User.objects.filter(username=user.username,groups__name='sig_usuario_tactico').exists():
                 rol='tactico'
-            elif User.objects.filter(username="mm18057@ues.edu.sv",groups__name='sig_usuario_estrategico').exists():
+            elif User.objects.filter(username=user.username,groups__name='sig_usuario_estrategico').exists():
                 rol='estrategico'
             else:
                 return HttpResponse("No tiene rol asignado.", status=401)

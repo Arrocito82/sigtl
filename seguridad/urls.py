@@ -11,6 +11,7 @@ urlpatterns = [
     path("register-admin", views.registrarAdmin),
     path("register-usuario", views.registrarUsuario),
     path("cambiar-contrasena", views.cambiarContrasena),
+    path("historial-usuarios", views.getAcciones),
     # agregar aqui path para refrescar el token
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

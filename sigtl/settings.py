@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'corsheaders',
     "django.contrib.postgres",
     "api_sig.apps.ApiSigConfig",
+    "seguridad",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
