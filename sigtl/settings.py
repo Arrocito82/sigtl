@@ -10,7 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+import environ
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 CORS_ORIGIN_ALLOW_ALL = False
 
@@ -30,12 +36,15 @@ CORS_ALLOW_METHODS = (
 
 CORS_ALLOWED_ORIGINS = [
        'http://localhost:3000',
-       'http://172.17.0.2:3000'
+       'http://172.17.0.2:3000',
+       env('CORS_ALLOWED_ORIGINS_PRODUCTION')
+
 ]
 
 CSRF_TRUSTED_ORIGINS = [
        'http://localhost:3000',
-       'http://172.17.0.2:3000'
+       'http://172.17.0.2:3000',
+       env('CSRF_TRUSTED_ORIGINS_PRODUCTION')
 ]
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,7 +54,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-o)sl=za+$_(z_!8ctjx5gs$#)g0hq=rhtp!-d-%*&n5^c_*i4z"
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -107,16 +116,16 @@ WSGI_APPLICATION = "sigtl.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'SIGTL05',
-        'USER': 'dsi115',
-        'PASSWORD': 'dsi115',
-        'HOST': 'proyectos.czoy1vdwgmhj.us-east-1.rds.amazonaws.com',
-        'PORT': '5432',
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
+        'HOST': env('DATABASE_HOST'),
+        'PORT': env('DATABASE_PORT'),
     },
-    "sqlite": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    # "sqlite": {
+    #     "ENGINE": "django.db.backends.sqlite3",
+    #     "NAME": BASE_DIR / "db.sqlite3",
+    # }
 }
 
 
@@ -155,6 +164,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
