@@ -20,7 +20,7 @@ import datetime
 from seguridad.serializers import AccionSerializer
 
 def getAcciones(request):
-    acciones_list = Accion.objects.all().order_by('fecha')
+    acciones_list = Accion.objects.all().order_by('-fecha')
     page_number = request.GET.get("page")
     paginator = Paginator(acciones_list, 10)  # Show 25 contacts per page.
     # print(page_number)
