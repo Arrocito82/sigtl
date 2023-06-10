@@ -20,7 +20,7 @@ function Nav(){
     },[])
     return(
       <nav className="navbar"> 
-          <div className="pt-3 justify-content-between container-fluid">
+          <div className="container pt-3 justify-content-between container-fluid">
                 <div className="btn-group" >
                   <img src="cover.png" alt="Tienda Luisito" style={{width:'300px'}}/>
                 </div>

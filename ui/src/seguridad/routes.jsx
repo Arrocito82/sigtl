@@ -21,6 +21,7 @@ import HistorialUsuarios from "../components/seguridad/HistorialUsuarios";
 import Usuarios from "../components/seguridad/Usuarios";
 import CambiarContrasena from "../components/seguridad/CambiarContrasena";
 import RespaldoDatos from "../components/seguridad/RespaldoDatos";
+import RegistrarUsuario from "../components/seguridad/RegistrarUsuario";
 
 function Routes() {
    return (
@@ -100,6 +101,11 @@ function Routes() {
                 exact
                 path="/respaldo-datos"
                 component={RespaldoDatos}
+                />
+            <RouteGuard
+                exact
+                path="/registrar-usuario"
+                component={RegistrarUsuario}
                 />
             <Redirect to="/" />
         </Switch>

@@ -5,10 +5,10 @@ import { setAuthToken } from "../../seguridad/setAuthToken";
 function IniciarSesion() {
     const [mensajeError, setMensajeError]=useState();
     const [contrasena, setContrasena]=useState("");
-    const [email, setEmail]=useState("");
+    const [username, setUsername]=useState("");
 
-    function handleEmailChange(event) {
-        setEmail(event.target.value);
+    function handleUsernameChange(event) {
+        setUsername(event.target.value);
     }
     function handlePasswordlChange(event) {
         setContrasena(event.target.value);
@@ -18,7 +18,7 @@ function IniciarSesion() {
         setMensajeError();
         let data={
             'password':contrasena,
-            'email': email
+            'username': username
         }
         await axios.post("http://localhost:8000/auth/login", data, {
         headers: {
@@ -36,9 +36,10 @@ function IniciarSesion() {
             localStorage.setItem("token", token);
             localStorage.setItem("isConfigured", isConfigured);
             localStorage.setItem("isAdmin", isAdmin);
-            localStorage.setItem("username", email);
+            localStorage.setItem("username", username);
             localStorage.setItem("rol", rol);
-            // console.log(localStorage.getItem("token"));
+            console.log(localStorage.getItem("token"));
+            console.log(localStorage.getItem("username"));
             //set token to axios common header
             setAuthToken(token);
 
@@ -53,7 +54,7 @@ function IniciarSesion() {
                 console.log(error.response.headers);
             }
             setMensajeError(<div className="bg-light-subtle rounded border fw-bold text-danger-emphasis border-danger text-center my-3 py-1">          
-                                <span style={{"position":"relative","bottom":"10px"}}>Credenciales Incorrectas</span>
+                                <span style={{"position":"relative","bottom":"10px"}}>{error.response.data}</span>
                                 <span className="material-symbols-outlined m-1 fs-2" >report</span>
                             </div>);
         });
@@ -66,9 +67,9 @@ function IniciarSesion() {
                         <p className="text-center"><span className="h4 text-dark-emphasis" >Iniciar Sesión</span></p>
                         {mensajeError}
                         <div className="mb-3">
-                            <label htmlFor="email" className="form-label">Correo Electrónico</label>
-                            <input type="email" className="form-control" id="email" aria-describedby="emailHelp" value={email} onChange={handleEmailChange}/>
-                            <div id="emailHelp" className="form-text">Ej. carnet@tiendaluisito.com</div>
+                            <label htmlFor="username" className="form-label">Usuario</label>
+                            <input type="text" className="form-control" id="username" aria-describedby="usernameHelp" value={username} onChange={handleUsernameChange}/>
+                            <div id="usernameHelp" className="form-text">Ej. mm18057</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="password1" className="form-label">Password</label>

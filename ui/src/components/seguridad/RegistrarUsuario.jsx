@@ -1,15 +1,18 @@
 import { useState } from "react";
 import axios from 'axios';
-import { setAuthToken } from "../../seguridad/setAuthToken";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content'
 
 function Config() {
     const [mensajeError, setMensajeError]=useState();
-    const [contrasena, setContrasena]=useState("");
-    const [contrasena2, setContrasena2]=useState("");
     const [email, setEmail]=useState("");
     const [nombre, setNombre]=useState("");
     const [apellidos, setApellidos]=useState("");
     const [nombreUsuario, setNombreUsuario]=useState("");
+    const [rol, setRol]=useState("");
+
+    // Mensaje de alerta
+    const MySwal = withReactContent(Swal);
 
     function handleNombreUsuarioChange(event) {
         setNombreUsuario(event.target.value);    
@@ -26,47 +29,34 @@ function Config() {
     function handleEmailChange(event) {
         setEmail(event.target.value);
     }
-    function handlePasswordlChange(event) {
-        setContrasena(event.target.value);
-    }
-    function handlePasswordlChange2(event) {
-        setContrasena2(event.target.value);
+    function handleRolChange(event) {
+        setRol(event.target.value);
     }
     async function iniciarSesion() {
         // función para iniciar sesion que retorna un token
         setMensajeError();
         let data={
-            'password':contrasena,
+            'rol':rol,
             'username':nombreUsuario,
             'email': email,
             'nombre':nombre,
             'apellidos':apellidos
         }
-        await axios.post("http://localhost:8000/auth/register-admin", data, {
+        await axios.post("http://localhost:8000/auth/register-usuario", data, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
         }
         }).then(response => { // then print response status
-            //get token from response
-            const token  =  response.data.token;
-            const isConfigured  =  response.data.isConfigured;
-            const isAdmin= response.data.isAdmin;
-            const rol= response.data.rol;
-            const username=response.data.username;
-            
-            //set JWT token to local
-            localStorage.setItem("token", token);
-            localStorage.setItem("isConfigured", isConfigured);
-            localStorage.setItem("isAdmin", isAdmin);
-            localStorage.setItem("username", username);
-            localStorage.setItem("rol", rol);
-            // console.log(localStorage.getItem("token"));
-            //set token to axios common header
-            setAuthToken(token);
-
-            //redirect user to home page
-            window.location.href = '/'
+            MySwal.fire({
+                title: response.data.mensaje,
+                icon:'success'
+            }).then((result)=>{
+                if(result.isConfirmed){
+                    //redirect user to home page
+                    window.location.href = '/usuarios'
+                }
+            });
         }).catch(error=>{
             if (error.response) {
                 // The request was made and the server responded with a status code
@@ -88,7 +78,7 @@ function Config() {
                         <div className="row justify-content-center">
                             <img src="cover.png" alt="Bienvenidos a Tienda Luisito" className="pb-2 pt-3 logo-login"/>
                             <p className="text-center">
-                                <span className="h4 text-dark-emphasis" >Registrar Administrador</span>
+                                <span className="h4 text-dark-emphasis" >Registrar Usuario</span>
                             </p>
                             {mensajeError}
                         </div>
@@ -120,22 +110,19 @@ function Config() {
                             </div>
                             <div className="row">                            
                                 <div className="col mb-3">
-                                    <label htmlFor="password1" className="form-label">Contraseña</label>
-                                    <input type="password" className="form-control" id="password1" value={contrasena} onChange={handlePasswordlChange}/>
-                                </div>
-                                <div className="col mb-3">
-                                    <label htmlFor="password2" className="form-label">Confirmar Contraseña</label>
-                                    <input type="password" className="form-control" id="password2" value={contrasena2} onChange={handlePasswordlChange2}/>
+                                    <label htmlFor="rol" className="form-label">Rol</label>
+                                    <select value={rol} id="rol" name="rol" class="form-select" aria-label="Seleccionar Rol" onChange={handleRolChange}>
+                                        <option selected>Seleccionar Rol</option>
+                                        <option value="admin">Administrador</option>
+                                        <option value="tactico">Táctico</option>
+                                        <option value="estrategico">Estratégico</option>
+                                    </select>
                                 </div>
                             </div>
                             <div className="row mb-3 mx-0 ">
-                                <div className="col mb-3 form-check">
-                                    <input type="checkbox" className="form-check-input" id="recordar-contrasena"/>
-                                    <label className="form-check-label" htmlFor="recordar-contrasena">Recordar Contraseña</label>
-                                </div>
                                 <div className="px-0 col text-end">
                                     <button
-                                    disabled={!((contrasena===contrasena2)&&(contrasena!=="")&&(contrasena2!=="")&&(email!==""))}
+                                    disabled={!((rol!=="")&&(email!==""))}
                                     type="button" className="btn btn-primary px-3" onClick={iniciarSesion}>Registrar</button>
                                 </div>
                             </div>
