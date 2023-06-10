@@ -42,7 +42,7 @@ function Config() {
             'nombre':nombre,
             'apellidos':apellidos
         }
-        await axios.post("http://localhost:8000/auth/register-admin", data, {
+        await axios.post("https://sigtl.herokuapp.com"+"/auth/register-admin", data, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'

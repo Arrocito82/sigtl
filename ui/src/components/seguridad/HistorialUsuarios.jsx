@@ -7,7 +7,7 @@ function HistorialUsuarios() {
     const [totalPages, setTotalPages]=useState(1);
     const [historial, setHistorial]=useState([]);
     async function getAcciones(pageSelected) {
-        axios.get("http://localhost:8000/auth/historial-usuarios?page="+parseInt(pageSelected), {
+        axios.get("https://sigtl.herokuapp.com"+"/auth/historial-usuarios?page="+parseInt(pageSelected), {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'

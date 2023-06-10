@@ -19,7 +19,7 @@ function RestablecerContrasena() {
         let data={
             'password':contrasena
         }
-        await axios.post("http://localhost:8000/auth/cambiar-contraseña", data, {
+        await axios.post("https://sigtl.herokuapp.com"+"/auth/cambiar-contraseña", data, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'

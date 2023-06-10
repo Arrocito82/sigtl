@@ -20,7 +20,7 @@ function IniciarSesion() {
             'password':contrasena,
             'username': username
         }
-        await axios.post("http://localhost:8000/auth/login", data, {
+        await axios.post("https://sigtl.herokuapp.com"+"/auth/login", data, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'

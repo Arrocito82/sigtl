@@ -42,7 +42,7 @@ function DemandaClientes() {
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
         console.log(formJson); 
-        await axios.post('http://localhost:8000/api/demandaClientes/', formJson,{
+        await axios.post("https://sigtl.herokuapp.com"+'/api/demandaClientes/', formJson,{
             headers: {
                 'Content-Type': 'application/json'
             }

@@ -42,7 +42,7 @@ function Config() {
             'nombre':nombre,
             'apellidos':apellidos
         }
-        await axios.post("http://localhost:8000/auth/register-usuario", data, {
+        await axios.post(process.env.DJANGO_HOST+"/auth/register-usuario", data, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'

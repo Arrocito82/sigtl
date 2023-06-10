@@ -95,7 +95,7 @@ async function onClickHandler(){
 // console.log(data);
 // Iniciar la validación de los datos
 setLoadingSpinner(true);
-await axios.post("http://localhost:8000/api/valProdDan/", data, {
+await axios.post("https://sigtl.herokuapp.com"+"/api/valProdDan/", data, {
 headers: {
   // Overwrite Axios's automatically set Content-Type
   'Content-Type': 'application/json'
@@ -113,7 +113,7 @@ headers: {
 }
 // Funcion para guardar los productos
 async function Guardar(){
-  await axios.post("http://localhost:8000/api/saveProdDan/", posts.productos, {
+  await axios.post("https://sigtl.herokuapp.com"+"/api/saveProdDan/", posts.productos, {
   headers: {
     // Overwrite Axios's automatically set Content-Type
     'Content-Type': 'application/json'

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 function Usuarios() {
     const [usuarios, setUsuarios]=useState([]);
     function getUsuarios() {
-        axios.get("http://localhost:8000/auth/usuarios", {
+        axios.get("https://sigtl.herokuapp.com"+"/auth/usuarios", {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
