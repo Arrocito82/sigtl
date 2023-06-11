@@ -42,7 +42,7 @@ function Config() {
             'nombre':nombre,
             'apellidos':apellidos
         }
-        await axios.post(process.env.DJANGO_HOST+"/auth/register-usuario", data, {
+        await axios.post("https://sigtl.herokuapp.com"+"/auth/register-usuario", data, {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'

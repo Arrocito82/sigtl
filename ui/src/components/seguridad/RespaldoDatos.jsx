@@ -43,7 +43,7 @@ function RespaldoDatos() {
         });
     }
     async function descargarRespaldo(){
-        window.open("http://127.0.0.1:8000/api/descargarRespaldoDatos/", "_top", "noreferrer");
+        window.open("https://sigtl.herokuapp.com"+"/api/descargarRespaldoDatos/", "_top", "noreferrer");
         const current = new Date();
         const time = current.toLocaleString("es-es");
         setEstadoRespaldo("Respaldo de datos descargados con éxito.");
