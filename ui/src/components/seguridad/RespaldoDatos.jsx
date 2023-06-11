@@ -27,7 +27,7 @@ function RespaldoDatos() {
 
     async function crearRespaldo(){
         setLoadingSpinner(true);
-        await axios.get("http://127.0.0.1:8000/api/crearRespaldoDatos/", {
+        await axios.get("https://sigtl.herokuapp.com"+"/api/crearRespaldoDatos/", {
         headers: {
             // Overwrite Axios's automatically set Content-Type
             'Content-Type': 'application/json'
