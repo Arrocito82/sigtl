@@ -37,14 +37,16 @@ CORS_ALLOW_METHODS = (
 CORS_ALLOWED_ORIGINS = [
        'http://localhost:3000',
        'http://172.17.0.2:3000',
-       env('CORS_ALLOWED_ORIGINS_PRODUCTION')
+       env('CORS_ALLOWED_ORIGINS_PRODUCTION'),
+       env('CORS_ALLOWED_ORIGINS_LOCAL')
 
 ]
 
 CSRF_TRUSTED_ORIGINS = [
        'http://localhost:3000',
        'http://172.17.0.2:3000',
-       env('CSRF_TRUSTED_ORIGINS_PRODUCTION')
+       env('CSRF_TRUSTED_ORIGINS_PRODUCTION'),
+       env('CSRF_TRUSTED_ORIGINS_LOCAL')
 ]
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
