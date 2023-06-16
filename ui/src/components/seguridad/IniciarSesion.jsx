@@ -61,7 +61,7 @@ function IniciarSesion() {
     }
 
     return(
-                <div className="d-flex justify-content-center" style={{height: "100vh"}}>                   
+                <div className="d-flex justify-content-center" style={{height: "80vh"}}>                   
                     <form action="/login" method="post" className="m-3 bg-body-tertiary p-4 rounded  align-self-center">
                         <img src="cover.png" alt="Bienvenidos a Tienda Luisito" className="pb-2 pt-3 logo-login"/>
                         <p className="text-center"><span className="h4 text-dark-emphasis" >Iniciar Sesión</span></p>
@@ -79,7 +79,7 @@ function IniciarSesion() {
                             <input type="checkbox" className="form-check-input" id="recordar-contrasena"/>
                             <label className="form-check-label" htmlFor="recordar-contrasena">Recordar Contraseña</label>
                         </div>
-                        <div>
+                        <div className="text-end">
                             <button type="button" className="btn btn-primary" onClick={iniciarSesion}>Iniciar Sesión</button>
                         </div>
                     </form>

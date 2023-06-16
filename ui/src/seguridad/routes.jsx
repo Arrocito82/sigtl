@@ -1,9 +1,8 @@
 import React from "react";
-import { Redirect, Switch, Router } from "react-router-dom";
+import { Redirect, Switch, Router, Route } from "react-router-dom";
  
 //history
 import { history } from './history';
-import RouteGuard from "./RouteGuard";
  
 //pages
 import Bienvenida from '../components/Bienvenida';
@@ -22,12 +21,14 @@ import Usuarios from "../components/seguridad/Usuarios";
 import CambiarContrasena from "../components/seguridad/CambiarContrasena";
 import RespaldoDatos from "../components/seguridad/RespaldoDatos";
 import RegistrarUsuario from "../components/seguridad/RegistrarUsuario";
+import RegistrarAdmin from "../components/seguridad/RegistrarAdmin";
 
 
 import Nav from '../components/navbar/Nav';
 import MenuTactico from '../components/navbar/MenuTactico';
 import MenuEstrategico from '../components/navbar/MenuEstrategico';
 import MenuSeguridad from '../components/navbar/MenuSeguridad';
+import IniciarSesion from "../components/seguridad/IniciarSesion";
 
 function Routes() {
     function getMenu() {
@@ -54,88 +55,98 @@ function Routes() {
     <Router history={history}>
         <header className='bg-body-tertiary'>        
             <Nav/>
-            {menuAsignado}
+            {menuAsignado&&menuAsignado}
         </header>
         <Switch>
-            <RouteGuard
+            <Route
                 exact
                 path="/"
                 component={Bienvenida}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/cargar-sucursales"
                 component={CargarDatosSucursales}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/cargar-categorias"
                 component={CargarDatosCategorias}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/cargar-productos"
                 component={CargarDatosProductos}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/cargar-movimientos"
                 component={CargarDatosMovimientos}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/cargar-productos-danados"
                 component={CargarProductosDanados}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/demanda-clientes"
                 component={DemandaClientes}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/frecuencia-compra"
                 component={FrecuenciaCompra}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/ingresos-costos"
                 component={IngresosCostos}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/productos-danados"
                 component={ProductosDanados}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/productos-mas-vendidos"
                 component={ProductosMasVendidos}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/usuarios"
                 component={Usuarios}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/historial"
                 component={HistorialUsuarios}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/cambiar-contrasena"
                 component={CambiarContrasena}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/respaldo-datos"
                 component={RespaldoDatos}
                 />
-            <RouteGuard
+            <Route
                 exact
                 path="/registrar-usuario"
                 component={RegistrarUsuario}
+                />
+            <Route
+                exact
+                path="/registrar-admin"
+                component={RegistrarAdmin}
+                />
+            <Route
+                exact
+                path="/iniciar-sesion"
+                component={IniciarSesion}
                 />
             <Redirect to="/" />
         </Switch>

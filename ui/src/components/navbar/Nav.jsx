@@ -24,6 +24,7 @@ function Nav(){
                 <div className="btn-group" >
                   <img src="cover.png" alt="Tienda Luisito" style={{width:'300px'}}/>
                 </div>
+                {username&&
                 <div className="btn-group" >
                     <button type="button" className="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       <span className="material-symbols-outlined" style={{position:'relative',top:'5px'}}>person</span>
@@ -51,6 +52,30 @@ function Nav(){
                         </li>
                     </ul>
                 </div>
+                }
+                {!username&&	
+                <div className="btn-group" >
+                  <a
+                    href="/iniciar-sesion"
+                    name='iniciar-sesion' 
+                    className='btn btn-outline-primary mx-1' 
+                    >
+                      <span style={{position:'relative',bottom:'10px'}}>Iniciar Sesión</span>
+                      <span className="material-symbols-outlined fs-2 m-2">login</span>
+                    </a>
+
+
+                    <a
+                    href="registrar-admin"
+                    name='registrar-admin'
+                    className='btn btn-outline-primary mx-1'>
+                      <span style={{position:'relative',bottom:'10px'}}>
+                        Registrar Administrador
+                      </span>
+                      <span className="material-symbols-outlined fs-2 m-2">person_add</span>
+                    </a>
+                </div>
+                }
           </div>
       </nav>
     );
