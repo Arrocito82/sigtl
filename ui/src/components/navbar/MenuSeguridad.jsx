@@ -1,7 +1,16 @@
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 function MenuSeguridad(){
     return(
         <div className="d-flex pt-2 pb-3 justify-content-center container-fluid">
           
+
+            <Router forceRefresh={true}>
             <div className="btn-group">
               <button type="button" className="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <span>Cargar CSV</span> 
@@ -9,59 +18,57 @@ function MenuSeguridad(){
               </button>
               <ul className="dropdown-menu">
               <li>
-                  <a href="/cargar-sucursales"
+                  <Link to="/cargar-sucursales"
                     name='cargar-sucursales' 
                     className='dropdown-item' 
-                    >Sucursales</a>
+                    >Sucursales</Link>
               </li>
               <li>
-                <a
-                href="/cargar-categorias"
+                <Link
+                to="/cargar-categorias"
                 name='cargar-categorias' 
                 className='dropdown-item' 
-                >Categorias</a>
+                >Categorias</Link>
               </li>
               <li>
-                <a
-                href="/cargar-productos"
+                <Link
+                to="/cargar-productos"
                 name='cargar-productos' 
                 className='dropdown-item' 
-                >Productos</a>
+                >Productos</Link>
+                
               </li>
             </ul>
           </div>
-          <a
-          href="/usuarios"
-          name='usuarios' 
-          className='btn btn-outline-primary mx-1' 
-          >
-            <span style={{position:'relative',bottom:'10px'}}>Usuarios</span>
-            <span className="material-symbols-outlined fs-2 m-2">person</span>
-          </a>
-  
-  
-          <a
-           href="/historial"
-           name='historial'
-           className='btn btn-outline-primary mx-1'>
-            <span style={{position:'relative',bottom:'10px'}}>
-              Historial
-            </span>
-            <span className="material-symbols-outlined fs-2 m-2">history</span>
-          </a>
-          <a
-           href="/respaldo-datos"
-           name='respaldo-datos'
-           className='btn btn-outline-primary mx-1'>
-            <span style={{position:'relative',bottom:'10px'}}>
-              Respaldo de Datos
-            </span>
-            <span className="material-symbols-outlined fs-2 m-2">settings_backup_restore</span>
-          </a>
-  
-  
-         
-  
+            <Link
+            to="/usuarios"
+            name='usuarios' 
+            className='btn btn-outline-primary mx-1' 
+            >
+              <span style={{position:'relative',bottom:'10px'}}>Usuarios</span>
+              <span className="material-symbols-outlined fs-2 m-2">person</span>
+            </Link>
+    
+    
+            <Link
+            to="/historial"
+            name='historial'
+            className='btn btn-outline-primary mx-1'>
+              <span style={{position:'relative',bottom:'10px'}}>
+                Historial
+              </span>
+              <span className="material-symbols-outlined fs-2 m-2">history</span>
+            </Link>
+            <Link
+            to="/respaldo-datos"
+            name='respaldo-datos'
+            className='btn btn-outline-primary mx-1'>
+              <span style={{position:'relative',bottom:'10px'}}>
+                Respaldo de Datos
+              </span>
+              <span className="material-symbols-outlined fs-2 m-2">settings_backup_restore</span>
+            </Link>
+          </Router>
         </div>
     );
   }

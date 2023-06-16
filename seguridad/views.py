@@ -221,7 +221,7 @@ def registrarUsuario(request):
                 user.groups.add(grupo_tactico)
             if rol=='estrategico':    
                 user.groups.add(grupo_estrategico)    
-            token=get_tokens_for_user(user)
+
         except IntegrityError:
             return HttpResponse("Usuario ya existe", status=401)
             

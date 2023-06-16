@@ -23,9 +23,39 @@ import CambiarContrasena from "../components/seguridad/CambiarContrasena";
 import RespaldoDatos from "../components/seguridad/RespaldoDatos";
 import RegistrarUsuario from "../components/seguridad/RegistrarUsuario";
 
+
+import Nav from '../components/navbar/Nav';
+import MenuTactico from '../components/navbar/MenuTactico';
+import MenuEstrategico from '../components/navbar/MenuEstrategico';
+import MenuSeguridad from '../components/navbar/MenuSeguridad';
+
 function Routes() {
-   return (
+    function getMenu() {
+        let rol=localStorage.getItem("rol");
+        let menu;
+        switch (rol) {
+            case "tactico":
+                menu=<MenuTactico/>;
+                break;
+            case "estrategico":
+                menu=<MenuEstrategico/>
+                break;
+            case "admin":
+                menu=<MenuSeguridad/>
+                break;
+            default:
+                menu=null;
+                break;
+        }
+        return menu;
+    }
+    let menuAsignado=getMenu();
+    return (
     <Router history={history}>
+        <header className='bg-body-tertiary'>        
+            <Nav/>
+            {menuAsignado}
+        </header>
         <Switch>
             <RouteGuard
                 exact
