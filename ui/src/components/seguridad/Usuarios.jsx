@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 function Usuarios() {
     const [usuarios, setUsuarios]=useState([]);
     function getUsuarios() {
-        axios.get("https://sigtl.herokuapp.com"+"/auth/usuarios", {
+        axios.get(process.env.REACT_APP_DJANGO_HOST+"/auth/usuarios", {
         headers: {
           // Overwrite Axios's automatically set Content-Type
           'Content-Type': 'application/json'
@@ -43,6 +43,7 @@ function Usuarios() {
                         <th scope="col">Apellidos</th>
                         <th scope="col">Rol</th>
                         <th scope="col">Fecha Creación</th>
+                        <th scope="col">Activo</th>
                         <th scope="col">Editar</th>
                         <th scope="col">Eliminar</th>
                         </tr>
@@ -56,6 +57,7 @@ function Usuarios() {
                                     <td>{usuario.nombre}</td>
                                     <td>{usuario.apellidos}</td>
                                     <td>{usuario.rol}</td>
+                                    <td>{usuario.is_active}</td>
                                     <td>{usuario.fecha_creacion}</td>
                                     <td><button className='btn btn-outline-primary'>Editar</button></td>
                                     <td><button className='btn btn-outline-danger'>Eliminar</button></td>

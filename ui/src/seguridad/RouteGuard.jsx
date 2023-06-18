@@ -2,17 +2,9 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { setAuthToken } from "./setAuthToken";
 import axios from 'axios';
-import IniciarSesion from '../components/seguridad/IniciarSesion';
-// import Config from '../components/seguridad/RegistrarUsuario';
 
 const RouteGuard = ({ component: Component, ...rest }) => {
     
-    // function isConfigured() {
-    //     if(localStorage.getItem("isConfigured")){
-    //         return true;
-    //     }
-    //     return false;
-    // }
     function isLoggedIn() {
         if (localStorage.getItem("token")) {
            return true;
@@ -24,7 +16,7 @@ const RouteGuard = ({ component: Component, ...rest }) => {
         let data={
             'refresh': localStorage.getItem("token")
         }
-        await axios.post("https://sigtl.herokuapp.com"+"/auth/token/refresh/", data, {
+        await axios.post(process.env.REACT_APP_DJANGO_HOST+"/auth/token/refresh/", data, {
             headers: {
             // Overwrite Axios's automatically set Content-Type
             'Content-Type': 'application/json'
@@ -59,12 +51,6 @@ const RouteGuard = ({ component: Component, ...rest }) => {
             render={props => (<Component {...props} />)}
             />
         );
-//    }else if(!isConfigured()) {
-//         return(
-//             <Route {...rest}
-//             render={props => (<Config {...props} />)}
-//             />
-//         );
    }else if(window.location.pathname==="/iniciar-sesion" || window.location.pathname==="/registrar-usuario" || window.location.pathname==="/"){
         return(
             <Route {...rest}

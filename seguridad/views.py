@@ -75,7 +75,8 @@ def getUsuarios(request):
                 'email':user.email,
                 'rol': rol,
                 'usuario':user.username,
-                'fecha_creacion':user.date_joined.strftime("%d/%m/%Y %H:%M:%S")
+                'fecha_creacion':user.date_joined.strftime("%d/%m/%Y %H:%M:%S"),
+                'is_active':user.is_active
             }
             users.append(data)
     return JsonResponse(users, safe=False)

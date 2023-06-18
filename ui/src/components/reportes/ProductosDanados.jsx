@@ -26,7 +26,7 @@ function ProductosDanados() {
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
         console.log(formJson); 
-        await axios.post("https://sigtl.herokuapp.com"+'/api/prodDaniados/', formJson,{
+        await axios.post(process.env.REACT_APP_DJANGO_HOST+'/api/prodDaniados/', formJson,{
             headers: {
                 'Content-Type': 'application/json'
             }

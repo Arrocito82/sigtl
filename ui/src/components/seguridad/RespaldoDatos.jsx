@@ -27,7 +27,7 @@ function RespaldoDatos() {
 
     async function crearRespaldo(){
         setLoadingSpinner(true);
-        await axios.get("https://sigtl.herokuapp.com"+"/api/crearRespaldoDatos/", {
+        await axios.get(process.env.REACT_APP_DJANGO_HOST+"/api/crearRespaldoDatos/", {
         headers: {
             // Overwrite Axios's automatically set Content-Type
             'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ function RespaldoDatos() {
         });
     }
     async function descargarRespaldo(){
-        window.open("https://sigtl.herokuapp.com"+"/api/descargarRespaldoDatos/", "_top", "noreferrer");
+        window.open(process.env.REACT_APP_DJANGO_HOST+"/api/descargarRespaldoDatos/", "_top", "noreferrer");
         const current = new Date();
         const time = current.toLocaleString("es-es");
         setEstadoRespaldo("Respaldo de datos descargados con éxito.");

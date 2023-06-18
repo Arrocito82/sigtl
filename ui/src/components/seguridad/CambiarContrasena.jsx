@@ -31,7 +31,7 @@ function CambiarContrasena() {
                 'password':contrasena,
                 'username':username
             }
-            await axios.post("https://sigtl.herokuapp.com"+"/auth/cambiar-contrasena", data, {
+            await axios.post(process.env.REACT_APP_DJANGO_HOST+"/auth/cambiar-contrasena", data, {
             headers: {
               // Overwrite Axios's automatically set Content-Type
               'Content-Type': 'application/json'

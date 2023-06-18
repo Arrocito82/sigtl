@@ -10,7 +10,7 @@ function MenuSeguridad(){
         <div className="d-flex pt-2 pb-3 mb-3 justify-content-center container-fluid">
           
 
-            <Router>
+            <Router forceRefresh={true}>
             <div className="btn-group">
               <button type="button" className="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <span>Cargar CSV</span> 

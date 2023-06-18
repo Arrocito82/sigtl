@@ -104,7 +104,7 @@ async function onClickHandler(){
   // console.log(data);
   // Iniciar la validación de los datos
   setLoadingSpinner(true);
-  await axios.post("https://sigtl.herokuapp.com"+"/api/save/", data, {
+  await axios.post(process.env.REACT_APP_DJANGO_HOST+"/api/save/", data, {
   headers: {
     // Overwrite Axios's automatically set Content-Type
     'Content-Type': 'application/json'
@@ -123,7 +123,7 @@ async function onClickHandler(){
 // Función para guardar los movimientos
 async function Guardar(){
   console.log(posts.movimientos);
-  await axios.post("https://sigtl.herokuapp.com"+"/api/saveMovimientos/", posts.movimientos, {
+  await axios.post(process.env.REACT_APP_DJANGO_HOST+"/api/saveMovimientos/", posts.movimientos, {
   headers: {
     // Overwrite Axios's automatically set Content-Type
     'Content-Type': 'application/json'
