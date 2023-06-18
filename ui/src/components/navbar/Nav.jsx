@@ -5,13 +5,8 @@ function Nav(){
     const [username, setUsername]=useState();
     const logout=()=>{
       setAuthToken();
-      localStorage.removeItem("token");
-      // localStorage.removeItem("isConfigured");
-      localStorage.removeItem("isAdmin");
-      localStorage.removeItem("username");
-      // console.log(localStorage.getItem("token"));
+      localStorage.clear();
       window.location.href = '/'
-      // history.forward();
 
     }
     useEffect(()=>{
@@ -22,7 +17,9 @@ function Nav(){
       <nav className="navbar"> 
           <div className="container pt-3 justify-content-between container-fluid">
                 <div className="btn-group" >
-                  <img src="cover.png" alt="Tienda Luisito" style={{width:'300px'}}/>
+                  <a href="/">
+                    <img src="cover.png" alt="Tienda Luisito" style={{width:'300px'}}/>
+                  </a>
                 </div>
                 {username&&
                 <div className="btn-group" >
@@ -66,11 +63,11 @@ function Nav(){
 
 
                     <a
-                    href="registrar-admin"
-                    name='registrar-admin'
+                    href="registrar-usuario"
+                    name='registrar-usuario'
                     className='btn btn-outline-primary mx-1'>
                       <span style={{position:'relative',bottom:'10px'}}>
-                        Registrar Administrador
+                        Registrarme
                       </span>
                       <span className="material-symbols-outlined fs-2 m-2">person_add</span>
                     </a>

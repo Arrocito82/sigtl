@@ -1,9 +1,10 @@
 import React from "react";
 import { Redirect, Switch, Router, Route } from "react-router-dom";
- 
+
 //history
 import { history } from './history';
- 
+import RouteGuard from "./RouteGuard";
+
 //pages
 import Bienvenida from '../components/Bienvenida';
 import CargarDatosMovimientos from "../components/cargarCSV/CargarDatosMovimientos";
@@ -58,92 +59,92 @@ function Routes() {
             {menuAsignado&&menuAsignado}
         </header>
         <Switch>
-            <Route
+            <RouteGuard
                 exact
                 path="/"
                 component={Bienvenida}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/cargar-sucursales"
                 component={CargarDatosSucursales}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/cargar-categorias"
                 component={CargarDatosCategorias}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/cargar-productos"
                 component={CargarDatosProductos}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/cargar-movimientos"
                 component={CargarDatosMovimientos}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/cargar-productos-danados"
                 component={CargarProductosDanados}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/demanda-clientes"
                 component={DemandaClientes}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/frecuencia-compra"
                 component={FrecuenciaCompra}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/ingresos-costos"
                 component={IngresosCostos}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/productos-danados"
                 component={ProductosDanados}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/productos-mas-vendidos"
                 component={ProductosMasVendidos}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/usuarios"
                 component={Usuarios}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/historial"
                 component={HistorialUsuarios}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/cambiar-contrasena"
                 component={CambiarContrasena}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/respaldo-datos"
                 component={RespaldoDatos}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/registrar-usuario"
                 component={RegistrarUsuario}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/registrar-admin"
                 component={RegistrarAdmin}
                 />
-            <Route
+            <RouteGuard
                 exact
                 path="/iniciar-sesion"
                 component={IniciarSesion}

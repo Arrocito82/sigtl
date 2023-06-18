@@ -73,7 +73,7 @@ function Config() {
     }
 
     return(
-                <div className="d-flex justify-content-center" >                   
+                <div className="d-flex justify-content-center mt-3" >                   
                     <form action="/login" method="post" className="bg-body-tertiary p-4 rounded  align-self-center w-75">
                         <div className="row justify-content-center">
                             <img src="cover.png" alt="Bienvenidos a Tienda Luisito" className="pb-2 pt-3 logo-login"/>
